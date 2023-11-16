@@ -27,5 +27,7 @@ public:
     //開放
     void Release() override;
 
+    //プレイヤーを見つけたら追跡
+    void ShowPlayer();
 };
 

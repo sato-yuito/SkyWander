@@ -1,5 +1,6 @@
 #include "Enemy.h"
 #include "Engine/Model.h"
+#include"Player.h"
 
 Enemy::Enemy(GameObject* parent):GameObject(parent,"Enemy"),hModel_(-1), timing_(rand() % 180 + 1),movement_(0.15f)
 {
@@ -19,7 +20,7 @@ void Enemy::Initialize()
 
 void Enemy::Update()
 {
-    //©“®ˆÚ“®(‰¼j
+    //©“®ˆÚ“®
     transform_.position_.x += movement_*sin(angle_);
     transform_.position_.z += movement_*cos(angle_);
 
@@ -43,5 +44,9 @@ void Enemy::Draw()
 }
 
 void Enemy::Release()
+{
+}
+
+void Enemy::ShowPlayer()
 {
 }
