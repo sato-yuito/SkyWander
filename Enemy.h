@@ -28,6 +28,6 @@ public:
     void Release() override;
 
     //ƒvƒŒƒCƒ„[‚ğŒ©‚Â‚¯‚½‚ç’ÇÕ
-    void ShowPlayer();
+    /*void ShowPlayer(Player&player);*/
 };
 

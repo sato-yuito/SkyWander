@@ -26,14 +26,21 @@ void Enemy::Update()
 
 
     // 移動範囲の制御
-    if (transform_.position_.x < -5.0f || transform_.position_.x > 5.0f ||
-        transform_.position_.z < -5.0f || transform_.position_.z > 5.0f)
+    if (transform_.position_.x < -5.0f )
     {
-        
-        angle_= static_cast<float>(rand() % 360) * (3.14f / 180.0f); //360°まで回転して移動する。
+        float angleX= static_cast<float>(rand() % 180); 
+        angle_ -= angleX;
     }
-
-    
+    if (transform_.position_.z > 5.0f)
+    {
+        float angleZ = static_cast<float>(rand() % 180+90);
+        angle_ = angleZ;
+    }
+    if (transform_.position_.x > 5.0f)
+    {
+        float angleX = static_cast<float>(rand() % 180+180);
+        angle_ += angleX;
+     }
    
 }
 
@@ -47,6 +54,15 @@ void Enemy::Release()
 {
 }
 
-void Enemy::ShowPlayer()
-{
-}
+//void Enemy::ShowPlayer( Player&player)
+//{
+//    //// プレイヤーの位置を取得
+//    // XMFLOAT3 PlayerPosition = player.GetPosition();
+//    // XMVECTOR PlayerWorldPosition = XMLoadFloat3(&PlayerPosition);//変換
+//
+//    // //自身の位置も取得
+//    // XMFLOAT3 EnemyPosition = GetPosition();
+//    // XMVECTOR EnemyWorldPotion = XMLoadFloat3(&EnemyPosition);
+//
+//
+//}
