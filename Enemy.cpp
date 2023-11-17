@@ -34,13 +34,18 @@ void Enemy::Update()
     if (transform_.position_.z > 5.0f)
     {
         float angleZ = static_cast<float>(rand() % 180+90);
-        angle_ = angleZ;
+        angle_ += angleZ;
     }
     if (transform_.position_.x > 5.0f)
     {
         float angleX = static_cast<float>(rand() % 180+180);
         angle_ += angleX;
-     }
+    }
+    if (transform_.position_.z < -5.0)
+    {
+        float angleZ = static_cast<float>(rand() %180-90);
+        angle_ -= angleZ;
+    }
    
 }
 
