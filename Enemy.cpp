@@ -5,19 +5,22 @@
 
 void Enemy::ShowPlayer(Player& player, float speed)
 {
-    
+    //位置取得
     XMFLOAT3 PlayerPosition = player.GetPosition();
 
+    //プレイヤーベクトルの計算
     XMFLOAT3 PlayerVector;
     PlayerVector.x = PlayerPosition.x - transform_.position_.x;
     PlayerVector.y = PlayerPosition.y - transform_.position_.y;
     PlayerVector.z = PlayerPosition.z - transform_.position_.z;
 
+    //プレイヤーベクトルの正規化
     float length = sqrt(PlayerVector.x * PlayerVector.x + PlayerVector.y * PlayerVector.y + PlayerVector.z * PlayerVector.z);
     PlayerVector.x /= length;
     PlayerVector.y /= length;
     PlayerVector.z /= length;
 
+    //プレイヤーに向かって移動
     transform_.position_.x += PlayerVector.x * speed;
     transform_.position_.y += PlayerVector.y * speed;
     transform_.position_.z += PlayerVector.z * speed;
@@ -42,6 +45,7 @@ void Enemy::Initialize()
 
 void Enemy::Update()
 {
+    //Playerオブジェクトを探してポジションをプレイヤーの位置を取得
     Player* pPlayer = (Player*)FindObject("Player");
     int hPlayerModel = pPlayer->GetModelHandle();
     pPlayer->GetPosition();
