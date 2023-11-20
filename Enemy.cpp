@@ -1,6 +1,6 @@
 #include "Enemy.h"
 #include "Engine/Model.h"
-#include"Player.h"
+
 
 
 void Enemy::ShowPlayer(Player& player, float speed)
@@ -42,10 +42,10 @@ void Enemy::Initialize()
 
 void Enemy::Update()
 {
-    Player* plyaer_ = (Player*)FindObject("Player");
-    int hPlayerModel = plyaer_->GetModelHandle();
-   
-    ShowPlayer(,0.1f);
+    Player* pPlayer = (Player*)FindObject("Player");
+    int hPlayerModel = pPlayer->GetModelHandle();
+    pPlayer->GetPosition();
+    ShowPlayer(*pPlayer, 0.1f);
 
     //Ž©“®ˆÚ“®
     transform_.position_.x += movement_*sin(angle_);
