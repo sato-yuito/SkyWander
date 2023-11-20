@@ -42,8 +42,10 @@ void Enemy::Initialize()
 
 void Enemy::Update()
 {
-
-    ShowPlayer(player_,0.1f);
+    Player* plyaer_ = (Player*)FindObject("Player");
+    int hPlayerModel = plyaer_->GetModelHandle();
+   
+    ShowPlayer(,0.1f);
 
     //Ž©“®ˆÚ“®
     transform_.position_.x += movement_*sin(angle_);
