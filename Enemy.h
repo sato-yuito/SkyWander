@@ -8,6 +8,7 @@ class Enemy :public GameObject
     float angle_;
     int time_;
     int timing_;
+   
 public:
     //コンストラクタ
     Enemy(GameObject* parent);
@@ -28,6 +29,6 @@ public:
     void Release() override;
 
     //プレイヤーを見つけたら追跡
-    /*void ShowPlayer(Player&player);*/
+    void ShowPlayer(Player&player,float speed);
 };
 

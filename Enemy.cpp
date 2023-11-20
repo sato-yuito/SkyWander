@@ -2,6 +2,28 @@
 #include "Engine/Model.h"
 #include"Player.h"
 
+
+void Enemy::ShowPlayer(Player& player, float speed)
+{
+    
+    XMFLOAT3 PlayerPosition = player.GetPosition();
+
+    XMFLOAT3 PlayerVector;
+    PlayerVector.x = PlayerPosition.x - transform_.position_.x;
+    PlayerVector.y = PlayerPosition.y - transform_.position_.y;
+    PlayerVector.z = PlayerPosition.z - transform_.position_.z;
+
+    float length = sqrt(PlayerVector.x * PlayerVector.x + PlayerVector.y * PlayerVector.y + PlayerVector.z * PlayerVector.z);
+    PlayerVector.x /= length;
+    PlayerVector.y /= length;
+    PlayerVector.z /= length;
+
+    transform_.position_.x += PlayerVector.x * speed;
+    transform_.position_.y += PlayerVector.y * speed;
+    transform_.position_.z += PlayerVector.z * speed;
+}
+
+
 Enemy::Enemy(GameObject* parent):GameObject(parent,"Enemy"),hModel_(-1), timing_(rand() % 180 + 1),movement_(0.15f)
 {
 }
@@ -20,6 +42,9 @@ void Enemy::Initialize()
 
 void Enemy::Update()
 {
+
+    ShowPlayer(player_,0.1f);
+
     //自動移動
     transform_.position_.x += movement_*sin(angle_);
     transform_.position_.z += movement_*cos(angle_);
@@ -28,23 +53,20 @@ void Enemy::Update()
     // 移動範囲の制御
     if (transform_.position_.x < -5.0f )
     {
-        float angleX= static_cast<float>(rand() % 180); 
-        angle_ -= angleX;
+       angle_= static_cast<float>(rand() % 180); 
+      
     }
     if (transform_.position_.z > 5.0f)
     {
-        float angleZ = static_cast<float>(rand() % 180+90);
-        angle_ += angleZ;
+        angle_ = static_cast<float>(rand() % 180+90);
     }
     if (transform_.position_.x > 5.0f)
     {
-        float angleX = static_cast<float>(rand() % 180+180);
-        angle_ += angleX;
+         angle_ = static_cast<float>(rand() % 180+180);
     }
     if (transform_.position_.z < -5.0)
     {
-        float angleZ = static_cast<float>(rand() %180-90);
-        angle_ -= angleZ;
+         angle_ = static_cast<float>(rand() %180-90);
     }
    
 }
@@ -59,15 +81,3 @@ void Enemy::Release()
 {
 }
 
-//void Enemy::ShowPlayer( Player&player)
-//{
-//    //// プレイヤーの位置を取得
-//    // XMFLOAT3 PlayerPosition = player.GetPosition();
-//    // XMVECTOR PlayerWorldPosition = XMLoadFloat3(&PlayerPosition);//変換
-//
-//    // //自身の位置も取得
-//    // XMFLOAT3 EnemyPosition = GetPosition();
-//    // XMVECTOR EnemyWorldPotion = XMLoadFloat3(&EnemyPosition);
-//
-//
-//}
