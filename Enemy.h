@@ -28,6 +28,10 @@ public:
     //開放
     void Release() override;
 
+
+    //視野角の設定
+    bool EenmyPOV(XMFLOAT3 PlayerVec);
+
     //プレイヤーを見つけたら追跡
     void ShowPlayer(Player&player,float speed);
 };
