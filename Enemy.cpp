@@ -1,14 +1,20 @@
 #include "Enemy.h"
 #include "Engine/Model.h"
 
-//
-////Ž‹–ìŠp‚ð—^‚¦‚Ä‚à‚µ“ü‚Á‚Ä‚¢‚È‚©‚Á‚½‚çfalse,“ü‚Á‚Ä‚¢‚é‚È‚çture‚ð•Ô‚·
-//bool Enemy::EenmyPOV(XMFLOAT3 PlayerVec)
-//{
-//    float POV = 45.0f;
-//    float viewPov = tan(POV / 2.0f);
-//    if(abs(PlayerVec.x))
-//}
+//Ž‹–ìŠp‚ð—^‚¦‚Ä‚à‚µ“ü‚Á‚Ä‚¢‚È‚©‚Á‚½‚çfalse,“ü‚Á‚Ä‚¢‚é‚È‚çture‚ð•Ô‚·
+bool Enemy::EenmyPOV(const XMFLOAT3& PlayerVec)
+{
+    float POV = 45.0f;
+    float viewPov = tan(POV / 2.0f);
+
+    //Player‚ªŽ‹–ìŠp“à‚É‚ ‚é‚©”»’f
+    if (abs(PlayerVec.x) < viewPov && abs(PlayerVec.z) < viewPov)
+    {
+        return true;
+    }
+
+    return false;
+}
 
 void Enemy::ShowPlayer(Player& player, float speed)
 {
@@ -28,9 +34,13 @@ void Enemy::ShowPlayer(Player& player, float speed)
     PlayerVector.z /= length;
 
     //ƒvƒŒƒCƒ„[‚ÉŒü‚©‚Á‚ÄˆÚ“®
-    transform_.position_.x += PlayerVector.x * speed;
-    transform_.position_.y += PlayerVector.y * speed;
-    transform_.position_.z += PlayerVector.z * speed;
+    if (EenmyPOV(PlayerVector))
+    {
+        transform_.position_.x += PlayerVector.x * speed;
+        transform_.position_.y += PlayerVector.y * speed;
+        transform_.position_.z += PlayerVector.z * speed;
+    }
+   
 }
 
 

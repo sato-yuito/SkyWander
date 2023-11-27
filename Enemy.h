@@ -30,7 +30,7 @@ public:
 
 
     //‹–ìŠp‚Ìİ’è
-    bool EenmyPOV(XMFLOAT3 PlayerVec);
+    bool EenmyPOV(const XMFLOAT3 &PlayerVec);
 
     //ƒvƒŒƒCƒ„[‚ğŒ©‚Â‚¯‚½‚ç’ÇÕ
     void ShowPlayer(Player&player,float speed);
