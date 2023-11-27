@@ -1,14 +1,14 @@
 #include "Enemy.h"
 #include "Engine/Model.h"
 
-
-
-bool Enemy::EenmyPOV(XMFLOAT3 PlayerVec)
-{
-    float POV = 45.0f;
-    float viewPov = tan(POV / 2.0f);
-    if(abs(PlayerVec.x))
-}
+//
+////Ž‹–ìŠp‚ð—^‚¦‚Ä‚à‚µ“ü‚Á‚Ä‚¢‚È‚©‚Á‚½‚çfalse,“ü‚Á‚Ä‚¢‚é‚È‚çture‚ð•Ô‚·
+//bool Enemy::EenmyPOV(XMFLOAT3 PlayerVec)
+//{
+//    float POV = 45.0f;
+//    float viewPov = tan(POV / 2.0f);
+//    if(abs(PlayerVec.x))
+//}
 
 void Enemy::ShowPlayer(Player& player, float speed)
 {
