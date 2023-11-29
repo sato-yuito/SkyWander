@@ -4,15 +4,7 @@
 //Ž‹–ìŠp‚ð—^‚¦‚Ä‚à‚µ“ü‚Á‚Ä‚¢‚È‚©‚Á‚½‚çfalse,“ü‚Á‚Ä‚¢‚é‚È‚çture‚ð•Ô‚·
 bool Enemy::EnemyPOV(const XMFLOAT3& PlayerVec)
 {
-    float POV = 40.0f;
-    float viewPov = tan(POV / 2.0f);
-
-    //Player‚ªŽ‹–ìŠp“à‚É‚ ‚é‚©”»’f
-    if (abs(PlayerVec.x) <= viewPov && abs(PlayerVec.z) <= viewPov)
-    {
-        return true;
-    }
-    return false;
+   
 }
 
 void Enemy::ShowPlayer(Player& player, float speed)

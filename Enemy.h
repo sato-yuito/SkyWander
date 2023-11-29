@@ -9,6 +9,22 @@ class Enemy :public GameObject
     int time_;
     int timing_;
    
+
+    struct Position
+    {
+        XMVECTOR Enemypotion;//敵の座標
+    };
+
+    struct EnemyFan
+    {
+        XMVECTOR EnemyPosition;//中心座標
+        float EnemyDegree;//視野角の範囲（角度）
+        float EnemyLength;//中心から扇までの長さ
+        float DirectionDegree;//扇の方向を決めるために必要なもの
+
+    };
+
+
 public:
     //コンストラクタ
     Enemy(GameObject* parent);
