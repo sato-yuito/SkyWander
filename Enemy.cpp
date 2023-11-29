@@ -2,7 +2,7 @@
 #include "Engine/Model.h"
 
 //視野角を与えてもし入っていなかったらfalse,入っているならtureを返す
-bool Enemy::EnemyPOV(const XMFLOAT3& PlayerVec)
+bool Enemy::EnemyPOV(const XMVECTOR& PlayerVec)
 {
    
 }
@@ -13,7 +13,7 @@ void Enemy::ShowPlayer(Player& player, float speed)
     XMFLOAT3 PlayerPosition = player.GetPosition();
 
     //プレイヤーベクトルの計算
-    XMFLOAT3 PlayerVector;
+    XMVECTOR PlayerVector;
     PlayerVector.x = PlayerPosition.x - transform_.position_.x;
     PlayerVector.y = PlayerPosition.y - transform_.position_.y;
     PlayerVector.z = PlayerPosition.z - transform_.position_.z;

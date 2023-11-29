@@ -46,7 +46,7 @@ public:
 
 
     //‹–ìŠp‚Ìİ’è
-    bool EnemyPOV(const XMFLOAT3 &PlayerVec);
+    bool EnemyPOV(const XMVECTOR &PlayerVec);
 
     //ƒvƒŒƒCƒ„[‚ğŒ©‚Â‚¯‚½‚ç’ÇÕ
     void ShowPlayer(Player&player,float speed);
