@@ -13,6 +13,7 @@ class Enemy :public GameObject
     struct Position
     {
         XMVECTOR Enemypotion;//敵の座標
+        XMVECTOR PlayerPositon;//プレイヤーの座標
     };
 
     struct EnemyFan
@@ -46,7 +47,9 @@ public:
 
 
     //視野角の設定
-    bool EnemyPOV(const XMVECTOR &PlayerVec);
+    bool EnemyPOV(const XMFLOAT3& PlayerVec, EnemyFan& enemyfan);
+
+    
 
     //プレイヤーを見つけたら追跡
     void ShowPlayer(Player&player,float speed);
