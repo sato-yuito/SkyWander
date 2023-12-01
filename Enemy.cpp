@@ -1,12 +1,26 @@
 #include "Enemy.h"
 #include "Engine/Model.h"
-
+#include <DirectXMath.h>
 //視野角を与えてもし入っていなかったらfalse,入っているならtureを返す
 bool Enemy::EnemyPOV(const XMFLOAT3& PlayerVec)
 {
     XMVECTOR playervec = XMLoadFloat3(&PlayerVec);//Float型からXMVECOTR型に変換
     XMVECTOR EnemyandPlayer = playervec - enemyfan->EnemyPosition;//プレイヤーのベクトルからポジションを引いて計算
+    XMVECTOR GetPosition() = new EnemyandPlayer;
+    XMVECTOR EnemyDirection = XMVector3Normalize(EnemyandPlayer);//正規化
+    float EnemyLength = XMVectorGetX(XMVector3Length(EnemyandPlayer));//ベクトルの長さを1にする
 
+    if (EnemyLength <= enemyfan->EnemyLength)//敵とプレイヤーの距離と扇の長さ以内なら視野角に入っている判定
+    {
+        //扇の方向ベクトルとプレイヤーの方向ベクトルの角度の計算
+        float EnemyAngle = XMVectorGetX(XMVector3AngleBetweenVectors(EnemyDirection, XMVector3Normalize(XMVectorSet(1.0f, 0.0f, 0.0f, 0.0f))));
+        if (EnemyAngle <= XMConvertToRadians(enemyfan->EnemyDegree))
+        {
+            return true;
+
+        }
+    }
+    return false;
 }
 
 void Enemy::ShowPlayer(Player& player, float speed)

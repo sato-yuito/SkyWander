@@ -27,6 +27,7 @@ class Enemy :public GameObject
 
     EnemyFan* enemyfan;
 
+    
 public:
     //コンストラクタ
     Enemy(GameObject* parent);
