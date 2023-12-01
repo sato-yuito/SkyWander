@@ -25,6 +25,7 @@ class Enemy :public GameObject
 
     };
 
+    EnemyFan* enemyfan;
 
 public:
     //コンストラクタ
@@ -47,7 +48,7 @@ public:
 
 
     //視野角の設定
-    bool EnemyPOV(const XMFLOAT3& PlayerVec, EnemyFan& enemyfan);
+    bool EnemyPOV(const XMFLOAT3& PlayerVec);
 
     
 
