@@ -1,34 +1,24 @@
 #include "Enemy.h"
 #include "Engine/Model.h"
 #include <DirectXMath.h>
-//視野角を与えてもし入っていなかったらfalse,入っているならtureを返す
+
+//視野角判定するために必要間前準備
 bool Enemy::EnemyPOV(const XMFLOAT3& PlayerVec)
 {
     XMFLOAT3 enemyposition = GetPosition();//自身のポジションを入れる変数
     XMVECTOR EnePos = XMLoadFloat3(&enemyposition);//XMVECTOR型に変換
-    EnePos = enemyfan.EnemyPosition;
+    enemyfan.EnemyPosition = EnePos;//自身のポジション取得
 
     XMVECTOR playervec = XMLoadFloat3(&PlayerVec);//Float型からXMVECOTR型に変換
     XMVECTOR EnemyandPlayer = playervec - enemyfan.EnemyPosition;//プレイヤーのベクトルからポジションを引いて計算
     XMVECTOR EnemyDirection = XMVector3Normalize(EnemyandPlayer);//正規化
-    float EnemyLength = XMVectorGetX(XMVector3Length(EnemyandPlayer));//ベクトルの長さを1にする
-
-    if (EnemyLength <= enemyfan.EnemyLength)//敵とプレイヤーの距離と扇の長さ以内なら視野角に入っている判定
-    {
-        //扇の方向ベクトルとプレイヤーの方向ベクトルの角度の計算
-        float EnemyAngle = XMVectorGetX(XMVector3AngleBetweenVectors(EnemyDirection, XMVector3Normalize(XMVectorSet(1.0f, 0.0f, 0.0f, 0.0f))));
-        if (EnemyAngle <= XMConvertToRadians(enemyfan.EnemyDegree))
-        {
-            return true;
-
-        }
-    }
-    return false;
+   
+   
 }
 
 
 /// <summary>
-/// 
+/// 追撃アルゴリズムの実装。
 /// </summary>
 /// <param name="player"></param>
 /// <param name="speed"></param>
