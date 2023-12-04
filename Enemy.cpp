@@ -11,7 +11,7 @@ bool Enemy::EnemyPOV(const XMFLOAT3& PlayerVec)
 
     XMVECTOR playervec = XMLoadFloat3(&PlayerVec);//Float型からXMVECOTR型に変換
     XMVECTOR EnemyandPlayer = playervec - enemyfan.EnemyPosition;//プレイヤーのベクトルからポジションを引いて計算
-    XMVECTOR EnemyDirection = XMVector3Normalize(EnemyandPlayer);//正規化
+    DirectionDegree
    
    
 }
