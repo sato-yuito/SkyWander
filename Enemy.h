@@ -25,7 +25,7 @@ class Enemy :public GameObject
 
     };
 
-    EnemyFan* enemyfan;
+    EnemyFan  enemyfan;
 
     
 public:

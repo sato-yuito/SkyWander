@@ -6,18 +6,18 @@ bool Enemy::EnemyPOV(const XMFLOAT3& PlayerVec)
 {
     XMFLOAT3 enemyposition = GetPosition();//自身のポジションを入れる変数
     XMVECTOR EnePos = XMLoadFloat3(&enemyposition);//XMVECTOR型に変換
-    EnePos = ;
+    EnePos = enemyfan.EnemyPosition;
 
     XMVECTOR playervec = XMLoadFloat3(&PlayerVec);//Float型からXMVECOTR型に変換
-    XMVECTOR EnemyandPlayer = playervec - enemyfan->EnemyPosition;//プレイヤーのベクトルからポジションを引いて計算
+    XMVECTOR EnemyandPlayer = playervec - enemyfan.EnemyPosition;//プレイヤーのベクトルからポジションを引いて計算
     XMVECTOR EnemyDirection = XMVector3Normalize(EnemyandPlayer);//正規化
     float EnemyLength = XMVectorGetX(XMVector3Length(EnemyandPlayer));//ベクトルの長さを1にする
 
-    if (EnemyLength <= enemyfan->EnemyLength)//敵とプレイヤーの距離と扇の長さ以内なら視野角に入っている判定
+    if (EnemyLength <= enemyfan.EnemyLength)//敵とプレイヤーの距離と扇の長さ以内なら視野角に入っている判定
     {
         //扇の方向ベクトルとプレイヤーの方向ベクトルの角度の計算
         float EnemyAngle = XMVectorGetX(XMVector3AngleBetweenVectors(EnemyDirection, XMVector3Normalize(XMVectorSet(1.0f, 0.0f, 0.0f, 0.0f))));
-        if (EnemyAngle <= XMConvertToRadians(enemyfan->EnemyDegree))
+        if (EnemyAngle <= XMConvertToRadians(enemyfan.EnemyDegree))
         {
             return true;
 
@@ -26,6 +26,12 @@ bool Enemy::EnemyPOV(const XMFLOAT3& PlayerVec)
     return false;
 }
 
+
+/// <summary>
+/// 
+/// </summary>
+/// <param name="player"></param>
+/// <param name="speed"></param>
 void Enemy::ShowPlayer(Player& player, float speed)
 {
     //位置取得
