@@ -4,9 +4,12 @@
 //視野角を与えてもし入っていなかったらfalse,入っているならtureを返す
 bool Enemy::EnemyPOV(const XMFLOAT3& PlayerVec)
 {
+    XMFLOAT3 enemyposition = GetPosition();//自身のポジションを入れる変数
+    XMVECTOR EnePos = XMLoadFloat3(&enemyposition);//XMVECTOR型に変換
+    EnePos = ;
+
     XMVECTOR playervec = XMLoadFloat3(&PlayerVec);//Float型からXMVECOTR型に変換
     XMVECTOR EnemyandPlayer = playervec - enemyfan->EnemyPosition;//プレイヤーのベクトルからポジションを引いて計算
-    XMVECTOR GetPosition() = new EnemyandPlayer;
     XMVECTOR EnemyDirection = XMVector3Normalize(EnemyandPlayer);//正規化
     float EnemyLength = XMVectorGetX(XMVector3Length(EnemyandPlayer));//ベクトルの長さを1にする
 
