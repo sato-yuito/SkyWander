@@ -11,9 +11,14 @@ bool Enemy::EnemyPOV(const XMFLOAT3& PlayerVec)
 
     XMVECTOR playervec = XMLoadFloat3(&PlayerVec);//Float型からXMVECOTR型に変換
     XMVECTOR EnemyandPlayer = playervec - enemyfan.EnemyPosition;//プレイヤーのベクトルからポジションを引いて計算
+    XMVECTOR EnemyDir = XMVector3Normalize(EnemyandPlayer);//方向見るために正規化
+    XMVECTOR EnemyFanForward = XMVectorSet(cos(XMConvertToRadians(enemyfan.DirectionDegree)), 0.0f, 
+                                           sin(XMConvertToRadians(enemyfan.DirectionDegree)), 0.0f);
     
-   
-   
+
+    float Enemydot = XMVectorGetX(XMVector3Dot(EnemyDir, EnemyFanForward));//正面ベクトル
+
+   float Enemyangle = Enemydot/
 }
 
 
@@ -40,7 +45,7 @@ void Enemy::ShowPlayer(Player& player, float speed)
     PlayerVector.y /= length;
     PlayerVector.z /= length;
 
-   
+   //視野角に入っていたら追撃
       if(EnemyPOV(PlayerVector))
       {
         transform_.position_.x += PlayerVector.x * speed;
