@@ -2,7 +2,8 @@
 #include "Engine/Model.h"
 #include <DirectXMath.h>
 
-//視野角判定するために必要間前準備
+
+//視野角判定するために必要前準備
 bool Enemy::EnemyPOV(const XMFLOAT3& PlayerVec)
 {
     XMFLOAT3 enemyposition = GetPosition();//自身のポジションを入れる変数
@@ -12,13 +13,26 @@ bool Enemy::EnemyPOV(const XMFLOAT3& PlayerVec)
     XMVECTOR playervec = XMLoadFloat3(&PlayerVec);//Float型からXMVECOTR型に変換
     XMVECTOR EnemyandPlayer = playervec - enemyfan.EnemyPosition;//プレイヤーのベクトルからポジションを引いて距離を求める
     XMVECTOR EnemyDir = XMVector3Normalize(EnemyandPlayer);//方向見るために正規化
+
     XMVECTOR EnemyFanForward = XMVectorSet(cos(XMConvertToRadians(enemyfan.DirectionDegree)), 0.0f, 
-                                           sin(XMConvertToRadians(enemyfan.DirectionDegree)), 0.0f);
+                                           sin(XMConvertToRadians(enemyfan.DirectionDegree)), 0.0f);//視野方向を表す単位ベクトル
     
 
-    float Enemydot = XMVectorGetX(XMVector3Dot(EnemyDir, EnemyFanForward));//正面ベクトル
+    float Enemydot = XMVectorGetX(XMVector3Dot(EnemyDir, EnemyFanForward));//正面ベクトル計算
 
-   float Enemyangle = Enemydot/
+    //プレイヤーの位置と自分の位置から計算されるベクトルと視野の方向ベクトルのなす角の計算
+    float Enemyangle = Enemydot / (XMVectorGetX(XMVector3Length(EnemyDir)) * XMVectorGetX(XMVector3Length(EnemyFanForward)));
+ 
+  
+
+  //視野角内にイルカの判定
+    if (Enemyangle < cos(XMConvertToRadians(EnemyParam::EnemyFanDegree / 2.0f)) )
+    {
+        return true;
+    }
+    return false;
+
+    
 }
 
 
@@ -45,6 +59,7 @@ void Enemy::ShowPlayer(Player& player, float speed)
     PlayerVector.y /= length;
     PlayerVector.z /= length;
 
+   
    //視野角に入っていたら追撃
       if(EnemyPOV(PlayerVector))
       {
@@ -74,10 +89,10 @@ void Enemy::Initialize()
 
 void Enemy::Update()
 {
-    //Playerオブジェクトを探してポジションをプレイヤーの位置を取得
+    //Playerオブジェクトを探してプレイヤーの位置を取得
     Player* pPlayer = (Player*)FindObject("Player");
     int hPlayerModel = pPlayer->GetModelHandle();
-    pPlayer->GetPosition();
+     pPlayer->GetPosition();
    
   
 

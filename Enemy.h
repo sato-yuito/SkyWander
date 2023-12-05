@@ -1,6 +1,14 @@
 #pragma once
 #include "Engine/GameObject.h"
 #include"Player.h"
+
+//視野角の値を入れるパラメーター
+namespace EnemyParam
+{
+    const float EnemyFanDegree = 60.0f;
+};
+
+
 class Enemy :public GameObject
 {
     int hModel_;    //モデル番号
@@ -23,9 +31,19 @@ class Enemy :public GameObject
         float EnemyLength;//中心から扇までの長さ
         float DirectionDegree;//扇の方向を決めるために必要なもの
 
-    };
+    } enemyfan;
 
-    EnemyFan  enemyfan;
+    //視野角の範囲を入れるためのセッター
+    void SetEnemyDegree(float degree)
+    {
+        enemyfan.EnemyDegree = degree;
+    }
+    
+    //視野角のパラメータをセット
+    void SetEnemyPram()
+    {
+        SetEnemyDegree(EnemyParam::EnemyFanDegree);
+    }
 
     
 public:
