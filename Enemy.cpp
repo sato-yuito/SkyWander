@@ -10,7 +10,7 @@ bool Enemy::EnemyPOV(const XMFLOAT3& PlayerVec)
     enemyfan.EnemyPosition = EnePos;//自身のポジション取得
 
     XMVECTOR playervec = XMLoadFloat3(&PlayerVec);//Float型からXMVECOTR型に変換
-    XMVECTOR EnemyandPlayer = playervec - enemyfan.EnemyPosition;//プレイヤーのベクトルからポジションを引いて計算
+    XMVECTOR EnemyandPlayer = playervec - enemyfan.EnemyPosition;//プレイヤーのベクトルからポジションを引いて距離を求める
     XMVECTOR EnemyDir = XMVector3Normalize(EnemyandPlayer);//方向見るために正規化
     XMVECTOR EnemyFanForward = XMVectorSet(cos(XMConvertToRadians(enemyfan.DirectionDegree)), 0.0f, 
                                            sin(XMConvertToRadians(enemyfan.DirectionDegree)), 0.0f);
