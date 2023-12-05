@@ -48,7 +48,7 @@ void Enemy::ShowPlayer(Player& player, float speed)
 
     //プレイヤーベクトルの計算
     XMFLOAT3 PlayerVector;
-    XMVECTOR playervector = XMLoadFloat3(&PlayerVector);
+    XMVECTOR playervector = XMLoadFloat3(&PlayerPosition);
     PlayerVector.x = PlayerPosition.x - transform_.position_.x;
     PlayerVector.y = PlayerPosition.y - transform_.position_.y;
     PlayerVector.z = PlayerPosition.z - transform_.position_.z;
@@ -60,13 +60,13 @@ void Enemy::ShowPlayer(Player& player, float speed)
     PlayerVector.z /= length;
 
    
-   //視野角に入っていたら追撃
-      if(EnemyPOV(PlayerVector))
-      {
-        transform_.position_.x += PlayerVector.x * speed;
-        transform_.position_.y += PlayerVector.y * speed;
-        transform_.position_.z += PlayerVector.z * speed;
-      }
+   ////視野角に入っていたら追撃
+   //   if(EnemyPOV(PlayerVector))
+   //   {
+   //     transform_.position_.x += PlayerVector.x * speed;
+   //     transform_.position_.y += PlayerVector.y * speed;
+   //     transform_.position_.z += PlayerVector.z * speed;
+   //   }
     
 }
 
@@ -93,11 +93,11 @@ void Enemy::Update()
     Player* pPlayer = (Player*)FindObject("Player");
     int hPlayerModel = pPlayer->GetModelHandle();
      pPlayer->GetPosition();
-   
+     
   
 
     //プレイヤーを見つけていない場合は移動し続けて見つけたら追撃
-    if (pPlayer == nullptr)
+    if (EnemyPOV(pPlayer->GetPosition()))
     {
        
         // 移動
