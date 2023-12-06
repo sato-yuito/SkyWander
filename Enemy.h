@@ -39,12 +39,7 @@ class Enemy :public GameObject
         enemyfan.EnemyDegree = degree;
     }
     
-    //視野角のパラメータをセット
-    void SetEnemyPram()
-    {
-        SetEnemyDegree(EnemyParam::EnemyFanDegree);
-    }
-
+    
     
 public:
     //コンストラクタ
