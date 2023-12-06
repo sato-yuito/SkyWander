@@ -60,13 +60,13 @@ void Enemy::ShowPlayer(Player& player, float speed)
     PlayerVector.z /= length;
 
    
-   ////Ž‹–ìŠp‚É“ü‚Á‚Ä‚¢‚½‚ç’ÇŒ‚
-   //   if(EnemyPOV(PlayerVector))
-   //   {
-   //     transform_.position_.x += PlayerVector.x * speed;
-   //     transform_.position_.y += PlayerVector.y * speed;
-   //     transform_.position_.z += PlayerVector.z * speed;
-   //   }
+   //Ž‹–ìŠp‚É“ü‚Á‚Ä‚¢‚½‚ç’ÇŒ‚
+      if(EnemyPOV(PlayerVector))
+      {
+        transform_.position_.x += PlayerVector.x * speed;
+        transform_.position_.y += PlayerVector.y * speed;
+        transform_.position_.z += PlayerVector.z * speed;
+      }
     
 }
 

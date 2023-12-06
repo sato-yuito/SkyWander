@@ -18,12 +18,6 @@ class Enemy :public GameObject
     int timing_;
    
 
-    struct Position
-    {
-        XMVECTOR Enemypotion;//敵の座標
-        XMVECTOR PlayerPositon;//プレイヤーの座標
-    };
-
     struct EnemyFan
     {
         XMVECTOR EnemyPosition;//中心座標
@@ -39,12 +33,10 @@ class Enemy :public GameObject
         enemyfan.EnemyDegree = degree;
     }
     
-    
-    
+   
 public:
     //コンストラクタ
     Enemy(GameObject* parent);
-
     //デストラクタ
     ~Enemy();
 
