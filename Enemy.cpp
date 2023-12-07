@@ -14,8 +14,8 @@ bool Enemy::EnemyPOV(const XMFLOAT3& PlayerVec)
     XMVECTOR EnemyandPlayer = playervec - enemyfan.EnemyPosition;//プレイヤーのベクトルからポジションを引いて距離を求める
     XMVECTOR EnemyDir = XMVector3Normalize(EnemyandPlayer);//方向見るために正規化
 
-    XMVECTOR EnemyFanForward = XMVectorSet(cos(XMConvertToRadians(enemyfan.DirectionDegree)), 0.0f, 
-                                           sin(XMConvertToRadians(enemyfan.DirectionDegree)), 0.0f);//視野方向を表す単位ベクトル
+    XMVECTOR EnemyFanForward = XMVectorSet(sin(XMConvertToRadians(enemyfan.DirectionDegree)), 0.0f, 
+                                           cos(XMConvertToRadians(enemyfan.DirectionDegree)), 0.0f);//視野方向を表す単位ベクトル
     
 
     float Enemydot = XMVectorGetX(XMVector3Dot(EnemyDir, EnemyFanForward));//正面ベクトル計算
@@ -73,6 +73,13 @@ void Enemy::ShowPlayer(Player& player, float speed)
 
 Enemy::Enemy(GameObject* parent):GameObject(parent,"Enemy"),hModel_(-1), timing_(rand() % 180 + 1),movement_(0.15f)
 {
+    enemyfan =
+    {
+        XMLoadFloat3(&transform_.position_),
+        60.0f,
+        20.0f,
+        transform_.rotate_.y
+    };
 }
 
 Enemy::~Enemy()
