@@ -37,7 +37,7 @@ bool Enemy::EnemyPOV(const XMFLOAT3& PlayerVec)
 
 
 /// <summary>
-/// 追撃アルゴリズムの実装。
+/// 追撃アルゴリズムの実装
 /// </summary>
 /// <param name="player"></param>
 /// <param name="speed"></param>
@@ -71,7 +71,7 @@ void Enemy::ShowPlayer(Player& player, float speed)
 }
 
 
-Enemy::Enemy(GameObject* parent):GameObject(parent,"Enemy"),hModel_(-1), timing_(rand() % 180 + 1),movement_(0.15f)
+Enemy::Enemy(GameObject* parent):GameObject(parent,"Enemy"),hModel_(-1),movement_(0.15f)
 {
     enemyfan =
     {
@@ -80,6 +80,7 @@ Enemy::Enemy(GameObject* parent):GameObject(parent,"Enemy"),hModel_(-1), timing_
         20.0f,
         transform_.rotate_.y
     };
+    map = (Map*)FindObject("Map");
 }
 
 Enemy::~Enemy()

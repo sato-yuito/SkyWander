@@ -1,7 +1,7 @@
 #include "Player.h"
 #include "Engine/Model.h"
 #include "Engine/Input.h"
-Player::Player(GameObject* parent) :GameObject(parent, "Player"), hModel_(-1)
+Player::Player(GameObject* parent) :GameObject(parent, "Player"), hModel_(-1),map(nullptr)
 {
 }
 
@@ -16,6 +16,7 @@ void Player::Initialize()
     //モデルデータのロード
     hModel_ = Model::Load("Player.fbx");
     assert(hModel_ >= 0);
+    map = (Map*)FindObject("Map");
 }
 
 //更新

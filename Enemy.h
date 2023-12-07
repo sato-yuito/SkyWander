@@ -1,7 +1,7 @@
 #pragma once
 #include "Engine/GameObject.h"
 #include"Player.h"
-
+#include"Map.h"
 //視野角の値を入れるパラメーター
 namespace EnemyParam
 {
@@ -14,8 +14,7 @@ class Enemy :public GameObject
     int hModel_;    //モデル番号
     float movement_;
     float angle_;
-    int time_;
-    int timing_;
+    Map* map;
    
 
     struct EnemyFan
