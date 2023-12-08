@@ -2,25 +2,29 @@
 #include "Engine/Model.h"
 #include <DirectXMath.h>
 
-
-//視野角判定するために必要前準備
+/// <summary>
+/// 方向ベクトルを決めその扇の範囲内(視野角）を決める処理
+/// </summary>
+/// <param name="PlayerVec"></param>
+/// <returns></returns>
 bool Enemy::EnemyPOV(const XMFLOAT3& PlayerVec)
 {
-    XMFLOAT3 enemyposition = GetPosition();//自身のポジションを入れる変数
-    XMVECTOR EnePos = XMLoadFloat3(&enemyposition);//XMVECTOR型に変換
-    enemyfan.EnemyPosition = EnePos;//自身のポジション取得
+    
+    XMFLOAT3 enemyposition = GetPosition();
+    XMVECTOR EnePos = XMLoadFloat3(&enemyposition);
+    enemyfan.EnemyPosition = EnePos;
 
-    XMVECTOR playervec = XMLoadFloat3(&PlayerVec);//Float型からXMVECOTR型に変換
-    XMVECTOR EnemyandPlayer = playervec - enemyfan.EnemyPosition;//プレイヤーのベクトルからポジションを引いて距離を求める
-    XMVECTOR EnemyDir = XMVector3Normalize(EnemyandPlayer);//方向見るために正規化
+    XMVECTOR playervec = XMLoadFloat3(&PlayerVec);
+    XMVECTOR EnemyandPlayer = playervec - enemyfan.EnemyPosition;
+    XMVECTOR EnemyDir = XMVector3Normalize(EnemyandPlayer);
 
     XMVECTOR EnemyFanForward = XMVectorSet(sin(XMConvertToRadians(enemyfan.DirectionDegree)), 0.0f, 
-                                           cos(XMConvertToRadians(enemyfan.DirectionDegree)), 0.0f);//視野方向を表す単位ベクトル
+                                           cos(XMConvertToRadians(enemyfan.DirectionDegree)), 0.0f);
     
 
-    float Enemydot = XMVectorGetX(XMVector3Dot(EnemyDir, EnemyFanForward));//正面ベクトル計算
+    float Enemydot = XMVectorGetX(XMVector3Dot(EnemyDir, EnemyFanForward));
 
-    //プレイヤーの位置と自分の位置から計算されるベクトルと視野の方向ベクトルのなす角の計算
+   
     float Enemyangle = Enemydot / (XMVectorGetX(XMVector3Length(EnemyDir)) * XMVectorGetX(XMVector3Length(EnemyFanForward)));
  
   
@@ -81,6 +85,8 @@ Enemy::Enemy(GameObject* parent):GameObject(parent,"Enemy"),hModel_(-1),movement
         transform_.rotate_.y
     };
     map = (Map*)FindObject("Map");
+    //Playerオブジェクトを探してプレイヤーの位置を取得
+  
 }
 
 Enemy::~Enemy()
@@ -97,7 +103,6 @@ void Enemy::Initialize()
 
 void Enemy::Update()
 {
-    //Playerオブジェクトを探してプレイヤーの位置を取得
     Player* pPlayer = (Player*)FindObject("Player");
     int hPlayerModel = pPlayer->GetModelHandle();
      pPlayer->GetPosition();
