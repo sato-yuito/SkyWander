@@ -3,7 +3,7 @@
 #include <DirectXMath.h>
 
 /// <summary>
-/// 方向ベクトルを決めその扇の範囲内(視野角）を決める処理
+/// 扇の範囲内(視野角）を決める処理
 /// </summary>
 /// <param name="PlayerVec"></param>
 /// <returns></returns>
@@ -15,7 +15,7 @@ bool Enemy::EnemyPOV(const XMFLOAT3& PlayerVec)
     enemyfan.EnemyPosition = EnePos;
 
     XMVECTOR playervec = XMLoadFloat3(&PlayerVec);
-    XMVECTOR EnemyandPlayer = playervec - enemyfan.EnemyPosition;
+    XMVECTOR EnemyandPlayer = XMVectorSubtract(playervec, enemyfan.EnemyPosition);
     XMVECTOR EnemyDir = XMVector3Normalize(EnemyandPlayer);
 
     XMVECTOR EnemyFanForward = XMVectorSet(sin(XMConvertToRadians(enemyfan.DirectionDegree)), 0.0f, 
@@ -85,8 +85,7 @@ Enemy::Enemy(GameObject* parent):GameObject(parent,"Enemy"),hModel_(-1),movement
         transform_.rotate_.y
     };
     map = (Map*)FindObject("Map");
-    //Playerオブジェクトを探してプレイヤーの位置を取得
-  
+    
 }
 
 Enemy::~Enemy()
