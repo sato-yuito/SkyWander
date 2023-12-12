@@ -9,17 +9,21 @@
 /// <returns></returns>
 bool Enemy::EnemyPOV(const XMFLOAT3& PlayerVec)
 {
+    
     //自身のポジションを持ってきてVECTOR型に変換
-    XMFLOAT3 enemyposition = GetPosition();
+    XMFLOAT3 enemyposition = transform_.position_;
     XMVECTOR EnePos = XMLoadFloat3(&enemyposition);
     enemyfan.EnemyPosition = EnePos;
 
-    //プレイヤーベクトルを変換し距離を計算して正規化
+    //プレイヤーベクトルを変換し距離を計算
     XMVECTOR playervec = XMLoadFloat3(&PlayerVec);
-    XMVECTOR EnemyandPlayer = XMVectorSubtract(playervec, enemyfan.EnemyPosition);
-    XMVECTOR EnemyDir = XMVector3Normalize(EnemyandPlayer);
+    XMVECTOR EnemyDistance = XMVectorSubtract(playervec, enemyfan.EnemyPosition);
+   
+    float enemydistance = XMVectorGetX(XMVector3Length(EnemyDistance));
+    if (enemydistance <= enemyfan.EnemyLength)
+    {
 
-  
+    }
 
   
  
