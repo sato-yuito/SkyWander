@@ -19,23 +19,11 @@ bool Enemy::EnemyPOV(const XMFLOAT3& PlayerVec)
     XMVECTOR EnemyandPlayer = XMVectorSubtract(playervec, enemyfan.EnemyPosition);
     XMVECTOR EnemyDir = XMVector3Normalize(EnemyandPlayer);
 
-    XMVECTOR EnemyFanForward = XMVectorSet(sin(XMConvertToRadians(enemyfan.DirectionDegree)), 0.0f, 
-                                           cos(XMConvertToRadians(enemyfan.DirectionDegree)), 0.0f);
-    
-
-    float Enemydot = XMVectorGetX(XMVector3Dot(EnemyDir, EnemyFanForward));
-
-   
-    float Enemyangle = Enemydot / (XMVectorGetX(XMVector3Length(EnemyDir)) * XMVectorGetX(XMVector3Length(EnemyFanForward)));
+  
  
   
 
-  //Ž‹–ìŠp“à‚ÉƒCƒ‹ƒJ‚Ì”»’è
-    if (Enemyangle < cos(XMConvertToRadians(EnemyParam::EnemyFanDegree / 2.0f)) )
-    {
-        return true;
-    }
-    return false;
+ 
 
     
 }

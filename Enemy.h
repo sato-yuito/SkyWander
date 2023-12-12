@@ -2,12 +2,7 @@
 #include "Engine/GameObject.h"
 #include"Player.h"
 #include"Map.h"
-//視野角の値を入れるパラメーター
-namespace EnemyParam
-{
-    const float EnemyFanDegree = 60.0f;
-};
-
+ 
 
 class Enemy :public GameObject
 {
