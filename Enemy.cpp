@@ -9,16 +9,26 @@
 /// <returns></returns>
 bool Enemy::EnemyPOV(const XMFLOAT3& PlayerVec)
 {
-    XMVECTOR flont =XMVectorSet(0, 0, 1, 0);
+    //ヒント(視野角判定)
+    /*視野内にいるかを判別するには、
+        自分の向いてる向きのベクトル（長さ１）と、自分から対象へのベクトル
+        （長さ１）で内積を取ると、cosΘが手に入ります。視野角が60°であれば、これがcos(60°)よりも大きければ、
+        視野内にいます。*/
+
+
+    //向いている方向を表すやつ
+    XMVECTOR front =XMVectorSet(0, 0, 1, 0);
+
     XMMATRIX Enemyrotate = XMMatrixRotationY(XMConvertToRadians(transform_.rotate_.y));
-    XMVECTOR EnemyfE = XMVector3TransformCoord(flont, Enemyrotate);
-   
-    XMFLONT
- 
+    XMVECTOR EnemyfE = XMVector3TransformCoord(front, Enemyrotate);
+    XMVECTOR ENEMYFE = XMVector3Normalize(EnemyfE);
+    XMVECTOR Playervec = XMLoadFloat3(&PlayerVec) - XMLoadFloat3(&transform_.position_);
+    XMVECTOR PLAYERVEC = XMVector3Normalize(Playervec);
   
-
- 
-
+    //内積をとる
+    float InnerProduct = XMVectorGetX(XMVector3Dot(PLAYERVEC, ENEMYFE));
+   
+    return InnerProduct > enemyfan.EnemyDegree;
     
 }
 
@@ -30,6 +40,13 @@ bool Enemy::EnemyPOV(const XMFLOAT3& PlayerVec)
 /// <param name="speed"></param>
 void Enemy::ShowPlayer(Player& player, float speed)
 {
+    //ヒント1,3
+    /*自分が回転してないときの移動ベクトルに、回転行列をかけてから、座標に足します。<-ヒント1
+     目的の方向に向かうとき、滑らかに向きを変える場合は、
+         自分の右向きのベクトルと、自分から対象へのベクトルとで内積を取り、＞０であれば対象は右側に、
+         ＜０であれば対象は左側にいます。
+         その方向に、自分の向きを変えれば、だんだん対象の方を向くようになります。*/
+
     //位置取得
     XMFLOAT3 PlayerPosition = player.GetPosition();
 
@@ -88,7 +105,6 @@ void Enemy::Update()
      pPlayer->GetPosition();
      
   
-
     //プレイヤーを見つけていない場合は移動し続けて見つけたら追撃
     if (EnemyPOV(pPlayer->GetPosition()))
     {
