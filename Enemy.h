@@ -21,12 +21,6 @@ class Enemy :public GameObject
 
     } enemyfan;
 
-    //視野角の範囲を入れるためのセッター
-    void SetEnemyDegree(float degree)
-    {
-        enemyfan.EnemyDegree = degree;
-    }
-    
    
 public:
     //コンストラクタ

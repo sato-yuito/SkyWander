@@ -9,23 +9,11 @@
 /// <returns></returns>
 bool Enemy::EnemyPOV(const XMFLOAT3& PlayerVec)
 {
-    
-    //自身のポジションを持ってきてVECTOR型に変換
-    XMFLOAT3 enemyposition = transform_.position_;
-    XMVECTOR EnePos = XMLoadFloat3(&enemyposition);
-    enemyfan.EnemyPosition = EnePos;
-
-    //プレイヤーベクトルを変換し距離を計算
-    XMVECTOR playervec = XMLoadFloat3(&PlayerVec);
-    XMVECTOR EnemyDistance = XMVectorSubtract(playervec, enemyfan.EnemyPosition);
+    XMVECTOR flont =XMVectorSet(0, 0, 1, 0);
+    XMMATRIX Enemyrotate = XMMatrixRotationY(XMConvertToRadians(transform_.rotate_.y));
+    XMVECTOR EnemyfE = XMVector3TransformCoord(flont, Enemyrotate);
    
-    float enemydistance = XMVectorGetX(XMVector3Length(EnemyDistance));
-    if (enemydistance <= enemyfan.EnemyLength)
-    {
-
-    }
-
-  
+    XMFLONT
  
   
 
