@@ -17,7 +17,7 @@ bool Enemy::EnemyPOV(const XMFLOAT3& PlayerVec)
 
 
     //Œü‚¢‚Ä‚¢‚é•ûŒü‚ð•\‚·‚â‚Â
-    XMVECTOR front =XMVectorSet(0, 0, 1, 0);
+    XMVECTOR front =XMVectorSet(0, 0, 0, 0);
 
     XMMATRIX Enemyrotate = XMMatrixRotationY(XMConvertToRadians(transform_.rotate_.y));
     XMVECTOR EnemyfE = XMVector3TransformCoord(front, Enemyrotate);
