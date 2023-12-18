@@ -77,7 +77,7 @@ bool Enemy::IsFindPlayer(const XMFLOAT3& PlayerPos)
 	XMVECTOR frontVec = XMVector3TransformCoord(front, matRY);
 	frontVec = XMVector3Normalize(frontVec);
 
-	//
+	//対象のポジションから自身のポジションを引いてベクトルを求めて正規化
 	XMVECTOR playerVec = XMLoadFloat3(&PlayerPos) - XMLoadFloat3(&transform_.position_);
 	playerVec = XMVector3Normalize(playerVec);
 
@@ -97,8 +97,12 @@ void Enemy::ChasePlayer(XMFLOAT3 playerPos, float speed)
 	//目的の方向に向かうとき、滑らかに向きを変える場合は、
 	//自分の右向きのベクトルと、自分から対象へのベクトルとで内積を取り、＞０であれば対象は右側に、＜０であれば対象は左側にいます。
 	//その方向に、自分の向きを変えれば、だんだん対象の方を向くようになります。
+    
 
-	XM
+	//これで追撃型アルゴリズムってで来てるのかそもそも怪しい
+	XMVECTOR EnemyVec = XMLoadFloat3(&transform_.position_) - XMLoadFloat3(&playerPos);
+	EnemyVec = XMVector3Normalize(EnemyVec);
 
+	XMVECTOR MoveEnemy = EnemyVec * XMLoadFloat3(&transform_.position_);
 
 }
