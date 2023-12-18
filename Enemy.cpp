@@ -105,38 +105,22 @@ void Enemy::Update()
      pPlayer->GetPosition();
      
   
-    //プレイヤーを見つけていない場合は移動し続けて見つけたら追撃
-    if (EnemyPOV(pPlayer->GetPosition()))
-    {
-       
-        // 移動
-        transform_.position_.x += movement_ * sin(angle_);
-        transform_.position_.z += movement_ * cos(angle_);
+     if (!EnemyPOV(pPlayer->GetPosition()))
+     {
+         // 視野外の場合の処理
+         transform_.position_.x += movement_ * sin(angle_);
+         transform_.position_.z += movement_ * cos(angle_);
 
-
-        // 移動範囲の制御
-        if (transform_.position_.x < -5.0f)
-        {
-            angle_ = static_cast<float>(rand() % 180);
-
-        }
-        if (transform_.position_.z > 5.0f)
-        {
-            angle_ = static_cast<float>(rand() % 180 + 90);
-        }
-        if (transform_.position_.x > 5.0f)
-        {
-            angle_ = static_cast<float>(rand() % 180 + 180);
-        }
-        if (transform_.position_.z < -5.0)
-        {
-            angle_ = static_cast<float>(rand() % 180 - 90);
-        }
-    }
-    else
-    {
-        ShowPlayer(*pPlayer, 0.1f);
-    }
+         if (transform_.position_.x < -5.0f || transform_.position_.z > 5.0f || transform_.position_.x > 5.0f || transform_.position_.z < -5.0)
+         {
+             angle_ = XMConvertToRadians(static_cast<float>(rand() % 360));
+         }
+     }
+     else
+     {
+        //視野内にいるとき
+         ShowPlayer(*pPlayer, 0.1f);
+     }
    
 }
 
