@@ -1,15 +1,14 @@
 #pragma once
 #include "Engine/GameObject.h"
-#include"Player.h"
-#include"Map.h"
  
+class Map;
 
 class Enemy :public GameObject
 {
     int hModel_;    //モデル番号
     float movement_;
     float angle_;
-    Map* map;
+    Map* map_;
    
 
     struct EnemyFan
@@ -40,13 +39,11 @@ public:
     //開放
     void Release() override;
 
-
-    //視野角の設定
-    bool EnemyPOV(const XMFLOAT3& PlayerVec);
-
-    
+private:
+    //見つけているか
+    bool IsFindPlayer(const XMFLOAT3& PlayerPos);
 
     //プレイヤーを見つけたら追跡
-    void ShowPlayer(Player&player,float speed);
+    void ChasePlayer(XMFLOAT3 playerPos, float speed);
 };
 
