@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include <cmath>
 #include "Player.h"
 #include"Map.h"
 #include "Engine/Model.h"
@@ -40,7 +41,7 @@ void Enemy::Update()
 	else
 	{
 		// 見つけていないなら向きを変えながら移動
-
+		EnemyMove();
 	}
 }
 
@@ -83,11 +84,16 @@ bool Enemy::IsFindPlayer(const XMFLOAT3& PlayerPos)
 
 	//距離と視野内だったらの判定
    if (InnerProduct > enemyfan.EnemyDegree / 2.0);
+   {
 
-	float length = XMVectorGetX(XMVector3Length(playerVec));
 
-	if (length > enemyfan.EnemyLength) return false;
-	return true;
+	   float length = XMVectorGetX(XMVector3Length(playerVec));
+
+	   if (length > enemyfan.EnemyLength) {
+		   return false;
+	   }
+	   return true;
+   }
 
 }
 
@@ -97,12 +103,14 @@ bool Enemy::IsFindPlayer(const XMFLOAT3& PlayerPos)
 /// </summary>
 void Enemy::ChasePlayer(XMFLOAT3 playerPos)
 {
+	//ヒント
 	//目的の方向に向かうとき、滑らかに向きを変える場合は、
 	//自分の右向きのベクトルと、自分から対象へのベクトルとで内積を取り、＞０であれば対象は右側に、＜０であれば対象は左側にいます。
 	//その方向に、自分の向きを変えれば、だんだん対象の方を向くようになります。
     
+
 	//右ベクトル
-	XMMATRIX RightEnemyVec = XMMatrixRotationX(XMConvertToRadians(transform_.rotate_.x+90.0f));
+	XMMATRIX RightEnemyVec = XMMatrixRotationX(XMConvertToRadians(transform_.rotate_.y+90.0f));
 	XMVECTOR RightVec = XMVector3Normalize(XMVector3TransformCoord(front_, RightEnemyVec));
 	
     //プレイヤーとのベクトル
@@ -110,10 +118,20 @@ void Enemy::ChasePlayer(XMFLOAT3 playerPos)
 	EnemyVec = XMVector3Normalize(EnemyVec);
 
 
-	
+	float EnemyRad = XMVectorGetX(XMVector3Dot(front_, XMVector3Normalize(EnemyVec)));
+
+	if (EnemyRad > 0)
+	{
+		transform_.rotate_.y += 0.5f;
+	}
+	else
+	{
+		transform_.rotate_.y -= 0.5f;
+	}
 
 	
-
+	
+	
 }
 
 /// <summary>
@@ -122,6 +140,7 @@ void Enemy::ChasePlayer(XMFLOAT3 playerPos)
 void Enemy::EnemyMove()
 {
 	
-	transform_.position_.x += movement_ * sin(angle_);
+	std::uniform_real_distribution<float> dist(0.0f, 360.0f);
+	transform_.rotate_.y = dist(engine_);
 
 }
