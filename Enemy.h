@@ -1,6 +1,5 @@
 #pragma once
 #include "Engine/GameObject.h"
-#include <random>
 
 class Enemy :public GameObject
 {
@@ -16,7 +15,7 @@ class Enemy :public GameObject
         float EnemyLength;//中心から扇までの長さ
     } enemyfan;
 
-    std::mt19937 engine_;
+    
 public:
     //コンストラクタ
     Enemy(GameObject* parent);

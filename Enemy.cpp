@@ -1,5 +1,4 @@
 #include "Enemy.h"
-#include <cmath>
 #include "Player.h"
 #include"Map.h"
 #include "Engine/Model.h"
@@ -83,17 +82,18 @@ bool Enemy::IsFindPlayer(const XMFLOAT3& PlayerPos)
 	float InnerProduct = cos(XMVectorGetX((XMVector3Dot(playerVec, frontVec))));
 
 	//‹——£‚ÆŽ‹–ì“à‚¾‚Á‚½‚ç‚Ì”»’è
-   if (InnerProduct > enemyfan.EnemyDegree / 2.0);
-   {
+   if (InnerProduct > enemyfan.EnemyDegree / 2.0)return false;
+   
 
 
 	   float length = XMVectorGetX(XMVector3Length(playerVec));
 
-	   if (length > enemyfan.EnemyLength) {
+	   if (length > enemyfan.EnemyLength) 
+	   
 		   return false;
-	   }
+	   
 	   return true;
-   }
+   
 
 }
 
@@ -140,7 +140,6 @@ void Enemy::ChasePlayer(XMFLOAT3 playerPos)
 void Enemy::EnemyMove()
 {
 	
-	std::uniform_real_distribution<float> dist(0.0f, 360.0f);
-	transform_.rotate_.y = dist(engine_);
+	
 
 }
