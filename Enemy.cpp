@@ -94,6 +94,8 @@ bool Enemy::IsFindPlayer(const XMFLOAT3& PlayerPos)
 	   
 	   return true;
    
+	   //’Ç‚¢‚©‚¯‚é
+
 
 }
 
