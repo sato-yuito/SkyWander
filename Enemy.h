@@ -1,23 +1,18 @@
 #pragma once
 #include "Engine/GameObject.h"
- 
-class Map;
 
 class Enemy :public GameObject
 {
     int hModel_;    //モデル番号
     float movement_;
     float angle_;
-    Map* map_;
-   
+    XMVECTOR front_;//向いている方向を表す関数
+    XMVECTOR EnemyMove_;//移動量
 
     struct EnemyFan
     {
-        XMVECTOR EnemyPosition;//中心座標
         float EnemyDegree;//視野角の範囲（角度）
         float EnemyLength;//中心から扇までの長さ
-        float DirectionDegree;//扇の方向を決めるために必要なもの
-
     } enemyfan;
 
    
@@ -44,6 +39,10 @@ private:
     bool IsFindPlayer(const XMFLOAT3& PlayerPos);
 
     //プレイヤーを見つけたら追跡
-    void ChasePlayer(XMFLOAT3 playerPos, float speed);
+    void ChasePlayer(XMFLOAT3 playerPos);
+
+    //移動処理
+    void EnemyMove();
+
 };
 

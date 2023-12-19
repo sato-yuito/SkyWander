@@ -4,15 +4,16 @@
 #include "Engine/Model.h"
 
 Enemy::Enemy(GameObject* parent)
-	: GameObject(parent,"Enemy"),hModel_(-1),movement_(0.15f)
+	: GameObject(parent,"Enemy"),hModel_(-1),front_(XMVectorSet(0.0f,0.0f,-1.0f,0.0f))
 {
+	XMFLOAT3 movement_{ 0.0f,0.0f,0.15f };
+	EnemyMove_ = XMLoadFloat3(&movement_);
+
 	enemyfan = {
-		XMLoadFloat3(&transform_.position_),
 		60.0f,
 		20.0f,
-		transform_.rotate_.y
 	};
-	map_ = (Map*)FindObject("Map");
+	
 }
 
 Enemy::~Enemy()
@@ -33,12 +34,12 @@ void Enemy::Update()
 
 	if (IsFindPlayer(playerPos))
 	{
-		//見つけている
-		ChasePlayer(playerPos, 0.1f);
+		//もし見つけているなら追撃する
+		ChasePlayer(playerPos);
 	}
 	else
 	{
-		// 見つけていない
+		// 見つけていないなら向きを変えながら移動
 
 	}
 }
@@ -56,7 +57,7 @@ void Enemy::Release()
 
 
 // <summary>
-/// 見つけているか
+/// 視野の範囲にいるかどうか
 /// </summary>
 bool Enemy::IsFindPlayer(const XMFLOAT3& PlayerPos)
 {
@@ -68,13 +69,9 @@ bool Enemy::IsFindPlayer(const XMFLOAT3& PlayerPos)
 		視野内にいます。
 	*/
 
-
-	//向いている方向を表すやつ
-	XMVECTOR front = XMVectorSet(0, 0, -1, 0);
-
 	// 向いてる方向に変換
 	XMMATRIX matRY = XMMatrixRotationY(XMConvertToRadians(transform_.rotate_.y));
-	XMVECTOR frontVec = XMVector3TransformCoord(front, matRY);
+	XMVECTOR frontVec = XMVector3TransformCoord(front_, matRY);
 	frontVec = XMVector3Normalize(frontVec);
 
 	//対象のポジションから自身のポジションを引いてベクトルを求めて正規化
@@ -82,27 +79,49 @@ bool Enemy::IsFindPlayer(const XMFLOAT3& PlayerPos)
 	playerVec = XMVector3Normalize(playerVec);
 
 	//内積をとる
-	float InnerProduct = XMVectorGetX(XMVector3Dot(playerVec, frontVec));
+	float InnerProduct = cos(XMVectorGetX((XMVector3Dot(playerVec, frontVec))));
 
-	return InnerProduct > enemyfan.EnemyDegree;
+	//距離と視野内だったらの判定
+   if (InnerProduct > enemyfan.EnemyDegree / 2.0);
+
+	float length = XMVectorGetX(XMVector3Length(playerVec));
+
+	if (length > enemyfan.EnemyLength) return false;
+	return true;
 
 }
 
 
 /// <summary>
-/// 追撃アルゴリズムの実装
+/// 追撃アルゴリズム
 /// </summary>
-void Enemy::ChasePlayer(XMFLOAT3 playerPos, float speed)
+void Enemy::ChasePlayer(XMFLOAT3 playerPos)
 {
 	//目的の方向に向かうとき、滑らかに向きを変える場合は、
 	//自分の右向きのベクトルと、自分から対象へのベクトルとで内積を取り、＞０であれば対象は右側に、＜０であれば対象は左側にいます。
 	//その方向に、自分の向きを変えれば、だんだん対象の方を向くようになります。
     
-
-	//これで追撃型アルゴリズムってで来てるのかそもそも怪しい
+	//右ベクトル
+	XMMATRIX RightEnemyVec = XMMatrixRotationX(XMConvertToRadians(transform_.rotate_.x+90.0f));
+	XMVECTOR RightVec = XMVector3Normalize(XMVector3TransformCoord(front_, RightEnemyVec));
+	
+    //プレイヤーとのベクトル
 	XMVECTOR EnemyVec = XMLoadFloat3(&transform_.position_) - XMLoadFloat3(&playerPos);
 	EnemyVec = XMVector3Normalize(EnemyVec);
 
-	XMVECTOR MoveEnemy = EnemyVec * XMLoadFloat3(&transform_.position_);
+
+	
+
+	
+
+}
+
+/// <summary>
+/// 移動処理(そのうちある程度の時間がったら方向転換するようにしたい)
+/// </summary>
+void Enemy::EnemyMove()
+{
+	
+	transform_.position_.x += movement_ * sin(angle_);
 
 }
