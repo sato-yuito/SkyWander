@@ -39,8 +39,7 @@ void Enemy::Update()
 	}
 	else
 	{
-		// 見つけていないなら向きを変えながら移動
-		EnemyMove();
+		
 	}
 }
 
@@ -90,11 +89,11 @@ bool Enemy::IsFindPlayer(const XMFLOAT3& PlayerPos)
 
 	   if (length > enemyfan.EnemyLength) 
 	   
-		   return false;
+		  
 	   
 	   return true;
    
-	   //追いかける
+	  
 
 
 }
@@ -105,22 +104,27 @@ bool Enemy::IsFindPlayer(const XMFLOAT3& PlayerPos)
 /// </summary>
 void Enemy::ChasePlayer(XMFLOAT3 playerPos)
 {
-	//ヒント
-	//目的の方向に向かうとき、滑らかに向きを変える場合は、
-	//自分の右向きのベクトルと、自分から対象へのベクトルとで内積を取り、＞０であれば対象は右側に、＜０であれば対象は左側にいます。
-	//その方向に、自分の向きを変えれば、だんだん対象の方を向くようになります。
-    
+	XMVECTOR PlayerPos = XMLoadFloat3(&playerPos);
+	XMVECTOR EnemyPositon = XMLoadFloat3(&transform_.position_);
+	
+	XMVECTOR EnemyChase = PlayerPos - EnemyPositon;
+
+	EnemyChase = XMVector3Normalize(EnemyChase);
+
+	XMVECTOR MoveEnemy = EnemyChase * EnemyMove_;
+
+	XMStoreFloat3( &transform_.position_ , EnemyPositon +MoveEnemy);
 
 	//右ベクトル
-	XMMATRIX RightEnemyVec = XMMatrixRotationX(XMConvertToRadians(transform_.rotate_.y+90.0f));
+	XMMATRIX RightEnemyVec = XMMatrixRotationX(XMConvertToRadians(transform_.rotate_.y + 90.0f));
 	XMVECTOR RightVec = XMVector3Normalize(XMVector3TransformCoord(front_, RightEnemyVec));
-	
-    //プレイヤーとのベクトル
+
+	//プレイヤーとのベクトル
 	XMVECTOR EnemyVec = XMLoadFloat3(&transform_.position_) - XMLoadFloat3(&playerPos);
 	EnemyVec = XMVector3Normalize(EnemyVec);
 
 
-	float EnemyRad = XMVectorGetX(XMVector3Dot(front_, XMVector3Normalize(EnemyVec)));
+	float EnemyRad = XMVectorGetX(XMVector3Dot(front_, EnemyVec));
 
 	if (EnemyRad > 0)
 	{
@@ -131,17 +135,5 @@ void Enemy::ChasePlayer(XMFLOAT3 playerPos)
 		transform_.rotate_.y -= 0.5f;
 	}
 
-	
-	
-	
 }
 
-/// <summary>
-/// 移動処理(そのうちある程度の時間がったら方向転換するようにしたい)
-/// </summary>
-void Enemy::EnemyMove()
-{
-	
-	
-
-}

@@ -41,8 +41,7 @@ private:
     //ƒvƒŒƒCƒ„[‚ğŒ©‚Â‚¯‚½‚ç’ÇÕ
     void ChasePlayer(XMFLOAT3 playerPos);
 
-    //ˆÚ“®ˆ—
-    void EnemyMove();
+  
 
 };
 
