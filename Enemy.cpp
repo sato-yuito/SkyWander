@@ -4,14 +4,15 @@
 #include "Engine/Model.h"
 
 Enemy::Enemy(GameObject* parent)
-	: GameObject(parent,"Enemy"),hModel_(-1),
+	: GameObject(parent,"Enemy"),hModel_(-1),front_  (XMVectorSet(0.0f, 0.0f, -1.0f, 0.0f))
 {
-	XMFLOAT3 movement_{ 0.0f,0.0f,0.15f };
-	EnemyMove_ = XMLoadFloat3(&movement_);
+	
+	movement_ = 0.06f;
+	
 
 	enemyfan = {
-		60.0f,
-		20.0f,
+		15.0f,
+		10.0f,
 	};
 	
 }
@@ -31,17 +32,17 @@ void Enemy::Initialize()
 void Enemy::Update()
 {
 	XMFLOAT3 playerPos = ((Player*)FindObject("Player"))->GetPosition();
-	ChasePlayer(playerPos);
-	//if (IsFindPlayer(playerPos))
-	//{
-	//	//もし見つけているなら追撃する
-	//	
-	//	ChasePlayer(playerPos);
-	//}
-	//else
-	//{
-	//	
-	//}
+	
+	if (IsFindPlayer(playerPos))
+	{
+		//もし見つけているなら追撃する
+		
+		//ChasePlayer(playerPos);
+	}
+	else
+	{
+		int a = 0;
+	}
 }
 
 void Enemy::Draw()
@@ -68,31 +69,33 @@ bool Enemy::IsFindPlayer(const XMFLOAT3& PlayerPos)
 		（長さ１）で内積を取ると、cosΘが手に入ります。視野角が60°であれば、これがcos(60°)よりも大きければ、
 		視野内にいます。
 	*/
-
+	
 	// 向いてる方向に変換
 	XMMATRIX matRY = XMMatrixRotationY(XMConvertToRadians(transform_.rotate_.y));
 	XMVECTOR frontVec = XMVector3TransformCoord(front_, matRY);
 	frontVec = XMVector3Normalize(frontVec);
 
-	//対象のポジションから自身のポジションを引いてベクトルを求めて正規化
-	XMVECTOR playerVec = XMLoadFloat3(&PlayerPos) - XMLoadFloat3(&transform_.position_);
+	
+	XMVECTOR playerVec = frontVec - XMLoadFloat3(&transform_.position_);
 	playerVec = XMVector3Normalize(playerVec);
 
 	//内積をとる
 	float InnerProduct = cos(XMVectorGetX((XMVector3Dot(playerVec, frontVec))));
 
 	//距離と視野内だったらの判定
-   if (InnerProduct > enemyfan.EnemyDegree / 2.0)return false;
-   
+	if (InnerProduct > enemyfan.EnemyDegree / 2.0)
+	
+		return false;
+	
 
 
 	   float length = XMVectorGetX(XMVector3Length(playerVec));
 
-	   if (length > enemyfan.EnemyLength) 
+	   if (length > enemyfan.EnemyLength)
+
+		   return true;
 	   
-		  
 	   
-	   return true;
    
 	  
 
@@ -106,37 +109,23 @@ bool Enemy::IsFindPlayer(const XMFLOAT3& PlayerPos)
 void Enemy::ChasePlayer(XMFLOAT3 playerPos)
 {
 
-	//右ベクトル
-	//XMMATRIX RightEnemyVec = XMMatrixRotationX(XMConvertToRadians(transform_.rotate_.y + 90.0f));
-	//XMVECTOR RightVec = XMVector3Normalize(XMVector3TransformCoord(front_, RightEnemyVec));
-
-	////プレイヤーとのベクトル
-	//XMVECTOR EnemyVec = XMLoadFloat3(&playerPos) - XMLoadFloat3(&transform_.position_);
-	//EnemyVec = XMVector3Normalize(EnemyVec);
-
-
-
-	//float EnemyRad = XMVectorGetX(XMVector3Dot(front_, EnemyVec));
-
-	//if (EnemyRad > 0)
-	//{
-	//	//transform_.matRotate_* XMMatrixTransformation(EnemyVec, 0.5f);
-	//	
-	//	
-	//}
-	//else
-	//{
-	//	
-	//}
-
 
 	XMVECTOR PlayerPos = XMLoadFloat3(&playerPos);
 	XMVECTOR EnemyPositon = XMLoadFloat3(&transform_.position_);
 	XMVECTOR EnemyChase = PlayerPos - EnemyPositon;
 	EnemyChase = XMVector3Normalize(EnemyChase);
-	front_(XMVectorSet(0.0f, 0.0f, -1.0f, 0.0f));
+	XMVECTOR front_= (XMVectorSet(0.0f, 0.0f, -1.0f, 0.0f));
 	float dot = XMVectorGetX(XMVector3Dot(EnemyChase, front_));
 	float Eneangle_ = (float) acos(dot);
+	XMVECTOR  EnemyCross = XMVector3Cross(front_, EnemyChase);
+	if (XMVectorGetY(EnemyCross) < 0)
+	{
+		Eneangle_ *= -1.0f;
+	}
+	transform_.rotate_.y = XMConvertToDegrees(Eneangle_);
+
+	XMVECTOR MoveEnemy = EnemyChase * movement_;
+	XMStoreFloat3(&transform_.position_, EnemyPositon + MoveEnemy);
 
 }
 

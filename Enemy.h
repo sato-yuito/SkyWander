@@ -6,8 +6,9 @@ class Enemy :public GameObject
     int hModel_;    //ƒ‚ƒfƒ‹”Ô†
     float movement_;
     float angle_;
-    XMVECTOR front_;//Œü‚¢‚Ä‚¢‚é•ûŒü‚ğ•\‚·ŠÖ”
-    XMVECTOR EnemyMove_;//ˆÚ“®—Ê
+    
+    XMVECTOR front_;
+    
 
     struct EnemyFan
     {
