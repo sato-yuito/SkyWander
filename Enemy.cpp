@@ -37,11 +37,11 @@ void Enemy::Update()
 	{
 		//‚à‚µŒ©‚Â‚¯‚Ä‚¢‚é‚È‚ç’ÇŒ‚‚·‚é
 		
-		//ChasePlayer(playerPos);
+		ChasePlayer(playerPos);
 	}
 	else
 	{
-		int a = 0;
+		
 	}
 }
 
@@ -80,7 +80,7 @@ bool Enemy::IsFindPlayer(const XMFLOAT3& PlayerPos)
 	playerVec = XMVector3Normalize(playerVec);
 
 	//“àÏ‚ð‚Æ‚é
-	float InnerProduct = cos(XMVectorGetX((XMVector3Dot(playerVec, frontVec))));
+	float InnerProduct = XMVectorGetX(XMVector3Dot(playerVec, frontVec));
 
 	//‹——£‚ÆŽ‹–ì“à‚¾‚Á‚½‚ç‚Ì”»’è
 	if (InnerProduct > enemyfan.EnemyDegree / 2.0)
