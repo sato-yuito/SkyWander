@@ -4,7 +4,7 @@
 #include "Engine/Model.h"
 
 Enemy::Enemy(GameObject* parent)
-	: GameObject(parent,"Enemy"),hModel_(-1),front_(XMVectorSet(0.0f,0.0f,-1.0f,0.0f))
+	: GameObject(parent,"Enemy"),hModel_(-1),
 {
 	XMFLOAT3 movement_{ 0.0f,0.0f,0.15f };
 	EnemyMove_ = XMLoadFloat3(&movement_);
@@ -31,16 +31,17 @@ void Enemy::Initialize()
 void Enemy::Update()
 {
 	XMFLOAT3 playerPos = ((Player*)FindObject("Player"))->GetPosition();
-
-	if (IsFindPlayer(playerPos))
-	{
-		//もし見つけているなら追撃する
-		ChasePlayer(playerPos);
-	}
-	else
-	{
-		
-	}
+	ChasePlayer(playerPos);
+	//if (IsFindPlayer(playerPos))
+	//{
+	//	//もし見つけているなら追撃する
+	//	
+	//	ChasePlayer(playerPos);
+	//}
+	//else
+	//{
+	//	
+	//}
 }
 
 void Enemy::Draw()
@@ -104,36 +105,38 @@ bool Enemy::IsFindPlayer(const XMFLOAT3& PlayerPos)
 /// </summary>
 void Enemy::ChasePlayer(XMFLOAT3 playerPos)
 {
-	XMVECTOR PlayerPos = XMLoadFloat3(&playerPos);
-	XMVECTOR EnemyPositon = XMLoadFloat3(&transform_.position_);
-	
-	XMVECTOR EnemyChase = PlayerPos - EnemyPositon;
-
-	EnemyChase = XMVector3Normalize(EnemyChase);
-
-	XMVECTOR MoveEnemy = EnemyChase * EnemyMove_;
-
-	XMStoreFloat3( &transform_.position_ , EnemyPositon +MoveEnemy);
 
 	//右ベクトル
-	XMMATRIX RightEnemyVec = XMMatrixRotationX(XMConvertToRadians(transform_.rotate_.y + 90.0f));
-	XMVECTOR RightVec = XMVector3Normalize(XMVector3TransformCoord(front_, RightEnemyVec));
+	//XMMATRIX RightEnemyVec = XMMatrixRotationX(XMConvertToRadians(transform_.rotate_.y + 90.0f));
+	//XMVECTOR RightVec = XMVector3Normalize(XMVector3TransformCoord(front_, RightEnemyVec));
 
-	//プレイヤーとのベクトル
-	XMVECTOR EnemyVec = XMLoadFloat3(&transform_.position_) - XMLoadFloat3(&playerPos);
-	EnemyVec = XMVector3Normalize(EnemyVec);
+	////プレイヤーとのベクトル
+	//XMVECTOR EnemyVec = XMLoadFloat3(&playerPos) - XMLoadFloat3(&transform_.position_);
+	//EnemyVec = XMVector3Normalize(EnemyVec);
 
 
-	float EnemyRad = XMVectorGetX(XMVector3Dot(front_, EnemyVec));
 
-	if (EnemyRad > 0)
-	{
-		transform_.rotate_.y += 0.5f;
-	}
-	else
-	{
-		transform_.rotate_.y -= 0.5f;
-	}
+	//float EnemyRad = XMVectorGetX(XMVector3Dot(front_, EnemyVec));
+
+	//if (EnemyRad > 0)
+	//{
+	//	//transform_.matRotate_* XMMatrixTransformation(EnemyVec, 0.5f);
+	//	
+	//	
+	//}
+	//else
+	//{
+	//	
+	//}
+
+
+	XMVECTOR PlayerPos = XMLoadFloat3(&playerPos);
+	XMVECTOR EnemyPositon = XMLoadFloat3(&transform_.position_);
+	XMVECTOR EnemyChase = PlayerPos - EnemyPositon;
+	EnemyChase = XMVector3Normalize(EnemyChase);
+	front_(XMVectorSet(0.0f, 0.0f, -1.0f, 0.0f));
+	float dot = XMVectorGetX(XMVector3Dot(EnemyChase, front_));
+	float Eneangle_ = (float) acos(dot);
 
 }
 
