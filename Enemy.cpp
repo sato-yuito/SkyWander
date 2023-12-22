@@ -6,9 +6,9 @@
 Enemy::Enemy(GameObject* parent)
 	: GameObject(parent,"Enemy"),hModel_(-1),front_  (XMVectorSet(0.0f, 0.0f, -1.0f, 0.0f))
 {
-	//移動
-	movement_ = 0.06f;
 	
+	movement_ = 0.06f;
+	time_ = 10.0f;
 
 	enemyfan = {
 		15.0f,
@@ -36,13 +36,11 @@ void Enemy::Update()
 	if (IsFindPlayer(playerPos))
 	{
 		//もし見つけているなら追撃する
-		
 		ChasePlayer(playerPos);
 	}
 	else
 	{
-		//見つけていないなら回って移動
-
+		
 	}
 }
 
@@ -76,7 +74,7 @@ bool Enemy::IsFindPlayer(const XMFLOAT3& PlayerPos)
 	float InnerProduct = XMVectorGetX(XMVector3Dot(playerVec, frontVec));
 
 	//距離と視野内だったらの判定
-	if (InnerProduct >cos(XMConvertToRadians(enemyfan.EnemyDegree / 2.0)));
+	if (InnerProduct < cos(XMConvertToRadians(enemyfan.EnemyDegree / 2.0)))return false;
 	
 
 
@@ -93,21 +91,35 @@ bool Enemy::IsFindPlayer(const XMFLOAT3& PlayerPos)
 /// </summary>
 void Enemy::ChasePlayer(XMFLOAT3 playerPos)
 {
+	//対象のポジションと自身のポジションをVECTOR型に変換
 	XMVECTOR PlayerPos = XMLoadFloat3(&playerPos);
-	XMVECTOR EnemyPositon = XMLoadFloat3(&transform_.position_);
-	XMVECTOR EnemyChase = PlayerPos - EnemyPositon;
+	XMVECTOR EnemyPosition = XMLoadFloat3(&transform_.position_);
+	//追尾するための方向ベクトルとして使うための計算&正規化
+	XMVECTOR EnemyChase = PlayerPos - EnemyPosition;
 	EnemyChase = XMVector3Normalize(EnemyChase);
+
+	//前方ベクトルを作成しベクトル間の角度計算
 	XMVECTOR front_= (XMVectorSet(0.0f, 0.0f, -1.0f, 0.0f));
 	float dot = XMVectorGetX(XMVector3Dot(EnemyChase, front_));
 	float Eneangle_ = (float) acos(dot);
+
+	//外積を計算しy方向が0より小さい場合角度が反転(プレイヤーが右側か左側の区別がつくようになる)
 	XMVECTOR  EnemyCross = XMVector3Cross(front_, EnemyChase);
 	if (XMVectorGetY(EnemyCross) < 0)
 	{
 		Eneangle_ *= -1.0f;
 	}
+
+	//ラジアンから度に変換
 	transform_.rotate_.y = XMConvertToDegrees(Eneangle_);
 
+	//移動すべき方向が計算されて速さをかけることで動ける
 	XMVECTOR MoveEnemy = EnemyChase * movement_;
-	XMStoreFloat3(&transform_.position_, EnemyPositon + MoveEnemy);
+
+	//新しい位置を更新するように自身のポジションに格納
+	XMStoreFloat3(&transform_.position_, EnemyPosition + MoveEnemy);
 }
 
+void Enemy::EnemySearch()
+{
+}

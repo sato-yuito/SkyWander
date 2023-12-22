@@ -4,8 +4,8 @@
 class Enemy :public GameObject
 {
     int hModel_;    //モデル番号
-    float movement_;
-    float angle_;
+    float movement_;//移動量
+    float time_; //数秒に一回向きを変えれるようにするための変数
     
     XMVECTOR front_;
     
@@ -42,7 +42,8 @@ private:
     //プレイヤーを見つけたら追跡
     void ChasePlayer(XMFLOAT3 playerPos);
 
-  
+    //見つけていない場合の回転移動(5～10秒の間に向きが変わるようにする)
+    void EnemySearch();
 
 };
 
