@@ -76,7 +76,7 @@ bool Enemy::IsFindPlayer(const XMFLOAT3& PlayerPos)
 	float InnerProduct = XMVectorGetX(XMVector3Dot(playerVec, frontVec));
 
 	//‹——£‚ÆŽ‹–ì“à‚¾‚Á‚½‚ç‚Ì”»’è
-	if (InnerProduct > enemyfan.EnemyDegree / 2.0)return false;
+	if (InnerProduct >cos(XMConvertToRadians(enemyfan.EnemyDegree / 2.0)));
 	
 
 
