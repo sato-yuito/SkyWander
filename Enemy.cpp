@@ -6,7 +6,7 @@
 Enemy::Enemy(GameObject* parent)
 	: GameObject(parent,"Enemy"),hModel_(-1),front_  (XMVectorSet(0.0f, 0.0f, -1.0f, 0.0f))
 {
-	
+	//移動
 	movement_ = 0.06f;
 	
 
@@ -41,7 +41,8 @@ void Enemy::Update()
 	}
 	else
 	{
-		
+		//見つけていないなら回って移動
+
 	}
 }
 
@@ -62,14 +63,6 @@ void Enemy::Release()
 /// </summary>
 bool Enemy::IsFindPlayer(const XMFLOAT3& PlayerPos)
 {
-	//ヒント(視野角判定)
-	/*
-		視野内にいるかを判別するには、
-		自分の向いてる向きのベクトル（長さ１）と、自分から対象へのベクトル
-		（長さ１）で内積を取ると、cosΘが手に入ります。視野角が60°であれば、これがcos(60°)よりも大きければ、
-		視野内にいます。
-	*/
-	
 	// 向いてる方向に変換
 	XMMATRIX matRY = XMMatrixRotationY(XMConvertToRadians(transform_.rotate_.y));
 	XMVECTOR frontVec = XMVector3TransformCoord(front_, matRY);
@@ -83,23 +76,15 @@ bool Enemy::IsFindPlayer(const XMFLOAT3& PlayerPos)
 	float InnerProduct = XMVectorGetX(XMVector3Dot(playerVec, frontVec));
 
 	//距離と視野内だったらの判定
-	if (InnerProduct > enemyfan.EnemyDegree / 2.0)
-	
-		return false;
+	if (InnerProduct > enemyfan.EnemyDegree / 2.0)return false;
 	
 
 
 	   float length = XMVectorGetX(XMVector3Length(playerVec));
 
-	   if (length > enemyfan.EnemyLength)
+	   if (length > enemyfan.EnemyLength)return false;
 
 		   return true;
-	   
-	   
-   
-	  
-
-
 }
 
 
@@ -108,8 +93,6 @@ bool Enemy::IsFindPlayer(const XMFLOAT3& PlayerPos)
 /// </summary>
 void Enemy::ChasePlayer(XMFLOAT3 playerPos)
 {
-
-
 	XMVECTOR PlayerPos = XMLoadFloat3(&playerPos);
 	XMVECTOR EnemyPositon = XMLoadFloat3(&transform_.position_);
 	XMVECTOR EnemyChase = PlayerPos - EnemyPositon;
@@ -126,6 +109,5 @@ void Enemy::ChasePlayer(XMFLOAT3 playerPos)
 
 	XMVECTOR MoveEnemy = EnemyChase * movement_;
 	XMStoreFloat3(&transform_.position_, EnemyPositon + MoveEnemy);
-
 }
 
