@@ -120,6 +120,11 @@ void Enemy::ChasePlayer(XMFLOAT3 playerPos)
 	XMStoreFloat3(&transform_.position_, EnemyPosition + MoveEnemy);
 }
 
+/// <summary>
+/// Œ©‚Â‚¯‚Ä‚¢‚È‚¢‚Æ‚«‚Í10•b‚Éˆê‰ñŒü‚«‚ğ•Ï‚¦‚È‚ª‚çˆÚ“®‚·‚éˆ—
+/// </summary>
 void Enemy::EnemySearch()
 {
+   XMVECTOR EnePos = XMLoadFloat3(&transform_.position_);
+
 }
