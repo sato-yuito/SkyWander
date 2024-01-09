@@ -11,7 +11,7 @@ Enemy::Enemy(GameObject* parent)
 	time_ = 10.0f;
 
 	enemyfan = {
-		15.0f,
+		60.0f,
 		10.0f,
 	};
 	
@@ -35,7 +35,7 @@ void Enemy::Update()
 	
 	if (IsFindPlayer(playerPos))
 	{
-		//‚à‚µŒ©‚Â‚¯‚Ä‚¢‚é‚È‚ç’ÇŒ‚‚·‚é
+		//‚à‚µŒ©‚Â‚¯‚Ä‚¢‚é‚È‚ç’ÇŒ‚‚·‚é(‚Ì‚¿‚ÉUŒ‚‚·‚é‚æ‚¤‚É‚µ‚½‚¢j
 		ChasePlayer(playerPos);
 	}
 	else
@@ -56,7 +56,7 @@ void Enemy::Release()
 
 
 
-// <summary>
+/// <summary>
 /// ‹–ì‚Ì”ÍˆÍ‚É‚¢‚é‚©‚Ç‚¤‚©
 /// </summary>
 bool Enemy::IsFindPlayer(const XMFLOAT3& PlayerPos)
@@ -73,16 +73,18 @@ bool Enemy::IsFindPlayer(const XMFLOAT3& PlayerPos)
 	//“àÏ‚ğ‚Æ‚é
 	float InnerProduct = XMVectorGetX(XMVector3Dot(playerVec, frontVec));
 
-	//‹——£‚Æ‹–ì“à‚¾‚Á‚½‚ç‚Ì”»’è
-	if (InnerProduct < cos(XMConvertToRadians(enemyfan.EnemyDegree / 2.0)))return false;
+	if (InnerProduct > cos(XMConvertToRadians(enemyfan.EnemyDegree / 2.0)))
+	{
+		float length = XMVectorGetX(XMVector3Length(playerVec));
+
+		if (length > enemyfan.EnemyLength)
+		{
+			return true;
+		}
+	}
+
 	
-
-
-	   float length = XMVectorGetX(XMVector3Length(playerVec));
-
-	   if (length > enemyfan.EnemyLength)return false;
-
-		   return true;
+	return false;
 }
 
 
@@ -121,10 +123,10 @@ void Enemy::ChasePlayer(XMFLOAT3 playerPos)
 }
 
 /// <summary>
-/// Œ©‚Â‚¯‚Ä‚¢‚È‚¢‚Æ‚«‚Í10•b‚Éˆê‰ñŒü‚«‚ğ•Ï‚¦‚È‚ª‚çˆÚ“®‚·‚éˆ—
+/// Œ©‚Â‚¯‚Ä‚¢‚È‚¢‚Æ‚«‚ÌˆÚ“®‚Á‚Ä‚Ç‚¤‚µ‚æ‚¤;;
 /// </summary>
 void Enemy::EnemySearch()
 {
-   XMVECTOR EnePos = XMLoadFloat3(&transform_.position_);
+   
 
 }
