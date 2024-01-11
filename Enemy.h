@@ -7,9 +7,10 @@ class Enemy :public GameObject
     float movement_;//移動量
     float time_; //数秒に一回向きを変えれるようにするための変数
     
+    float EnemDirectionChange_;//経過時間をわかりやすいようにするための変数
     XMVECTOR front_;
     
-
+    XMFLOAT3 playerPos;
     struct EnemyFan
     {
         float EnemyDegree;//視野角の範囲（角度）
@@ -40,7 +41,7 @@ private:
     bool IsFindPlayer(const XMFLOAT3& PlayerPos);
 
     //プレイヤーを見つけたら追跡
-    void ChasePlayer(XMFLOAT3 playerPos);
+    void ChasePlayer();
 
     //見つけていない場合の回転移動(5～10秒の間に向きが変わるようにする)
     void EnemySearch();
