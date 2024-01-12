@@ -78,14 +78,16 @@ bool Enemy::IsFindPlayer(const XMFLOAT3& PlayerPos)
 
 	//Ž‹–ìŠp‚Ì”ÍˆÍ“à‚©‚Ç‚¤‚©
 	if (InnerProduct > cos(XMConvertToRadians(enemyfan.EnemyDegree / 2.0)))
-	
+	{
+
 		//’†S‚©‚çî‚Ü‚Å‚Ì’·‚³‚æ‚è‘å‚«‚¢‚©‚Ì”»•Ê
 		if (length > enemyfan.EnemyLength)
 		{
 			return false;
 		}
-	
+
 		return true;
+	}
 }
 
 
@@ -132,9 +134,9 @@ void Enemy::EnemySearch()
 	if (EnemDirectionChange_ >= time_)
 	{
 		transform_.rotate_.y = static_cast<float>(rand() % 360);//ƒ‰ƒ“ƒ_ƒ€‚ÉˆÚ“®
-		EnemDirectionChange_ = 0.0f;
+		XMVECTOR MoveEnemy = front_ * movement_;
+		XMVECTOR EnemyPosition = XMLoadFloat3(&transform_.position_);
+		XMStoreFloat3(&transform_.position_, EnemyPosition + MoveEnemy);
 	}
-	XMVECTOR MoveEnemy = front_ * movement_;
-	XMVECTOR EnemyPosition = XMLoadFloat3(&transform_.position_);
-	XMStoreFloat3(&transform_.position_, EnemyPosition + MoveEnemy);
+	
 }
