@@ -5,9 +5,8 @@ class Enemy :public GameObject
 {
     int hModel_;    //ƒ‚ƒfƒ‹”Ô†
     float movement_;//ˆÚ“®—Ê
-    float time_; //”•b‚Éˆê‰ñŒü‚«‚ğ•Ï‚¦‚ê‚é‚æ‚¤‚É‚·‚é‚½‚ß‚Ì•Ï”
-    
-    float EnemDirectionChange_;//Œo‰ßŠÔ‚ğ‚í‚©‚è‚â‚·‚¢‚æ‚¤‚É‚·‚é‚½‚ß‚Ì•Ï”
+   
+  
     XMVECTOR front_;
     
     XMFLOAT3 playerPos;

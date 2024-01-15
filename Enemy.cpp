@@ -3,12 +3,16 @@
 #include"Map.h"
 #include "Engine/Model.h"
 
+namespace {
+	const int LastTime = 10;//10秒に一回向きを変えたるための変数
+}
+
 Enemy::Enemy(GameObject* parent)
 	: GameObject(parent,"Enemy"),hModel_(-1),front_  (XMVectorSet(0.0f, 0.0f, -1.0f, 0.0f))
 {
 	
 	movement_ = 0.06f;
-	time_ = 10.0f;
+	
 
 	enemyfan = {
 		60.0f,
@@ -62,14 +66,20 @@ void Enemy::Release()
 /// </summary>
 bool Enemy::IsFindPlayer(const XMFLOAT3& PlayerPos)
 {
-	// 向いてる方向に変換
+	//自身のポジションを入れる変数
+	XMVECTOR EnemPos = XMLoadFloat3(&transform_.position_);
+
+	// 向いてる方向に対する回転行列
 	XMMATRIX matRY = XMMatrixRotationY(XMConvertToRadians(transform_.rotate_.y));
+	//敵の前方ベクトルをmatRYで回転させる
 	XMVECTOR frontVec = XMVector3TransformCoord(front_, matRY);
+	//正規化
 	frontVec = XMVector3Normalize(frontVec);
 
-
+	//プレイヤーの位置を表すベクトル
 	XMVECTOR Playervec = XMLoadFloat3(&playerPos);
-	XMVECTOR playerVec = frontVec - Playervec;
+
+	XMVECTOR playerVec = Playervec - EnemPos;
 	float length = XMVectorGetX(XMVector3Length(playerVec));
 	playerVec = XMVector3Normalize(playerVec);
 
@@ -78,16 +88,13 @@ bool Enemy::IsFindPlayer(const XMFLOAT3& PlayerPos)
 
 	//視野角の範囲内かどうか
 	if (InnerProduct > cos(XMConvertToRadians(enemyfan.EnemyDegree / 2.0)))
-	{
+		return false;
 
-		//中心から扇までの長さより大きいかの判別
-		if (length > enemyfan.EnemyLength)
-		{
-			return false;
-		}
+	//中心から扇までの長さより大きいかの判別
+	if (length > enemyfan.EnemyLength)
+		return false;
 
-		return true;
-	}
+	return true;
 }
 
 
@@ -103,8 +110,6 @@ void Enemy::ChasePlayer()
 	XMVECTOR EnemyChase = PlayerPos - EnemyPosition;
 	EnemyChase = XMVector3Normalize(EnemyChase);
 
-	//前方ベクトルを作成しベクトル間の角度計算
-	XMVECTOR front_= (XMVectorSet(0.0f, 0.0f, -1.0f, 0.0f));
 	float dot = XMVectorGetX(XMVector3Dot(EnemyChase, front_));
 	float Eneangle_ = (float) acos(dot);
 
@@ -130,13 +135,5 @@ void Enemy::ChasePlayer()
 /// </summary>
 void Enemy::EnemySearch()
 {
-	EnemDirectionChange_ += 0.016f;
-	if (EnemDirectionChange_ >= time_)
-	{
-		transform_.rotate_.y = static_cast<float>(rand() % 360);//ランダムに移動
-		XMVECTOR MoveEnemy = front_ * movement_;
-		XMVECTOR EnemyPosition = XMLoadFloat3(&transform_.position_);
-		XMStoreFloat3(&transform_.position_, EnemyPosition + MoveEnemy);
-	}
 	
 }
