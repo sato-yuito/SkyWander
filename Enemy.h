@@ -4,12 +4,12 @@
 class Enemy :public GameObject
 {
     int hModel_;    //モデル番号
+    
     float movement_;//移動量
    
-  
     XMVECTOR front_;
     
-    XMFLOAT3 playerPos;
+    XMFLOAT3 playerPos;//プレイヤーのポジションを探さないといけないのでそれを格納する変数
     struct EnemyFan
     {
         float EnemyDegree;//視野角の範囲（角度）
