@@ -1,6 +1,6 @@
 #pragma once
 #include "Engine/GameObject.h"
-
+#include "Player.h"
 class Enemy :public GameObject
 {
     int hModel_;    //モデル番号
@@ -9,11 +9,13 @@ class Enemy :public GameObject
    
     XMVECTOR front_;
     
-    XMFLOAT3 playerPos;//プレイヤーのポジションを探さないといけないのでそれを格納する変数
+    Player* pPlayer;
+
     struct EnemyFan
     {
         float EnemyDegree;//視野角の範囲（角度）
         float EnemyLength;//中心から扇までの長さ
+        float Emdeg;//計算結果を入れる
     } enemyfan;
 
     
@@ -37,7 +39,7 @@ public:
 
 private:
     //見つけているか
-    bool IsFindPlayer(const XMFLOAT3& PlayerPos);
+    bool IsFindPlayer();
 
     //プレイヤーを見つけたら追跡
     void ChasePlayer();

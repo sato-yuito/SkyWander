@@ -1,29 +1,28 @@
 #include "Enemy.h"
-#include "Player.h"
+
 #include"Map.h"
 #include "Engine/Model.h"
 
 namespace {
-	const int LastTime = 10;//10秒に一回向きを変えたるための変数
+	const int LastTime = 10;//向きを変えたるための時間(秒)
 }
 
 Enemy::Enemy(GameObject* parent)
-	: GameObject(parent,"Enemy"),hModel_(-1),front_  (XMVectorSet(0.0f, 0.0f, -1.0f, 0.0f))
+	: GameObject(parent, "Enemy"), hModel_(-1), front_(XMVectorSet(0.0f, 0.0f, -1.0f, 0.0f)),pPlayer(nullptr)
 {
-	
-	movement_ = 0.06f;
-	
 
-	enemyfan = {
-		60.0f,
-		10.0f,
-	};
+	movement_ = 0.06f;
+
+
+	enemyfan.EnemyDegree = cos(XMConvertToRadians(60.0 / 2.0));
+	enemyfan.EnemyLength = 10.0f;
+
 	
-	playerPos  = ((Player*)FindObject("Player"))->GetPosition();
 }
 
 Enemy::~Enemy()
 {
+	
 }
 
 void Enemy::Initialize()
@@ -33,12 +32,14 @@ void Enemy::Initialize()
 	
 	transform_.position_.x = (float)(rand() % 401 - 200) / 10;
 	transform_.position_.z = 20.0f;
+	
+	pPlayer = (Player*)FindObject("Player");
 }
 
 void Enemy::Update()
 {
 	
-	if (IsFindPlayer(playerPos))
+	if (IsFindPlayer())
 	{
 		//もし見つけているなら追撃する(のちに攻撃するようにしたい）
 		ChasePlayer();
@@ -64,8 +65,9 @@ void Enemy::Release()
 /// <summary>
 /// 視野の範囲にいるかどうか
 /// </summary>
-bool Enemy::IsFindPlayer(const XMFLOAT3& PlayerPos)
+bool Enemy::IsFindPlayer()
 {
+	XMFLOAT3 playerPos = pPlayer->GetPosition();
 	//自身のポジションを入れる変数
 	XMVECTOR EnemPos = XMLoadFloat3(&transform_.position_);
 
@@ -85,9 +87,9 @@ bool Enemy::IsFindPlayer(const XMFLOAT3& PlayerPos)
 
 	//内積をとる
 	float InnerProduct = XMVectorGetX(XMVector3Dot(playerVec, frontVec));
-
+	
 	//視野角の範囲内かどうか
-	if (InnerProduct > cos(XMConvertToRadians(enemyfan.EnemyDegree / 2.0)))
+	if (InnerProduct >enemyfan.EnemyDegree)
 		return false;
 
 	//中心から扇までの長さより大きいかの判別
@@ -103,29 +105,38 @@ bool Enemy::IsFindPlayer(const XMFLOAT3& PlayerPos)
 /// </summary>
 void Enemy::ChasePlayer()
 {
+	XMFLOAT3 playerpos = pPlayer->GetPosition();
 	//対象のポジションと自身のポジションをVECTOR型に変換
-	XMVECTOR PlayerPos = XMLoadFloat3(&playerPos);
+	XMVECTOR PlayerPos = XMLoadFloat3(&playerpos);
 	XMVECTOR EnemyPosition = XMLoadFloat3(&transform_.position_);
 	//追尾するための方向ベクトルとして使うための計算&正規化
 	XMVECTOR EnemyChase = PlayerPos - EnemyPosition;
-	EnemyChase = XMVector3Normalize(EnemyChase);
 
+	//ここから、§§§までの部分は、atan2 って関数を使えば一発で出る。 
+	//内積や外積を使うことは、いいことなんだけど、使いどころがこれじゃない。(めも。明日直す)
+ 
+	EnemyChase = XMVector3Normalize(EnemyChase);
 	float dot = XMVectorGetX(XMVector3Dot(EnemyChase, front_));
 	float Eneangle_ = (float) acos(dot);
 
 	//外積を計算しy方向が0より小さい場合角度が反転(プレイヤーが右側か左側の区別がつくようになる)
 	XMVECTOR  EnemyCross = XMVector3Cross(front_, EnemyChase);
+	float angle = atan2(XMVectorGetY(EnemyCross), XMVectorGetX(EnemyCross));
+
 	if (XMVectorGetY(EnemyCross) < 0)
 	{
 		Eneangle_ *= -1.0f;
 	}
-
+	//§§§
+	
 	//ラジアンから度に変換
 	transform_.rotate_.y = XMConvertToDegrees(Eneangle_);
 
 	//移動すべき方向が計算されて速さをかけることで動ける
-	XMVECTOR MoveEnemy = EnemyChase * movement_;
 
+	XMVECTOR MoveEnemy = EnemyChase * movement_;
+	//↑これだと、プレイヤーのいる方に進んでいます。キャラの向いてる方に移動するべき。ホーミングっぽく動くようにするときのために。(これも明日)
+	
 	//新しい位置を更新するように自身のポジションに格納
 	XMStoreFloat3(&transform_.position_, EnemyPosition + MoveEnemy);
 }
