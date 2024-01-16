@@ -112,26 +112,8 @@ void Enemy::ChasePlayer()
 	//追尾するための方向ベクトルとして使うための計算&正規化
 	XMVECTOR EnemyChase = PlayerPos - EnemyPosition;
 
-	//ここから、§§§までの部分は、atan2 って関数を使えば一発で出る。 
-	//内積や外積を使うことは、いいことなんだけど、使いどころがこれじゃない。(めも。明日直す)
- 
-	EnemyChase = XMVector3Normalize(EnemyChase);
-	float dot = XMVectorGetX(XMVector3Dot(EnemyChase, front_));
-	float Eneangle_ = (float) acos(dot);
-
-	//外積を計算しy方向が0より小さい場合角度が反転(プレイヤーが右側か左側の区別がつくようになる)
-	XMVECTOR  EnemyCross = XMVector3Cross(front_, EnemyChase);
-	float angle = atan2(XMVectorGetY(EnemyCross), XMVectorGetX(EnemyCross));
-
-	if (XMVectorGetY(EnemyCross) < 0)
-	{
-		Eneangle_ *= -1.0f;
-	}
-	//§§§
+	atan2(XMVectorGetZ(EnemyChase), XMVectorGetX(EnemyChase));
 	
-	//ラジアンから度に変換
-	transform_.rotate_.y = XMConvertToDegrees(Eneangle_);
-
 	//移動すべき方向が計算されて速さをかけることで動ける
 
 	XMVECTOR MoveEnemy = EnemyChase * movement_;
