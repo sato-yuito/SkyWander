@@ -112,8 +112,11 @@ void Enemy::ChasePlayer()
 	//追尾するための方向ベクトルとして使うための計算&正規化
 	XMVECTOR EnemyChase = PlayerPos - EnemyPosition;
 
-	atan2(XMVectorGetZ(EnemyChase), XMVectorGetX(EnemyChase));
+	double enemtan= atan2(XMVectorGetX(EnemyChase),XMVectorGetZ(EnemyChase));
 	
+	//ラジアンから度に変換
+	transform_.rotate_.y = XMConvertToDegrees(enemtan);
+
 	//移動すべき方向が計算されて速さをかけることで動ける
 
 	XMVECTOR MoveEnemy = EnemyChase * movement_;
