@@ -107,10 +107,11 @@ void Enemy::ChasePlayer()
 	//対象のポジションと自身のポジションをVECTOR型に変換
 	XMVECTOR PlayerPos = XMLoadFloat3(&playerpos);
 	XMVECTOR EnemyPosition = XMLoadFloat3(&transform_.position_);
-	//追尾するための方向ベクトルとして使うための計算&正規化
+	//追尾するための方向ベクトルとして使うための計算
 	XMVECTOR EnemyChase = PlayerPos - EnemyPosition;
 
-	double enemtan= atan2(XMVectorGetX(EnemyChase),XMVectorGetZ(EnemyChase));
+	//敵キャラクターがプレイヤーを追いかけるときにプレイヤーが向いている方向に向けさせるための処理
+	double enemtan= atan2(XMVectorGetX(-EnemyChase),XMVectorGetZ(-EnemyChase));
 	
 	//ラジアンから度に変換
 	transform_.rotate_.y = XMConvertToDegrees(enemtan);
@@ -129,5 +130,8 @@ void Enemy::ChasePlayer()
 /// </summary>
 void Enemy::EnemySearch()
 {
-	
+	if (LastTime)
+	{
+		transform_.rotate_.y = (rand() % 360);
+	}
 }
