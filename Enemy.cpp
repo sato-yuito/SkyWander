@@ -116,10 +116,12 @@ void Enemy::ChasePlayer()
 	//ラジアンから度に変換
 	transform_.rotate_.y = XMConvertToDegrees(enemtan);
 
-	//移動すべき方向が計算されて速さをかけることで動ける
+	// プレイヤーに向かって進む方向ベクトルを生成
+	XMVECTOR moveDirection = XMVector3Normalize(EnemyChase);
 
-	XMVECTOR MoveEnemy = EnemyChase * movement_;
-	//↑これだと、プレイヤーのいる方に進んでいます。キャラの向いてる方に移動するべき。ホーミングっぽく動くようにするときのために。(これも明日)
+	//移動ベクトル計算
+	XMVECTOR MoveEnemy = moveDirection * movement_;
+	
 	
 	//新しい位置を更新するように自身のポジションに格納
 	XMStoreFloat3(&transform_.position_, EnemyPosition + MoveEnemy);
