@@ -15,7 +15,6 @@ class Enemy :public GameObject
     {
         float EnemyDegree;//視野角の範囲（角度）
         float EnemyLength;//中心から扇までの長さ
-        float Emdeg;//計算結果を入れる
     } enemyfan;
 
     
