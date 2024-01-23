@@ -5,17 +5,21 @@
 
 namespace {
 	const int LastTime = 10;//向きを変えたるための時間(秒)
+	float minX = -10.0f;//x座標の最小行動範囲
+	float maxX = 10.0f;//x座標の最大行動範囲
+	float minZ = -10.0f;//z座標の最小行動範囲
+	float maxZ = 10.0f;//z座標の最大行動範囲
 }
 
 Enemy::Enemy(GameObject* parent)
 	: GameObject(parent, "Enemy"), hModel_(-1), front_(XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f)),pPlayer(nullptr)
 {
 
-	movement_ = 0.06f;
+	movement_ = 0.02f;
 
 	enemyfan.EnemyDegree = cos(XMConvertToRadians(60.0 / 2.0));
 	enemyfan.EnemyLength = 10.0f;
-	
+	elaspsedTime_ = 0.0f;
 }
 
 Enemy::~Enemy()
@@ -132,8 +136,35 @@ void Enemy::ChasePlayer()
 /// </summary>
 void Enemy::EnemySearch()
 {
-	if (LastTime)
+	elaspsedTime_ += 0.016f;//経過時間の設定(毎フレーム加算)
+	//指定した時間以上になったときにランダムに回転をしてリセットする
+	if (elaspsedTime_>=LastTime)
 	{
-		transform_.rotate_.y = (rand() % 360);
+		transform_.rotate_.y = static_cast<float>(rand()%360);
+		elaspsedTime_ = 0.0f;
 	}
+
+	// 現在の回転に基づいて移動ベクトルを計算
+	XMVECTOR moveDirection = XMVectorSet(sinf(XMConvertToRadians(transform_.rotate_.y)),
+		0.0f,
+		cosf(XMConvertToRadians(transform_.rotate_.y)),
+		0.0f);
+
+	moveDirection = XMVector3Normalize(moveDirection);
+
+	// 新しい位置を計算
+	XMVECTOR EnemyPosition = XMLoadFloat3(&transform_.position_);
+	XMVECTOR MoveEnemy = moveDirection * movement_;
+
+	// 新しい位置を適用
+	XMVECTOR NewPosition = EnemyPosition + MoveEnemy;
+
+	// 移動範囲を制限
+	NewPosition = XMVectorClamp(NewPosition, XMVectorSet(minX, 0.0f, minZ, 0.0f), XMVectorSet(maxX, 0.0f, maxZ, 0.0f));
+
+	// 移動ベクトルを再計算
+	MoveEnemy = NewPosition - EnemyPosition;
+
+	XMStoreFloat3(&transform_.position_, NewPosition);
+
 }

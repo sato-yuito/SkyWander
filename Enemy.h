@@ -10,7 +10,7 @@ class Enemy :public GameObject
     XMVECTOR front_;
     
     Player* pPlayer;
-
+    float elaspsedTime_;//経過時間を追跡するための変数
     struct EnemyFan
     {
         float EnemyDegree;//視野角の範囲（角度）
