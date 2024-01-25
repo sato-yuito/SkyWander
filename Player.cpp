@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Engine/Model.h"
 #include "Engine/Input.h"
+#include"Engine/Camera.h"
 Player::Player(GameObject* parent) :GameObject(parent, "Player"), hModel_(-1),map(nullptr)
 {
 }
@@ -39,6 +40,8 @@ void Player::Update()
     {
         transform_.position_.z -= 0.3f;
     }
+
+    Camera::SetTarget(transform_.position_);
 }
 
 //•`‰æ
