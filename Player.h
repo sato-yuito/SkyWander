@@ -16,6 +16,8 @@ class Player:public GameObject
         useitem//アイテムを使う
     }playerstate_;
     
+    //何もしていない状態
+    void PlayerWait();
     //歩く
     void PlayerWalk();
     //走る

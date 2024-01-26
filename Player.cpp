@@ -68,6 +68,12 @@ void Player::Initialize()
 void Player::Update()
 {
     Camera::SetTarget(transform_.position_);
+
+    switch (playerstate_)
+    {
+    case :
+
+    }
 }
 
 //•`‰æ
