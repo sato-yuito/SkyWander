@@ -5,7 +5,7 @@ class Player:public GameObject
 {
     int hModel_;    //ƒ‚ƒfƒ‹”Ô†
     Map* map;
-
+   
     enum class Playeraction
     {
         wait,//‰½‚à‚µ‚Ä‚¢‚È‚¢ó‘Ô

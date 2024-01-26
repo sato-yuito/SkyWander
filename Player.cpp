@@ -2,8 +2,52 @@
 #include "Engine/Model.h"
 #include "Engine/Input.h"
 #include"Engine/Camera.h"
+
+namespace
+{
+    const float PlayerSpeed = 0.5f;//プレイヤーのスピード
+}
+void Player::PlayerWalk()
+{
+    if (Input::IsKey(DIK_W))
+    {
+        transform_.position_.x += PlayerSpeed;
+    }
+    if (Input::IsKey(DIK_S))
+    {
+        transform_.position_.x -= PlayerSpeed;
+    }
+    if (Input::IsKey(DIK_D))
+    {
+        transform_.position_.z += PlayerSpeed;
+
+    }
+    if (Input::IsKey(DIK_S))
+    {
+        transform_.position_.z -= PlayerSpeed;
+    }
+    //向きを変える処理
+
+}
+void Player::PlayerRun()
+{
+
+}
+void Player::PlayerJump()
+{
+
+}
+void Player::PlayerAttack()
+{
+
+}
+void Player::UseAitem()
+{
+
+}
 Player::Player(GameObject* parent) :GameObject(parent, "Player"), hModel_(-1),map(nullptr)
 {
+
 }
 
 //デストラクタ
@@ -23,24 +67,6 @@ void Player::Initialize()
 //更新
 void Player::Update()
 {
-    if (Input::IsKey(DIK_D))
-    {
-        transform_.position_.x += 0.3f;
-    }
-
-    if (Input::IsKey(DIK_A))
-    {
-        transform_.position_.x -= 0.3f;
-    }
-    if (Input::IsKey(DIK_W))
-    {
-        transform_.position_.z += 0.3f;
-    }
-    if (Input::IsKey(DIK_S))
-    {
-        transform_.position_.z -= 0.3f;
-    }
-
     Camera::SetTarget(transform_.position_);
 }
 
@@ -54,4 +80,5 @@ void Player::Draw()
 //開放
 void Player::Release()
 {
+
 }
