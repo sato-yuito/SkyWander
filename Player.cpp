@@ -34,15 +34,21 @@ void Player::Update()
 
     switch (playerstate_)
     {
+    case Playeraction::wait:
+        PlayerWait();
+        break;
     case Playeraction::Walk:
         PlayerWalk();
         break;
     case Playeraction::run:
         PlayerRun();
         break;
-
-
-
+    case Playeraction::jump:
+        PlayerJump();
+        break;
+    case Playeraction::attack:
+        PlayerAttack();
+        break;
     }
 }
 
@@ -67,20 +73,20 @@ void Player::PlayerWalk()
 {
     if (Input::IsKey(DIK_W))
     {
-        transform_.position_.x += PlayerSpeed;
-    }
-    if (Input::IsKey(DIK_S))
-    {
-        transform_.position_.x -= PlayerSpeed;
-    }
-    if (Input::IsKey(DIK_D))
-    {
-        transform_.position_.z += PlayerSpeed;
-
+        transform_.position_.z+= PlayerSpeed;
     }
     if (Input::IsKey(DIK_S))
     {
         transform_.position_.z -= PlayerSpeed;
+    }
+    if (Input::IsKey(DIK_D))
+    {
+        transform_.position_.x += PlayerSpeed;
+
+    }
+    if (Input::IsKey(DIK_A))
+    {
+        transform_.position_.x -= PlayerSpeed;
     }
     //å¸Ç´ÇïœÇ¶ÇÈèàóù
 
@@ -95,7 +101,10 @@ void Player::PlayerRun()
 }
 void Player::PlayerJump()
 {
-
+    if (Input::IsKey(DIK_SPACE))
+    {
+        transform_.position_.y += 0.5f;
+    }
 }
 void Player::PlayerAttack()
 {

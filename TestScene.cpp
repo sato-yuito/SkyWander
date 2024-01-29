@@ -16,7 +16,6 @@ void TestScene::Initialize()
 	Instantiate<Enemy>(this);
 	Instantiate<Map>(this);
 	Camera::SetPosition(XMFLOAT3(0, 6, -10));
-	
 }
 
 //XV
