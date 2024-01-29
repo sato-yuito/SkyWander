@@ -2,10 +2,7 @@
 #include "Engine/GameObject.h"
 #include"Map.h"
 class Player:public GameObject
-{
-    int hModel_;    //モデル番号
-    Map* map;
-   
+{ 
     enum class Playeraction
     {
         wait,//何もしていない状態
@@ -15,6 +12,10 @@ class Player:public GameObject
         attack,//攻撃
         useitem//アイテムを使う
     }playerstate_;
+
+    int hModel_;    //モデル番号
+    Map* map;
+
     
     //何もしていない状態
     void PlayerWait();

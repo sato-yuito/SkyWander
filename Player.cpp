@@ -7,45 +7,8 @@ namespace
 {
     const float PlayerSpeed = 0.5f;//プレイヤーのスピード
 }
-void Player::PlayerWalk()
-{
-    if (Input::IsKey(DIK_W))
-    {
-        transform_.position_.x += PlayerSpeed;
-    }
-    if (Input::IsKey(DIK_S))
-    {
-        transform_.position_.x -= PlayerSpeed;
-    }
-    if (Input::IsKey(DIK_D))
-    {
-        transform_.position_.z += PlayerSpeed;
 
-    }
-    if (Input::IsKey(DIK_S))
-    {
-        transform_.position_.z -= PlayerSpeed;
-    }
-    //向きを変える処理
-
-}
-void Player::PlayerRun()
-{
-
-}
-void Player::PlayerJump()
-{
-
-}
-void Player::PlayerAttack()
-{
-
-}
-void Player::UseAitem()
-{
-
-}
-Player::Player(GameObject* parent) :GameObject(parent, "Player"), hModel_(-1),map(nullptr)
+Player::Player(GameObject* parent) :GameObject(parent, "Player"), hModel_(-1),map(nullptr),playerstate_(Playeraction::wait)
 {
 
 }
@@ -71,7 +34,14 @@ void Player::Update()
 
     switch (playerstate_)
     {
-    case :
+    case Playeraction::Walk:
+        PlayerWalk();
+        break;
+    case Playeraction::run:
+        PlayerRun();
+        break;
+
+
 
     }
 }
@@ -85,6 +55,53 @@ void Player::Draw()
 
 //開放
 void Player::Release()
+{
+
+}
+
+void Player::PlayerWait()
+{
+}
+
+void Player::PlayerWalk()
+{
+    if (Input::IsKey(DIK_W))
+    {
+        transform_.position_.x += PlayerSpeed;
+    }
+    if (Input::IsKey(DIK_S))
+    {
+        transform_.position_.x -= PlayerSpeed;
+    }
+    if (Input::IsKey(DIK_D))
+    {
+        transform_.position_.z += PlayerSpeed;
+
+    }
+    if (Input::IsKey(DIK_S))
+    {
+        transform_.position_.z -= PlayerSpeed;
+    }
+    //向きを変える処理
+
+}
+void Player::PlayerRun()
+{
+    if (Input::IsKey(DIK_LSHIFT) && Input::IsKey(DIK_W))
+    {
+        float RUN = PlayerSpeed * 2;
+    }
+
+}
+void Player::PlayerJump()
+{
+
+}
+void Player::PlayerAttack()
+{
+
+}
+void Player::UseAitem()
 {
 
 }
