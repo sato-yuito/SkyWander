@@ -14,22 +14,29 @@ class Player:public GameObject
     }playerstate_;
 
     int hModel_;    //モデル番号
+
     Map* map;
 
-    
     //何もしていない状態
     void PlayerWait();
+
     //歩く
     void PlayerWalk();
+    
     //走る
     void PlayerRun();
+    
     //ジャンプ
     void PlayerJump();
+    
     //攻撃
     void PlayerAttack();
+    
     //アイテムを使う
     void UseAitem();
 
+    //遷移管理
+    void PlayerInputState();
 public:
     //コンストラクタ
     Player(GameObject* parent);

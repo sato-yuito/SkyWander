@@ -31,7 +31,7 @@ void Player::Initialize()
 void Player::Update()
 {
     Camera::SetTarget(transform_.position_);
-
+    PlayerInputState();
     switch (playerstate_)
     {
     case Playeraction::wait:
@@ -113,4 +113,20 @@ void Player::PlayerAttack()
 void Player::UseAitem()
 {
 
+}
+
+void Player::PlayerInputState()
+{
+    if (Input::IsKey(DIK_W))
+    {
+        playerstate_ = Playeraction::Walk;
+    }
+    else if (Input::IsKey(DIK_LSHIFT) && Input::IsKey(DIK_W))
+    {
+        playerstate_ = Playeraction::run;
+    }
+    else if (Input::IsKey(DIK_SPACE))
+    {
+        playerstate_ = Playeraction::jump;
+    }
 }
