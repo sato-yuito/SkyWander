@@ -33,6 +33,7 @@ void Player::Update()
 {
     Camera::SetTarget(transform_.position_);
     PlayerInputState();
+
     switch (playerstate_)
     {
     case Playeraction::wait:
@@ -107,13 +108,9 @@ void Player::PlayerRun()
 }
 void Player::PlayerJump()
 {
-    float jumpheight = 1.0f//ÉWÉÉÉìÉvÇÃçÇÇ≥ÇÃê›íË
-
-    if (Input::IsKey(DIK_SPACE))
-    {
-        transform_.position_.y += 0.5f;
-    }
+    
 }
+
 void Player::PlayerAttack()
 {
 
@@ -125,16 +122,5 @@ void Player::UseAitem()
 
 void Player::PlayerInputState()
 {
-    if (Input::IsKey(DIK_W))
-    {
-        playerstate_ = Playeraction::Walk;
-    }
-    else if (Input::IsKey(DIK_LSHIFT) && Input::IsKey(DIK_W))
-    {
-        playerstate_ = Playeraction::run;
-    }
-    else if (Input::IsKey(DIK_SPACE))
-    {
-        playerstate_ = Playeraction::jump;
-    }
+    
 }
