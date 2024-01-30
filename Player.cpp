@@ -5,7 +5,8 @@
 
 namespace
 {
-    const float PlayerSpeed = 0.5f;//プレイヤーのスピード
+    const float PlayerSpeed = 0.1f;//プレイヤーのスピード
+      
 }
 
 Player::Player(GameObject* parent) :GameObject(parent, "Player"), hModel_(-1),map(nullptr),playerstate_(Playeraction::wait)
@@ -93,14 +94,21 @@ void Player::PlayerWalk()
 }
 void Player::PlayerRun()
 {
-    if (Input::IsKey(DIK_LSHIFT) && Input::IsKey(DIK_W))
+    float RUN = PlayerSpeed * 2;
+
+    if (Input::IsKey(DIK_LSHIFT) && (Input::IsKey(DIK_W) || Input::IsKey(DIK_A) || Input::IsKey(DIK_S) || Input::IsKey(DIK_D)))
     {
-        float RUN = PlayerSpeed * 2;
+        // W、A、S、Dのいずれかが押されている場合に走る
+        transform_.position_.z += RUN;
+        
     }
+    
 
 }
 void Player::PlayerJump()
 {
+    float jumpheight = 1.0f//ジャンプの高さの設定
+
     if (Input::IsKey(DIK_SPACE))
     {
         transform_.position_.y += 0.5f;
