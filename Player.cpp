@@ -32,7 +32,7 @@ void Player::Initialize()
 void Player::Update()
 {
     Camera::SetTarget(transform_.position_);
-    PlayerInputState();
+   
 
     switch (playerstate_)
     {
@@ -69,6 +69,12 @@ void Player::Release()
 
 void Player::PlayerWait()
 {
+    if (Input::IsKey(DIK_W) || Input::IsKey(DIK_S) || Input::IsKey(DIK_D) || Input::IsKey(DIK_A))
+    {
+        PlayerWalk();
+    }
+    else if()
+
 }
 
 void Player::PlayerWalk()
@@ -100,15 +106,39 @@ void Player::PlayerRun()
     if (Input::IsKey(DIK_LSHIFT) && (Input::IsKey(DIK_W) || Input::IsKey(DIK_A) || Input::IsKey(DIK_S) || Input::IsKey(DIK_D)))
     {
         // W、A、S、Dのいずれかが押されている場合に走る
-        transform_.position_.z += RUN;
-        
+        transform_.position_ = RUN;
     }
-    
-
 }
 void Player::PlayerJump()
 {
-    
+    //今ジャンプをしているか
+    static bool nowJump = false;
+    //ジャンプをするときの加速度
+    float JumpVelocity = 0.0f;
+    //ジャンプの高さ
+    float Jumpheight = 0.6f;
+    //重力
+    float gravity = 0.04f;
+
+    if (!nowJump)
+    {
+        if (Input::IsKey(DIK_SPACE))
+        {
+            nowJump = true;
+            JumpVelocity = 0.5;//ジャンプ速度
+        }
+    }
+    else if (nowJump)
+    {
+        transform_.position_.y += JumpVelocity;
+        JumpVelocity -= gravity;
+        if (transform_.position_.y <= Jumpheight)
+        {
+            transform_.position_.y = Jumpheight;
+            nowJump = false;
+            JumpVelocity = 0.0f;
+        }
+    }
 }
 
 void Player::PlayerAttack()
@@ -118,9 +148,4 @@ void Player::PlayerAttack()
 void Player::UseAitem()
 {
 
-}
-
-void Player::PlayerInputState()
-{
-    
 }

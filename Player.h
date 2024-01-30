@@ -35,8 +35,7 @@ class Player:public GameObject
     //アイテムを使う
     void UseAitem();
 
-    //遷移管理
-    void PlayerInputState();
+   
 public:
     //コンストラクタ
     Player(GameObject* parent);
