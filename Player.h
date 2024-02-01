@@ -15,8 +15,9 @@ class Player:public GameObject
 
     int hModel_;    //モデル番号
 
-    Map* map;
+   
 
+    bool PlayerOnFloor_;// プレイヤーがマップ状にいるか
     //何もしていない状態
     void PlayerWait();
 
@@ -35,7 +36,7 @@ class Player:public GameObject
     //アイテムを使う
     void UseAitem();
 
-   
+  
 public:
     //コンストラクタ
     Player(GameObject* parent);
@@ -55,7 +56,7 @@ public:
     //開放
     void Release() override;
     
-    
+    void OnCollistion(GameObject* pTarget);
 
     
     int GetModelHandle() { return hModel_; }
