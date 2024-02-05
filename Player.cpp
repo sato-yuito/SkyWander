@@ -86,13 +86,7 @@ void Player::OnCollistion(GameObject* pTarget)
 
 void Player::PlayerWait()
 {
-    if (/*’n–Ê‚É‚Â‚¢‚Ä‚¢‚È‚¢‚Æ‚«*/true) {
-        //d—Íˆ—
-        static float gravity = 0.5f;
-        transform_.position_.y -= gravity;
-      
-
-    }
+    
 
     
     if (Input::IsKey(DIK_W) || Input::IsKey(DIK_S) || Input::IsKey(DIK_D) || Input::IsKey(DIK_A))
