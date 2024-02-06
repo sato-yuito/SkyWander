@@ -7,6 +7,7 @@ namespace
 {
     const float PlayerSpeed = 0.1f;//プレイヤーのスピード
     const float gravity = 0.01f;//プレイヤーの重力
+    const float PlayerInitialSpeed = 4.2f;//ジャンプの初速度
 }
 
 Player::Player(GameObject* parent) :GameObject(parent, "Player"), hModel_(-1),playerstate_(Playeraction::wait),
@@ -26,7 +27,7 @@ void Player::Initialize()
     //モデルデータのロード
     hModel_ = Model::Load("Player.fbx");
     assert(hModel_ >= 0);
-   FindObject("Map");
+   Collision(FindObject("Map"));
 }
 
 //更新
@@ -34,7 +35,6 @@ void Player::Update()
 {
     Camera::SetTarget(transform_.position_);
    
-
     switch (playerstate_)
     {
     case Playeraction::wait:
@@ -59,7 +59,7 @@ void Player::Update()
         transform_.position_.y -= gravity;
         return;
     }
-    Collision(FindObject("Map"));
+  
 }
 
 //描画
@@ -75,18 +75,7 @@ void Player::Release()
 
 }
 
-void Player::OnCollistion(GameObject* pTarget)
-{
-    if (pTarget->GetObjectName() == "Map")
-    {
-        if (transform_.position_.y <= 0.0f)
-        {
-            transform_.position_.y = 0.0f;
-            PlayerOnFloor_ = true;
-        }
-       
-    }
-}
+
 
 void Player::PlayerWait()
 {
@@ -141,17 +130,16 @@ void Player::PlayerRun()
 }
 void Player::PlayerJump()
 {
+    //床上にいないときはreturnを返して無限ジャンプをさせないようにする
     if (!PlayerOnFloor_)
     {
         return;
     }
     if (Input::IsKey(DIK_SPACE))
     {
-        transform_.position_.y += 0.3f;
+        transform_.position_.y += PlayerInitialSpeed;
         PlayerOnFloor_ = false;
     }
-    
-  
 }
 void Player::PlayerAttack()
 {
@@ -161,4 +149,17 @@ void Player::PlayerAttack()
 void Player::UseAitem()
 {
 
+}
+
+void Player::OnCollistion(GameObject* pTarget)
+{
+    if (pTarget->GetObjectName() == "Map")
+    {
+        if (transform_.position_.y <= 0.0f)
+        {
+            transform_.position_.y = 0.0f;
+            PlayerOnFloor_ = true;
+        }
+
+    }
 }

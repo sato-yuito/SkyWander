@@ -13,8 +13,7 @@ void Map::Initialize()
 {
 	hModel_ = Model::Load("Map.fbx");
 	assert(hModel_ >= 0);
-	BoxCollider* collision = new BoxCollider(XMFLOAT3(10, 0, 10), XMFLOAT3(100, 0, 100));
-	AddCollider(collision);
+	
 }
 
 void Map::Update()

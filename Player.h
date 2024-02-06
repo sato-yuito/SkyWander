@@ -15,9 +15,8 @@ class Player:public GameObject
 
     int hModel_;    //モデル番号
 
-   
-
     bool PlayerOnFloor_;// プレイヤーがマップ状にいるか
+
     //何もしていない状態
     void PlayerWait();
 
