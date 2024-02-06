@@ -6,7 +6,7 @@
 namespace
 {
     const float PlayerSpeed = 0.1f;//プレイヤーのスピード
-      
+    const float gravity = 0.01f;//プレイヤーの重力
 }
 
 Player::Player(GameObject* parent) :GameObject(parent, "Player"), hModel_(-1),playerstate_(Playeraction::wait),
@@ -54,7 +54,11 @@ void Player::Update()
         break;
     }
 
-    PlayerOnFloor_ = false;
+    //ジャンプなどをしてマップ上にいない場合
+    if (!PlayerOnFloor_){
+        transform_.position_.y -= gravity;
+        return;
+    }
     Collision(FindObject("Map"));
 }
 
@@ -87,8 +91,6 @@ void Player::OnCollistion(GameObject* pTarget)
 void Player::PlayerWait()
 {
     
-
-    
     if (Input::IsKey(DIK_W) || Input::IsKey(DIK_S) || Input::IsKey(DIK_D) || Input::IsKey(DIK_A))
     {
         PlayerWalk();
@@ -98,7 +100,7 @@ void Player::PlayerWait()
         PlayerJump();
     }
 
-
+   
 }
 
 void Player::PlayerWalk()
@@ -126,25 +128,36 @@ void Player::PlayerWalk()
 void Player::PlayerRun()
 {
 
-    if (Input::IsKey(DIK_LSHIFT) && (Input::IsKey(DIK_W) || Input::IsKey(DIK_A) || Input::IsKey(DIK_S) || Input::IsKey(DIK_D)))
+    if (Input::IsKey(DIK_LSHIFT) && (Input::IsKey(DIK_W)) ||  Input::IsKey(DIK_S))
     {
         // W、A、S、Dのいずれかが押されている場合に走る
         transform_.position_.x = PlayerSpeed * 2;
     }
+
+    else if (Input::IsKey(DIK_LSHIFT) && (Input::IsKey(DIK_D)) || (Input::IsKey(DIK_A)))
+    {
+        transform_.position_.z = PlayerSpeed * 2;
+    }
 }
 void Player::PlayerJump()
 {
-    transform_.position_.y += 3.0f;
-
-
-
+    if (!PlayerOnFloor_)
+    {
+        return;
+    }
+    if (Input::IsKey(DIK_SPACE))
+    {
+        transform_.position_.y += 0.3f;
+        PlayerOnFloor_ = false;
+    }
+    
+  
 }
-
-
 void Player::PlayerAttack()
 {
 
 }
+
 void Player::UseAitem()
 {
 
