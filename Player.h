@@ -1,6 +1,6 @@
 #pragma once
 #include "Engine/GameObject.h"
-#include"Map.h"
+
 class Player:public GameObject
 { 
     enum class Playeraction
@@ -35,7 +35,6 @@ class Player:public GameObject
     //アイテムを使う
     void UseAitem();
 
-  
 public:
     //コンストラクタ
     Player(GameObject* parent);
