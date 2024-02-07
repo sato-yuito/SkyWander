@@ -141,21 +141,21 @@ void Player::PlayerRun()
 	}
 }
 
+bool PlayerLower = false;//プレイヤーが一定の高さに到達したかどうか
 void Player::PlayerJump()
 {
-	// 一定の高さまでジャンプする
-
-
-	//もし、プレイヤーの位置がJumpHeight(ジャンプ最高地点)に到達したら
-	//プレイヤーのyの位置を下げる
-	if (JumpHeight >= transform_.position_.y)
+	//プレイチャーの位置が最高到達地点より高かったら
+	if (transform_.position_.y >= JumpHeight )
+	{
+		PlayerLower = true;
+	}
+	//最高地点に到達していない間
+	if (PlayerLower == false)
 	{
 		transform_.position_.y += PlayerInitialSpeed;
 	}
-	
-
-	// 一定の高さになったらステートを変更する
 }
+
 
 void Player::PlayerAttack()
 {
