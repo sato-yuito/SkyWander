@@ -123,6 +123,11 @@ void Player::PlayerWalk()
 	{
 		transform_.position_.x -= PlayerSpeed;
 	}
+	
+	if (Input::IsKeyDown(DIK_SPACE))
+	{
+		playerstate_ = Playeraction::jump;
+	}
 	//向きを変える処理
 
 }
@@ -139,20 +144,30 @@ void Player::PlayerRun()
 	{
 		transform_.position_.z = PlayerSpeed * 2;
 	}
+
+	
 }
 
 bool PlayerLower = false;//プレイヤーが一定の高さに到達したかどうか
 void Player::PlayerJump()
 {
+
 	//プレイチャーの位置が最高到達地点より高かったら
 	if (transform_.position_.y >= JumpHeight )
 	{
 		PlayerLower = true;
+
 	}
 	//最高地点に到達していない間
 	if (PlayerLower == false)
 	{
 		transform_.position_.y += PlayerInitialSpeed;
+
+	}
+	
+	if (Input::IsKey(DIK_W) || Input::IsKey(DIK_S) || Input::IsKey(DIK_D) || Input::IsKey(DIK_A))
+	{
+		playerstate_ = Playeraction::Walk;
 	}
 }
 
