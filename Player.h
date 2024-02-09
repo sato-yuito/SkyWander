@@ -7,7 +7,6 @@ class Player:public GameObject
     {
         wait,//何もしていない状態
         Walk,//歩く
-        run,//走る
         jump,//ジャンプ
         attack,//攻撃
         useitem//アイテムを使う
@@ -15,7 +14,7 @@ class Player:public GameObject
 
     int hModel_;    //モデル番号
 
-    bool PlayerOnFloor_;// プレイヤーがマップ状にいるか
+   
 
     //何もしていない状態
     void PlayerWait();
@@ -23,8 +22,7 @@ class Player:public GameObject
     //歩く
     void PlayerWalk();
     
-    //走る
-    void PlayerRun();
+  
     
     //ジャンプ
     void PlayerJump();
