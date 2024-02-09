@@ -10,11 +10,10 @@ namespace
 	const float PlayerSpeed = 0.1f;//プレイヤーのスピード
 	const float gravity = 0.01f;//プレイヤーの重力
 	const float PlayerInitialSpeed = 0.05f;//ジャンプの初速度
-	const float JumpHeight = 2.0f;
+	const float JumpHeight = 2.0f;//ジャンプをした時の最高到達地点
 }
 
-Player::Player(GameObject* parent) :GameObject(parent, "Player"), hModel_(-1), playerstate_(Playeraction::wait)
-									 
+Player::Player(GameObject* parent) :GameObject(parent, "Player"), hModel_(-1), playerstate_(Playeraction::wait)						 
 {
 
 }
@@ -61,9 +60,6 @@ void Player::Update()
 
 	data.dir = XMFLOAT3(0, -1, 0);
 	 
-	
-
-
 	Model::RayCast(((Map*)FindObject("Map"))->GetModelHandle(), &data);
 	//ジャンプなどをしてマップ上にいない場合
    if (data.hit)
@@ -109,26 +105,22 @@ void Player::PlayerWalk()
 	if (Input::IsKey(DIK_W))
 	{
 		transform_.position_.z+= PlayerSpeed;
+		
 	}
 	if (Input::IsKey(DIK_S))
 	{
 		transform_.position_.z -= PlayerSpeed;
+		
 	}
 	if (Input::IsKey(DIK_D))
 	{
 		transform_.position_.x += PlayerSpeed;
-
+		
 	}
 	if (Input::IsKey(DIK_A))
 	{
 		transform_.position_.x -= PlayerSpeed;
 	}
-	
-	if (Input::IsKeyDown(DIK_SPACE))
-	{
-		playerstate_ = Playeraction::jump;
-	}
-	//向きを変える処理
 
 }
 void Player::PlayerRun()
@@ -136,7 +128,6 @@ void Player::PlayerRun()
 
 	if (Input::IsKey(DIK_LSHIFT) && (Input::IsKey(DIK_W)) ||  Input::IsKey(DIK_S))
 	{
-		// W、A、S、Dのいずれかが押されている場合に走る
 		transform_.position_.x = PlayerSpeed * 2;
 	}
 
@@ -151,8 +142,8 @@ void Player::PlayerRun()
 bool PlayerLower = false;//プレイヤーが一定の高さに到達したかどうか
 void Player::PlayerJump()
 {
-
-	//プレイチャーの位置が最高到達地点より高かったら
+	
+	//プレイヤーの位置が最高到達地点より高かったら
 	if (transform_.position_.y >= JumpHeight )
 	{
 		PlayerLower = true;
@@ -162,10 +153,8 @@ void Player::PlayerJump()
 	if (PlayerLower == false)
 	{
 		transform_.position_.y += PlayerInitialSpeed;
-
 	}
-	
-	if (Input::IsKey(DIK_W) || Input::IsKey(DIK_S) || Input::IsKey(DIK_D) || Input::IsKey(DIK_A))
+	if (JumpHeight)
 	{
 		playerstate_ = Playeraction::Walk;
 	}
