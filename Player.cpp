@@ -128,15 +128,19 @@ void Player::PlayerJump(){
 	if (transform_.position_.y >= JumpHeight ){
 		isPlayerDown  = true;
 	}
+
 	//Å‚’n“_‚É“’B‚µ‚Ä‚¢‚È‚¢ŠÔ
 	if (isPlayerDown == false){
 		transform_.position_.y += PlayerInitialSpeed;
 	}
 	
-	if (transform_.position_.y <= 0.5f){
-		transform_.position_.y += 0.5f;
-		playerstate_ = Playeraction::wait;
-	}	
+	if (isPlayerDown == true) {
+		if (transform_.position_.y <= 0.5f) {
+
+			playerstate_ = Playeraction::wait;
+		}
+	}
+	
 }
 
 
