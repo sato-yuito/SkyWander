@@ -3,7 +3,7 @@
 #include "Engine/Input.h"
 #include"Engine/Camera.h"
 #include"Map.h"
-
+#include"Engine/ImGui/imgui.h"
 namespace
 {
 	const float PlayerSpeed = 0.1f;//プレイヤーのスピード
@@ -29,10 +29,10 @@ void Player::Initialize(){
 }
 
 //更新
-void Player::Update(){
+void Player::Update() {
 	//カメラの更新
 	Camera::SetTarget(transform_.position_);
-   
+
 	switch (playerstate_)
 	{
 	case Playeraction::wait:
@@ -48,18 +48,27 @@ void Player::Update(){
 		PlayerAttack();
 		break;
 	}
-	
+
 	//レイキャスト
 	RayCastData data;
 	data.start = transform_.position_;
 	data.dir = XMFLOAT3(0, -1, 0);
 	Model::RayCast(((Map*)FindObject("Map"))->GetModelHandle(), &data);
 	//ジャンプなどをしてマップ上にいない場合
-   if (data.hit){
-		if(data.dist > 0.5f){ 
-			transform_.position_.y -= gravity;	
-		}	
+	if (data.hit) {
+		if (data.dist > 0.5f) {
+			transform_.position_.y -= gravity;
+		}
 	}
+
+	XMFLOAT3 p_pos = transform_.position_;
+	ImGui::Text("Player Position = { %f,%f,%f}", p_pos.x, p_pos.y, p_pos.z);
+
+	float dist = data.dist;
+	ImGui::Text("dist = %f", dist);
+
+	bool isHit = data.hit;
+	ImGui::Text("isHit = %s", isHit ? "true" : "false");
 }
 
 //描画
@@ -123,7 +132,7 @@ void Player::PlayerJump(){
 	if (isPlayerDown == false){
 		transform_.position_.y += PlayerInitialSpeed;
 	}
-	//ポジションが0になったらwait状態になる(メモ:まだマップの高さは変わらないから仮。いつかいろんな高さのマップでも適応できるようにしたい)
+	
 	if (transform_.position_.y <= 0.5f){
 		transform_.position_.y += 0.5f;
 		playerstate_ = Playeraction::wait;
