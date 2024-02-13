@@ -14,15 +14,11 @@ class Player:public GameObject
 
     int hModel_;    //モデル番号
 
-   
-
     //何もしていない状態
     void PlayerWait();
 
     //歩く
     void PlayerWalk();
-    
-  
     
     //ジャンプ
     void PlayerJump();
@@ -31,7 +27,7 @@ class Player:public GameObject
     void PlayerAttack();
     
     //アイテムを使う
-    void UseAitem();
+    void Useitem();
 
 public:
     //コンストラクタ
@@ -51,9 +47,6 @@ public:
 
     //開放
     void Release() override;
-    
-    void OnCollistion(GameObject* pTarget);
-
     
     int GetModelHandle() { return hModel_; }
 };

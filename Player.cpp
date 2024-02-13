@@ -57,22 +57,19 @@ void Player::Update(){
 	//ジャンプなどをしてマップ上にいない場合
    if (data.hit){
 		if(data.dist > 0.5f){ 
-			transform_.position_.y -= gravity;
-		}
+			transform_.position_.y -= gravity;	
+		}	
 	}
-  
 }
 
 //描画
-void Player::Draw()
-{
+void Player::Draw(){
 	Model::SetTransform(hModel_, transform_);
 	Model::Draw(hModel_);
 }
 
 //開放
-void Player::Release()
-{
+void Player::Release(){
 
 }
 
@@ -127,7 +124,8 @@ void Player::PlayerJump(){
 		transform_.position_.y += PlayerInitialSpeed;
 	}
 	//ポジションが0になったらwait状態になる(メモ:まだマップの高さは変わらないから仮。いつかいろんな高さのマップでも適応できるようにしたい)
-	if (transform_.position_.y == 0.0){
+	if (transform_.position_.y <= 0.5f){
+		transform_.position_.y += 0.5f;
 		playerstate_ = Playeraction::wait;
 	}	
 }
@@ -136,6 +134,5 @@ void Player::PlayerJump(){
 void Player::PlayerAttack(){
 }
 
-void Player::UseAitem(){
-
+void Player::Useitem(){
 }
