@@ -114,8 +114,8 @@ void Player::PlayerWalk(){
 	}
 	//ダッシュ
 	if (Input::IsKey(DIK_LSHIFT)){
-		transform_.position_.x *= PlayerSpeed * 2;
-		transform_.position_.z *= PlayerSpeed * 2;
+		transform_.position_.x == PlayerSpeed * 2;
+		transform_.position_.z == PlayerSpeed * 2;
 	}
 	//ジャンプ
 	if (Input::IsKeyDown(DIK_SPACE)){
