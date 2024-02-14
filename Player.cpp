@@ -61,14 +61,17 @@ void Player::Update() {
 		}
 	}
 
-	XMFLOAT3 p_pos = transform_.position_;
-	ImGui::Text("Player Position = { %f,%f,%f}", p_pos.x, p_pos.y, p_pos.z);
 
-	float dist = data.dist;
-	ImGui::Text("dist = %f", dist);
+	/*XMFLOAT3 p_pos = transform_.position_;
+	ImGui::Text("Player Position = { %f,%f,%f}", p_pos.x, p_pos.y, p_pos.z);*/
 
-	bool isHit = data.hit;
-	ImGui::Text("isHit = %s", isHit ? "true" : "false");
+	/*float dist = data.dist;
+	ImGui::Text("dist = %f", dist);*/
+
+	//bool isHit = data.hit;
+	//ImGui::Text("isHit = %s", isHit ? "true" : "false");
+
+	ImGui::Text("state = %d", (int)playerstate_);
 }
 
 //描画
@@ -98,29 +101,30 @@ void Player::PlayerWait(){
 }
 
 void Player::PlayerWalk(){
+	float curSpeed;
+	//ダッシュをしているとき
+	if (Input::IsKey(DIK_LSHIFT)) {
+		curSpeed = PlayerSpeed * 2;
+	}
+	else {
+		curSpeed = PlayerSpeed;
+	}
 	//前後移動
 	if (Input::IsKey(DIK_W)){
-		transform_.position_.z+= PlayerSpeed;
+		transform_.position_.z+= curSpeed;
 	}
 	if (Input::IsKey(DIK_S)){
-		transform_.position_.z -= PlayerSpeed;
+		transform_.position_.z -= curSpeed;
 	}
 	//左右移動
 	if (Input::IsKey(DIK_D)){
-		transform_.position_.x += PlayerSpeed;
+		transform_.position_.x += curSpeed;
 	}
 	if (Input::IsKey(DIK_A)){
-		transform_.position_.x -= PlayerSpeed;
+		transform_.position_.x -= curSpeed;
 	}
-	//ダッシュ
-	if (Input::IsKey(DIK_LSHIFT)){
-		transform_.position_.x == PlayerSpeed * 2;
-		transform_.position_.z == PlayerSpeed * 2;
-	}
-	//ジャンプ
-	if (Input::IsKeyDown(DIK_SPACE)){
-		playerstate_ = Playeraction::jump;
-	}
+	
+	
 }
 
 void Player::PlayerJump(){
@@ -136,11 +140,9 @@ void Player::PlayerJump(){
 	
 	if (isPlayerDown == true) {
 		if (transform_.position_.y <= 0.5f) {
-
 			playerstate_ = Playeraction::wait;
 		}
 	}
-	
 }
 
 
