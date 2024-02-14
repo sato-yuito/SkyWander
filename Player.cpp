@@ -123,7 +123,10 @@ void Player::PlayerWalk(){
 	if (Input::IsKey(DIK_A)){
 		transform_.position_.x -= curSpeed;
 	}
-	
+	//
+	//if (Input::IsKey(DIK_SPACE)){
+	//	 Playeraction::jump;
+	//}
 	
 }
 
