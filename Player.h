@@ -6,10 +6,11 @@ class Player:public GameObject
     enum class Playeraction
     {
         wait,//何もしていない状態
-        Walk,//歩く
+        walk,//歩く
         jump,//ジャンプ
         attack,//攻撃
-        useitem//アイテムを使う
+        useitem,//アイテムを使う
+        walkjump
     }playerstate_;
 
     int hModel_;    //モデル番号
@@ -28,6 +29,8 @@ class Player:public GameObject
     
     //アイテムを使う
     void Useitem();
+
+    void PlayerWalkJump();
 
 public:
     //コンストラクタ

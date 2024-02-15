@@ -38,7 +38,7 @@ void Player::Update() {
 	case Playeraction::wait:
 		PlayerWait();
 		break;
-	case Playeraction::Walk:
+	case Playeraction::walk:
 		PlayerWalk();
 		break;
 	case Playeraction::jump:
@@ -47,6 +47,9 @@ void Player::Update() {
 	case Playeraction::attack:
 		PlayerAttack();
 		break;
+	case Playeraction::walkjump:
+		break;
+
 	}
 
 	//レイキャスト
@@ -60,16 +63,6 @@ void Player::Update() {
 			transform_.position_.y -= gravity;
 		}
 	}
-
-
-	/*XMFLOAT3 p_pos = transform_.position_;
-	ImGui::Text("Player Position = { %f,%f,%f}", p_pos.x, p_pos.y, p_pos.z);*/
-
-	/*float dist = data.dist;
-	ImGui::Text("dist = %f", dist);*/
-
-	//bool isHit = data.hit;
-	//ImGui::Text("isHit = %s", isHit ? "true" : "false");
 
 	ImGui::Text("state = %d", (int)playerstate_);
 }
@@ -91,7 +84,7 @@ void Player::PlayerWait(){
 	if (Input::IsKey(DIK_W) || Input::IsKey(DIK_S)  
 		||Input::IsKey(DIK_D) || Input::IsKey(DIK_A))
 	{
-		playerstate_ = Playeraction::Walk;
+		playerstate_ = Playeraction::walk;
 	}
 	if (Input::IsKeyDown(DIK_SPACE))
 	{
@@ -153,4 +146,12 @@ void Player::PlayerAttack(){
 }
 
 void Player::Useitem(){
+}
+
+void Player::PlayerWalkJump()
+{
+	
+	PlayerWalk();
+
+	PlayerJump();
 }
