@@ -47,8 +47,6 @@ void Player::Update() {
 	case Playeraction::attack:
 		PlayerAttack();
 		break;
-	case Playeraction::walkjump:
-		break;
 
 	}
 
@@ -95,6 +93,7 @@ void Player::PlayerWait(){
 
 void Player::PlayerWalk(){
 	float curSpeed;
+	
 	//ƒ_ƒbƒVƒ…‚ð‚µ‚Ä‚¢‚é‚Æ‚«
 	if (Input::IsKey(DIK_LSHIFT)) {
 		curSpeed = PlayerSpeed * 2;
@@ -116,10 +115,10 @@ void Player::PlayerWalk(){
 	if (Input::IsKey(DIK_A)){
 		transform_.position_.x -= curSpeed;
 	}
-	//
-	//if (Input::IsKey(DIK_SPACE)){
-	//	 Playeraction::jump;
-	//}
+	
+	if (Input::IsKey(DIK_SPACE)){
+		transform_.position_.y += PlayerInitialSpeed;
+	}
 	
 }
 
@@ -148,10 +147,4 @@ void Player::PlayerAttack(){
 void Player::Useitem(){
 }
 
-void Player::PlayerWalkJump()
-{
-	
-	PlayerWalk();
 
-	PlayerJump();
-}

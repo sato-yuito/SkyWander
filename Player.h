@@ -30,7 +30,7 @@ class Player:public GameObject
     //アイテムを使う
     void Useitem();
 
-    void PlayerWalkJump();
+   
 
 public:
     //コンストラクタ
