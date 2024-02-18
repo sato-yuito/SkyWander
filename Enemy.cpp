@@ -136,11 +136,12 @@ void Enemy::ChasePlayer()
 /// </summary>
 void Enemy::EnemySearch()
 {
-	elaspsedTime_ += 0.016f;//経過時間の設定(毎フレーム加算)
-	//指定した時間以上になったときにランダムに回転をしてリセットする
-	if (elaspsedTime_>=LastTime)
+	elaspsedTime_ += 0.016f; // 経過時間の設定(毎フレーム加算)
+
+	// 指定した時間以上になったときにランダムに回転をしてリセットする
+	if (elaspsedTime_ >= LastTime)
 	{
-		transform_.rotate_.y = static_cast<float>(rand()%360);
+		transform_.rotate_.y = static_cast<float>(rand() % 360);
 		elaspsedTime_ = 0.0f;
 	}
 
@@ -166,5 +167,4 @@ void Enemy::EnemySearch()
 	MoveEnemy = NewPosition - EnemyPosition;
 
 	XMStoreFloat3(&transform_.position_, NewPosition);
-
 }
