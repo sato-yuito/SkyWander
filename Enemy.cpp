@@ -5,10 +5,10 @@
 
 namespace {
 	const int LastTime = 10;//向きを変えたるための時間(秒)
-	float minX = -10.0f;//x座標の最小行動範囲
-	float maxX = 10.0f;//x座標の最大行動範囲
-	float minZ = -10.0f;//z座標の最小行動範囲
-	float maxZ = 10.0f;//z座標の最大行動範囲
+	float minX = -4.0f;//x座標の最小行動範囲
+	float maxX = 4.0f;//x座標の最大行動範囲
+	float minZ = -4.0f;//z座標の最小行動範囲
+	float maxZ = 4.0f;//z座標の最大行動範囲
 }
 
 Enemy::Enemy(GameObject* parent)
@@ -40,7 +40,6 @@ void Enemy::Initialize()
 
 void Enemy::Update()
 {
-	
 	if (IsFindPlayer())
 	{
 		//もし見つけているなら追撃する(のちに攻撃するようにしたい）
@@ -126,7 +125,6 @@ void Enemy::ChasePlayer()
 	//移動ベクトル計算
 	XMVECTOR MoveEnemy = moveDirection * movement_;
 	
-	
 	//新しい位置を更新するように自身のポジションに格納
 	XMStoreFloat3(&transform_.position_, EnemyPosition + MoveEnemy);
 }
@@ -168,3 +166,5 @@ void Enemy::EnemySearch()
 
 	XMStoreFloat3(&transform_.position_, NewPosition);
 }
+
+

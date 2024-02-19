@@ -61,7 +61,7 @@ void Player::Update() {
 			transform_.position_.y -= gravity;
 		}
 	}
-
+	
 	ImGui::Text("state = %d", (int)playerstate_);
 }
 
@@ -117,7 +117,7 @@ void Player::PlayerWalk(){
 	}
 	
 	if (Input::IsKey(DIK_SPACE)){
-		transform_.position_.y += PlayerInitialSpeed;
+		PlayerJump();
 	}
 	
 }
@@ -145,6 +145,11 @@ void Player::PlayerAttack(){
 }
 
 void Player::Useitem(){
+}
+
+void Player::Playerfalling()
+{
+
 }
 
 

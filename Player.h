@@ -30,7 +30,8 @@ class Player:public GameObject
     //アイテムを使う
     void Useitem();
 
-   
+    //落下死
+    void Playerfalling();
 
 public:
     //コンストラクタ
