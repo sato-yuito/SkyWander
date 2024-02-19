@@ -167,4 +167,9 @@ void Enemy::EnemySearch()
 	XMStoreFloat3(&transform_.position_, NewPosition);
 }
 
+void Enemy::EnemyAttack()
+{
+	
+}
+
 

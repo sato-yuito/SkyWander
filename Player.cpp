@@ -158,9 +158,5 @@ void Player::PlayerAttack(){
 void Player::Useitem(){
 }
 
-void Player::Playerfalling()
-{
-
-}
 
 
