@@ -59,8 +59,18 @@ void Player::Update() {
 	if (data.hit) {
 		if (data.dist > 0.5f) {
 			transform_.position_.y -= gravity;
+			
 		}
 	}
+	else
+	{
+		transform_.position_.y -= gravity;
+		if (transform_.position_.y < -1)
+		{
+			KillMe();
+		}
+	}
+	
 	
 	ImGui::Text("state = %d", (int)playerstate_);
 }
@@ -92,7 +102,7 @@ void Player::PlayerWait(){
 }
 
 void Player::PlayerWalk(){
-	float curSpeed;
+	float curSpeed = 0.0f;
 	
 	//ƒ_ƒbƒVƒ…‚ð‚µ‚Ä‚¢‚é‚Æ‚«
 	if (Input::IsKey(DIK_LSHIFT)) {
@@ -116,8 +126,9 @@ void Player::PlayerWalk(){
 		transform_.position_.x -= curSpeed;
 	}
 	
-	if (Input::IsKey(DIK_SPACE)){
-		PlayerJump();
+	if (Input::IsKey(DIK_SPACE))
+	{
+		transform_.position_.y += PlayerInitialSpeed;
 	}
 	
 }
