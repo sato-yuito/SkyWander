@@ -6,10 +6,11 @@
 #include"Engine/ImGui/imgui.h"
 namespace
 {
-	const float PlayerSpeed = 0.1f;//プレイヤーのスピード
-	const float gravity = 0.01f;//プレイヤーの重力
-	const float PlayerInitialSpeed = 0.05f;//ジャンプの速度
-	const float JumpHeight = 2.0f;//ジャンプをした時の最高到達地点
+	float PlayerSpeed = 0.1f;//プレイヤーのスピード
+	float gravity = 0.1f;//プレイヤーの重力
+	float PlayerInitialSpeed = 0.5f;//ジャンプの上昇量
+	float PlayerHorizontalSpeed = 0.5f; // 水平方向の速度
+	float JumpHeight = 6.0f;//ジャンプをした時の最高到達地点
 	bool isPlayerDown = false;//プレイヤーが下降しているかどうか
 }
 
@@ -47,7 +48,6 @@ void Player::Update() {
 	case Playeraction::attack:
 		PlayerAttack();
 		break;
-
 	}
 
 	//レイキャスト
@@ -59,7 +59,6 @@ void Player::Update() {
 	if (data.hit) {
 		if (data.dist > 0.5f) {
 			transform_.position_.y -= gravity;
-			
 		}
 	}
 	else
@@ -73,6 +72,7 @@ void Player::Update() {
 	
 	
 	ImGui::Text("state = %d", (int)playerstate_);
+	ImGui::Text("Jump = %f", PlayerInitialSpeed);
 }
 
 //描画
@@ -126,9 +126,11 @@ void Player::PlayerWalk(){
 		transform_.position_.x -= curSpeed;
 	}
 	
-	if (Input::IsKey(DIK_SPACE))
+	if (Input::IsKeyDown(DIK_SPACE))
 	{
-		transform_.position_.y += PlayerInitialSpeed;
+		playerstate_ = Playeraction::jump;
+		transform_.position_.x += PlayerHorizontalSpeed; 
+		PlayerInitialSpeed = 0.5;
 	}
 	
 }
@@ -140,14 +142,18 @@ void Player::PlayerJump(){
 	}
 
 	//最高地点に到達していない間
-	if (isPlayerDown == false){
+	if (!isPlayerDown){
 		transform_.position_.y += PlayerInitialSpeed;
+		
+		
 	}
 	
-	if (isPlayerDown == true) {
+	else{
 		if (transform_.position_.y <= 0.5f) {
+			isPlayerDown = false;
 			playerstate_ = Playeraction::wait;
 		}
+		
 	}
 }
 

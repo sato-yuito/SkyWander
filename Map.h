@@ -1,10 +1,13 @@
-#pragma once
+
 #pragma once
 #include "Engine/GameObject.h"
 
 class Map :public GameObject
 {
     int hModel_;    //モデル番号
+    int TestModel_;//テストモデル表示
+
+    Transform TestModelPos;
 public:
     //コンストラクタ
     Map(GameObject* parent);
