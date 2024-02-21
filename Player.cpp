@@ -142,7 +142,6 @@ void Player::PlayerJump(){
 	//ç≈çÇínì_Ç…ìûíBÇµÇƒÇ¢Ç»Ç¢ä‘
 	if (!isPlayerDown){
 		transform_.position_.y += PlayerInitialSpeed;
-		
 	}
 	
 
@@ -155,7 +154,16 @@ void Player::PlayerJump(){
 	if (Input::IsKey(DIK_W)) {
 		transform_.position_.z += PlayerInitialSpeed;
 	}
-	
+	if (Input::IsKey(DIK_S)){
+		transform_.position_.z -= PlayerInitialSpeed;
+	}
+	if (Input::IsKey(DIK_D)){
+		transform_.position_.x += PlayerInitialSpeed;
+	}
+	if (Input::IsKey(DIK_A)){
+		transform_.position_.x -= PlayerInitialSpeed;
+	}
+
 }
 
 
