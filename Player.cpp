@@ -57,7 +57,9 @@ void Player::Update() {
 	//ジャンプなどをしてマップ上にいない場合
 	if (data.hit) {
 		if (data.dist > 0.5f) {
-			transform_.position_.y -= gravity;
+			transform_.position_.y += PlayerInitialSpeed;
+			PlayerInitialSpeed -= gravity;
+			
 		}
 	}
 	else
@@ -144,14 +146,15 @@ void Player::PlayerJump(){
 		transform_.position_.y += PlayerInitialSpeed;
 	}
 	
-
 	else{
 		if (transform_.position_.y <= 0.5f) {
+			transform_.position_.y = 0.5f;
+			
 			isPlayerDown = false;
 			playerstate_ = Playeraction::wait;
 		}
 	}
-	if (Input::IsKey(DIK_W)) {
+	/*if (Input::IsKey(DIK_W)) {
 		transform_.position_.z += PlayerInitialSpeed;
 	}
 	if (Input::IsKey(DIK_S)){
@@ -162,7 +165,7 @@ void Player::PlayerJump(){
 	}
 	if (Input::IsKey(DIK_A)){
 		transform_.position_.x -= PlayerInitialSpeed;
-	}
+	}*/
 
 }
 
