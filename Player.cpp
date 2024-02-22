@@ -50,13 +50,13 @@ void Player::Update() {
 	}
 
 	//レイキャスト
-	RayCastData data;
-	data.start = transform_.position_;
-	data.dir = XMFLOAT3(0, -1, 0);
-	Model::RayCast(((Map*)FindObject("Map"))->GetModelHandle(), &data);
+	RayCastData Gronddata;
+	Gronddata.start = transform_.position_;
+	Gronddata.dir = XMFLOAT3(0, -1, 0);
+	Model::RayCast(((Map*)FindObject("Map"))->GetModelHandle(), &Gronddata);
 	//ジャンプなどをしてマップ上にいない場合
-	if (data.hit) {
-		if (data.dist > 0.5f) {
+	if (Gronddata.hit) {
+		if (Gronddata.dist > 0.5f) {
 			transform_.position_.y += PlayerInitialSpeed;
 			PlayerInitialSpeed -= gravity;
 		}
