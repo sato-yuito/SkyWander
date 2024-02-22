@@ -59,7 +59,6 @@ void Player::Update() {
 		if (data.dist > 0.5f) {
 			transform_.position_.y += PlayerInitialSpeed;
 			PlayerInitialSpeed -= gravity;
-			
 		}
 	}
 	else
@@ -73,7 +72,7 @@ void Player::Update() {
 	
 	
 	ImGui::Text("state = %d", (int)playerstate_);
-	ImGui::Text("Jump = %f", PlayerInitialSpeed);
+	//ImGui::Text("Jump = %f", PlayerInitialSpeed);
 }
 
 //•`‰æ
