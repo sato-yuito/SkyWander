@@ -7,9 +7,9 @@
 namespace
 {
 	float PlayerSpeed = 0.1f;//プレイヤーのスピード
-	float gravity = 0.005f;//プレイヤーの重力
+	float gravity =0.02f;//プレイヤーの重力
 	float PlayerInitialSpeed = 0.5f;//ジャンプの上昇量
-	float JumpHeight = 6.0f;//ジャンプをした時の最高到達地点
+	
 	bool isPlayerDown = false;//プレイヤーが下降しているかどうか
 }
 
@@ -128,36 +128,24 @@ void Player::PlayerWalk(){
 	
 	if (Input::IsKeyDown(DIK_SPACE))
 	{
+		isPlayerDown = true;
+
 		playerstate_ = Playeraction::jump;
-				
+
+		PlayerInitialSpeed = 0.5f;
+		
 	}
 	
 }
 
 void Player::PlayerJump(){
-	//プレイヤーの位置が最高到達地点より高かったら
-	if (transform_.position_.y >= JumpHeight ){
-		isPlayerDown  = true;
-	}
-	if (transform_.position_.y <= 0.5f) {
+
+	if (transform_.position_.y < 0.5f) {
 			transform_.position_.y = 0.5f;
 			isPlayerDown = false;
 			playerstate_ = Playeraction::wait;
 	}
 	
-	/*if (Input::IsKey(DIK_W)) {
-		transform_.position_.z += PlayerInitialSpeed;
-	}
-	if (Input::IsKey(DIK_S)){
-		transform_.position_.z -= PlayerInitialSpeed;
-	}
-	if (Input::IsKey(DIK_D)){
-		transform_.position_.x += PlayerInitialSpeed;
-	}
-	if (Input::IsKey(DIK_A)){
-		transform_.position_.x -= PlayerInitialSpeed;
-	}*/
-
 }
 
 
