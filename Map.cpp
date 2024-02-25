@@ -11,10 +11,11 @@ Map::~Map()
 
 void Map::Initialize()
 {
-	for (auto& hModel : AllMapModel)
+
+	for (auto hModel : AllMapModel)
 	{
-		AllMapModel = Model::Load("Map.fbx");
-		assert(hModel_ >= 0);
+		AllMapModel =Model::Load("Map.fbx");
+		assert(AllMapModel >= 0);
 
 		TestModel_ = Model::Load("TestairMap.fbx");
 		assert(TestModel_ >= 0);
@@ -30,11 +31,7 @@ void Map::Update()
 
 void Map::Draw()
 {
-	Model::SetTransform(hModel_, transform_);
-	Model::Draw(hModel_);
-
-	Model::SetTransform(TestModel_, TestModelPos);
-	Model::Draw(TestModel_);
+	
 }
 
 void Map::Release()
