@@ -13,7 +13,7 @@ namespace
 	bool isPlayerDown = false;//プレイヤーが下降しているかどうか
 }
 
-Player::Player(GameObject* parent) :GameObject(parent, "Player"), hModel_(-1), playerstate_(Playeraction::wait){
+Player::Player(GameObject* parent) :GameObject(parent, "Player"), playerModel(-1), playerstate_(Playeraction::wait){
 
 }
 
@@ -24,8 +24,8 @@ Player::~Player(){
 //初期化
 void Player::Initialize(){
 	//モデルデータのロード
-	hModel_ = Model::Load("Player.fbx");
-	assert(hModel_ >= 0);
+	playerModel = Model::Load("Player.fbx");
+	assert(playerModel >= 0);
 }
 
 //更新
@@ -77,8 +77,8 @@ void Player::Update() {
 
 //描画
 void Player::Draw(){
-	Model::SetTransform(hModel_, transform_);
-	Model::Draw(hModel_);
+	Model::SetTransform(playerModel, transform_);
+	Model::Draw(playerModel);
 }
 
 //開放

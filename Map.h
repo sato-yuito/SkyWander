@@ -4,8 +4,7 @@
 
 class Map :public GameObject
 {
-    int hModel_;    //モデル番号
-    int TestModel_;//テストモデル表示
+    std::vector<int>AllMapModel;
 
     Transform TestModelPos;
 public:
@@ -27,5 +26,5 @@ public:
     //開放
     void Release() override;
 
-    int GetModelHandle() { return hModel_; }
+    std::vector<int> GetModelHandle() { return AllMapModel; }
 };

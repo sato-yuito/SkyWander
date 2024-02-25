@@ -13,7 +13,7 @@ class Player:public GameObject
         walkjump
     }playerstate_;
 
-    int hModel_;    //ƒ‚ƒfƒ‹”Ô†
+    int playerModel;    //ƒ‚ƒfƒ‹”Ô†
 
     //‰½‚à‚µ‚Ä‚¢‚È‚¢ó‘Ô
     void PlayerWait();
