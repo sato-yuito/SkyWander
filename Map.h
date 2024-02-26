@@ -1,6 +1,6 @@
 #pragma once
 #include "Engine/GameObject.h"
-
+#include<vector>
 class Map :public GameObject
 {
     std::vector<int>AllMapModel;

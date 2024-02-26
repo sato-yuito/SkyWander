@@ -11,14 +11,14 @@ Map::~Map()
 
 void Map::Initialize()
 {
-
+	AllMapModel.push_back(2);
 	for (auto hModel : AllMapModel)
 	{
-		AllMapModel =Model::Load("Map.fbx");
-		assert(AllMapModel >= 0);
+		hModel = Model::Load("Map.fbx");
+		assert(hModel >= 0);
 
-		TestModel_ = Model::Load("TestairMap.fbx");
-		assert(TestModel_ >= 0);
+		hModel = Model::Load("TestairMap.fbx");
+		assert(hModel >= 0);
 		TestModelPos.position_ = { 0,5,6 };
 
 	}
