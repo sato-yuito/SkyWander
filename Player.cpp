@@ -54,6 +54,7 @@ void Player::Update() {
 	Gronddata.start = transform_.position_;
 	Gronddata.dir = XMFLOAT3(0, -1, 0);
 	Model::RayCast(((Map*)FindObject("Map"))->GetModelHandle(), &Gronddata);
+	Model::RayCast(((Map*)FindObject("TestairMap"))->GetModelHandle(), &Gronddata);
 	//ジャンプなどをしてマップ上にいない場合
 	if (Gronddata.hit) {
 		if (Gronddata.dist > 0.5f) {
