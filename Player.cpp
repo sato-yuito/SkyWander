@@ -31,7 +31,7 @@ void Player::Initialize(){
 //更新
 void Player::Update() {
 	//カメラの更新
-	Camera::SetTarget(transform_.position_);
+	Camera::SetTarget();
 
 	switch (playerstate_)
 	{

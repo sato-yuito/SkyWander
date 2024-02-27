@@ -1,6 +1,7 @@
 #include "Map.h"
 #include"Engine/Model.h"
-#include"Engine/BoxCollider.h"
+#include"Engine/CsvReader.h"
+
 Map::Map(GameObject* parent) :GameObject(parent, "Map"), TestMap(-1), TestAirMap(-1)
 {
 }

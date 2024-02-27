@@ -3,6 +3,7 @@
 #include "Player.h"
 class Enemy :public GameObject
 {
+protected:
     int hModel_;    //ƒ‚ƒfƒ‹”Ô†
     
     float movement_;//ˆÚ“®—Ê
@@ -36,7 +37,7 @@ public:
     //ŠJ•ú
     void Release() override;
 
-private:
+protected:
     //Œ©‚Â‚¯‚Ä‚¢‚é‚©
     bool IsFindPlayer();
 
@@ -46,7 +47,6 @@ private:
     //Œ©‚Â‚¯‚Ä‚¢‚È‚¢ê‡‚Ì‰ñ“]ˆÚ“®(5`10•b‚ÌŠÔ‚ÉŒü‚«‚ª•Ï‚í‚é‚æ‚¤‚É‚·‚é)
     void EnemySearch();
 
-    //UŒ‚
-    void EnemyAttack();
+    
 };
 

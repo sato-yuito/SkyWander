@@ -27,6 +27,18 @@
     <Filter Include="01Engine\ImGui">
       <UniqueIdentifier>{a57aa4f5-69c6-4326-8ed1-f884d18a8812}</UniqueIdentifier>
     </Filter>
+    <Filter Include="リソース ファイル\Enemy">
+      <UniqueIdentifier>{4f27393c-f168-4c19-b9e9-2e78fc2c2471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソース ファイル\Map">
+      <UniqueIdentifier>{7b1898ad-1105-44b1-9c62-c6397ff4fd36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソース ファイル\Player">
+      <UniqueIdentifier>{0f1840aa-02f3-41a0-b265-942ec0404394}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソース ファイル\Scene">
+      <UniqueIdentifier>{e2ddcdba-6a84-4507-9b1b-3c66f6b2ec1e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\BoxCollider.cpp">
@@ -83,7 +95,6 @@
     <ClCompile Include="Engine\Transform.cpp">
       <Filter>01Engine\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="Engine\Audio.cpp">
       <Filter>01Engine\ResourceManager</Filter>
     </ClCompile>
@@ -99,10 +110,6 @@
     <ClCompile Include="Engine\VFX.cpp">
       <Filter>01Engine\ResourceManager</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="Map.cpp" />
-    <ClCompile Include="TittleScene.cpp" />
     <ClCompile Include="Engine\ImGui\imgui.cpp">
       <Filter>01Engine\ImGui</Filter>
     </ClCompile>
@@ -120,6 +127,21 @@
     </ClCompile>
     <ClCompile Include="Engine\ImGui\imgui_widgets.cpp">
       <Filter>01Engine\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>リソース ファイル\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>リソース ファイル\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>リソース ファイル\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>リソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TittleScene.cpp">
+      <Filter>リソース ファイル\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -177,7 +199,6 @@
     <ClInclude Include="Engine\Transform.h">
       <Filter>01Engine\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="TestScene.h" />
     <ClInclude Include="Engine\Audio.h">
       <Filter>01Engine\ResourceManager</Filter>
     </ClInclude>
@@ -193,10 +214,6 @@
     <ClInclude Include="Engine\VFX.h">
       <Filter>01Engine\ResourceManager</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="Map.h" />
-    <ClInclude Include="TittleScene.h" />
     <ClInclude Include="Engine\ImGui\imconfig.h">
       <Filter>01Engine\ImGui</Filter>
     </ClInclude>
@@ -220,6 +237,21 @@
     </ClInclude>
     <ClInclude Include="Engine\ImGui\imstb_truetype.h">
       <Filter>01Engine\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>リソース ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>リソース ファイル\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>リソース ファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene.h">
+      <Filter>リソース ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TittleScene.h">
+      <Filter>リソース ファイル\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
