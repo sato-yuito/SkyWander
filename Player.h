@@ -13,7 +13,7 @@ class Player:public GameObject
         walkjump
     }playerstate_;
 
-    int hModel_;    //モデル番号
+    int playerModel;    //モデル番号
 
     //何もしていない状態
     void PlayerWait();
@@ -30,6 +30,7 @@ class Player:public GameObject
     //アイテムを使う
     void Useitem();
 
+    
 public:
     //コンストラクタ
     Player(GameObject* parent);
@@ -49,6 +50,6 @@ public:
     //開放
     void Release() override;
     
-    int GetModelHandle() { return hModel_; }
+    int GetModelHandle() { return playerModel; }
 };
 

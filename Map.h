@@ -1,12 +1,10 @@
-
 #pragma once
 #include "Engine/GameObject.h"
-
+#include<vector>
 class Map :public GameObject
 {
-    int hModel_;    //モデル番号
-    int TestModel_;//テストモデル表示
-
+   int TestMap;
+   int TestAirMap;
     Transform TestModelPos;
 public:
     //コンストラクタ
@@ -27,5 +25,7 @@ public:
     //開放
     void Release() override;
 
-    int GetModelHandle() { return hModel_; }
+   int  GetModelHandle() { return TestMap; }
+
+  
 };

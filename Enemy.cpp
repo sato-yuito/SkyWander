@@ -40,6 +40,8 @@ void Enemy::Initialize()
 
 void Enemy::Update()
 {
+	
+
 	if (IsFindPlayer())
 	{
 		//‚à‚µŒ©‚Â‚¯‚Ä‚¢‚é‚È‚ç’ÇŒ‚‚·‚é(‚Ì‚¿‚ÉUŒ‚‚·‚é‚æ‚¤‚É‚µ‚½‚¢j
@@ -167,9 +169,6 @@ void Enemy::EnemySearch()
 	XMStoreFloat3(&transform_.position_, NewPosition);
 }
 
-void Enemy::EnemyAttack()
-{
-	
-}
+
 
 

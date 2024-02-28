@@ -1,7 +1,8 @@
 #include "Map.h"
 #include"Engine/Model.h"
-#include"Engine/BoxCollider.h"
-Map::Map(GameObject* parent) :GameObject(parent, "Map"), hModel_(-1), TestModel_(-1)
+#include"Engine/CsvReader.h"
+
+Map::Map(GameObject* parent) :GameObject(parent, "Map"), TestMap(-1), TestAirMap(-1)
 {
 }
 
@@ -11,11 +12,11 @@ Map::~Map()
 
 void Map::Initialize()
 {
-	hModel_ = Model::Load("Map.fbx");
-	assert(hModel_ >= 0);
-	
-	TestModel_ = Model::Load("TestairMap.fbx");
-	assert(TestModel_ >= 0);
+	TestMap = Model::Load("Map.fbx");
+    assert(TestMap >= 0);
+
+	TestAirMap = Model::Load("TestairMap.fbx");
+	assert(TestAirMap >= 0);
 	TestModelPos.position_ = { 0,5,6 };
 
 }
@@ -26,11 +27,11 @@ void Map::Update()
 
 void Map::Draw()
 {
-	Model::SetTransform(hModel_, transform_);
-	Model::Draw(hModel_);
+	Model::SetTransform(TestMap, transform_);
+	Model::Draw(TestMap);
 
-	Model::SetTransform(TestModel_, TestModelPos);
-	Model::Draw(TestModel_);
+	Model::SetTransform(TestAirMap, TestModelPos);
+	Model::Draw(TestAirMap);
 }
 
 void Map::Release()
