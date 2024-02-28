@@ -30,8 +30,8 @@ void Player::Initialize(){
 
 //更新
 void Player::Update() {
-	//カメラの更新
-	Camera::SetTarget();
+
+	PlayerCamTarget();
 
 	switch (playerstate_)
 	{
@@ -153,6 +153,16 @@ void Player::PlayerAttack(){
 }
 
 void Player::Useitem(){
+}
+
+void Player::PlayerCamTarget(){
+	//マウスが動かされたら回転する
+	XMFLOAT3 PlayerMouseMove = Input::GetMouseMove();
+	transform_.rotate_.x += PlayerMouseMove.y / 2.5f;
+	transform_.rotate_.y += PlayerMouseMove.x / 2.5f;
+
+
+	
 }
 
 

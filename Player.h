@@ -30,7 +30,8 @@ class Player:public GameObject
     //アイテムを使う
     void Useitem();
 
-    
+    //プレイヤーの後ろを常に追尾してくれるようにする
+    void PlayerCamTarget();
 public:
     //コンストラクタ
     Player(GameObject* parent);
