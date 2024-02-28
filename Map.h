@@ -3,8 +3,8 @@
 #include<vector>
 class Map :public GameObject
 {
-   int TestMap;
-   int TestAirMap;
+    std::vector<int> models;
+  
     Transform TestModelPos;
 public:
     //コンストラクタ
@@ -25,7 +25,7 @@ public:
     //開放
     void Release() override;
 
-   int  GetModelHandle() { return TestMap; }
+   std::vector<int> GetModelHandles() { return models ; }
 
   
 };

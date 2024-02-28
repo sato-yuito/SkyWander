@@ -1,8 +1,8 @@
 #include "Map.h"
 #include"Engine/Model.h"
-#include"Engine/CsvReader.h"
 
-Map::Map(GameObject* parent) :GameObject(parent, "Map"), TestMap(-1), TestAirMap(-1)
+
+Map::Map(GameObject* parent) :GameObject(parent, "Map"), models{}
 {
 }
 
@@ -12,12 +12,14 @@ Map::~Map()
 
 void Map::Initialize()
 {
-	TestMap = Model::Load("Map.fbx");
-    assert(TestMap >= 0);
-
-	TestAirMap = Model::Load("TestairMap.fbx");
-	assert(TestAirMap >= 0);
-	TestModelPos.position_ = { 0,5,6 };
+	int numberOfModels = 10; //—¼•û10ŒÂ‚¸‚Âo‚·•Ï”
+	for (int i = 0; i < numberOfModels; i++) {
+		models.push_back(Model::Load("Map.fbx"));
+		models.push_back(Model::Load("TestairMap.fbx"));
+		assert(!models.empty());	
+	}
+	
+	
 
 }
 
@@ -27,11 +29,12 @@ void Map::Update()
 
 void Map::Draw()
 {
-	Model::SetTransform(TestMap, transform_);
-	Model::Draw(TestMap);
+	for (auto model : models)
+	{
+		Model::SetTransform(model, transform_);
+		Model::Draw(model);
+	}
 
-	Model::SetTransform(TestAirMap, TestModelPos);
-	Model::Draw(TestAirMap);
 }
 
 void Map::Release()

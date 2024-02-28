@@ -31,7 +31,7 @@ void Player::Initialize(){
 //更新
 void Player::Update() {
 
-	PlayerCamTarget();
+	Camera::SetTarget(transform_.position_);
 
 	switch (playerstate_)
 	{
@@ -53,9 +53,17 @@ void Player::Update() {
 	RayCastData Gronddata;
 	Gronddata.start = transform_.position_;
 	Gronddata.dir = XMFLOAT3(0, -1, 0);
-	Model::RayCast(((Map*)FindObject("Map"))->GetModelHandle(), &Gronddata);
-	//ジャンプなどをしてマップ上にいない場合
-	if (Gronddata.hit) {
+	bool PlayerHit = false;//一回でもヒットしたら
+	for (int i = 0; i < 2; i++){
+		Model::RayCast(((Map*)FindObject("Map"))->GetModelHandles()[i], &Gronddata);
+		//ジャンプなどをしてマップ上にいない場合
+		if (Gronddata.hit)
+		PlayerHit = true;
+		break;
+	}
+	
+
+	if (PlayerHit) {
 		if (Gronddata.dist > 0.5f) {
 			transform_.position_.y += PlayerInitialSpeed;
 			PlayerInitialSpeed -= gravity;
@@ -69,7 +77,11 @@ void Player::Update() {
 			KillMe();
 		}
 	}
+
+
 	
+
+
 	
 	ImGui::Text("state = %d", (int)playerstate_);
 	//ImGui::Text("Jump = %f", PlayerInitialSpeed);
@@ -156,12 +168,7 @@ void Player::Useitem(){
 }
 
 void Player::PlayerCamTarget(){
-	//マウスが動かされたら回転する
-	XMFLOAT3 PlayerMouseMove = Input::GetMouseMove();
-	transform_.rotate_.x += PlayerMouseMove.y / 2.5f;
-	transform_.rotate_.y += PlayerMouseMove.x / 2.5f;
-
-
+	
 	
 }
 
