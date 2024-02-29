@@ -61,8 +61,6 @@ void Player::Update() {
 		PlayerHit = true;
 		break;
 	}
-	
-
 	if (PlayerHit) {
 		if (Gronddata.dist > 0.5f) {
 			transform_.position_.y += PlayerInitialSpeed;
@@ -78,11 +76,6 @@ void Player::Update() {
 		}
 	}
 
-
-	
-
-
-	
 	ImGui::Text("state = %d", (int)playerstate_);
 	//ImGui::Text("Jump = %f", PlayerInitialSpeed);
 }

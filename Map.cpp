@@ -17,12 +17,15 @@ void Map::Initialize()
 		models.push_back(Model::Load("Map.fbx"));
 		models.push_back(Model::Load("TestairMap.fbx"));
 		assert(!models.empty());	
-
-		transform_.position_.x = rand() % 10;
-	    transform_.position_.z = rand() % 10;
+       
+		Transform t{};
+		t.position_.x = rand() % 25;
+		
+		t.position_.z = rand() % 10;
+		Model::SetTransform(numberOfModels,t);
 	}
 
-	//作りたいオブジェクトの個数のトランスフォームをつくってfor分で回す
+	
 	
 	
 	
@@ -36,7 +39,6 @@ void Map::Draw()
 {
 	for (auto model : models)
 	{
-		Model::SetTransform(model, transform_);
 		Model::Draw(model);
 	}
 
