@@ -54,8 +54,10 @@ void Player::Update() {
 	Gronddata.start = transform_.position_;
 	Gronddata.dir = XMFLOAT3(0, -1, 0);
 	bool PlayerHit = false;//一回でもヒットしたら
-	for (int i = 0; i < 2; i++){
-		Model::RayCast(((Map*)FindObject("Map"))->GetModelHandles()[i], &Gronddata);
+  	std::vector <int> mapModel = ((Map*)FindObject("Map"))->GetModelHandles();
+	for (auto mapmodels:mapModel) {
+		
+		Model::RayCast(mapmodels, &Gronddata);
 		//ジャンプなどをしてマップ上にいない場合
 		if (Gronddata.hit)
 		PlayerHit = true;
