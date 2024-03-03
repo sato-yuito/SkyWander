@@ -15,6 +15,7 @@ class Player:public GameObject
 
     int playerModel;    //ƒ‚ƒfƒ‹”Ô†
 
+
     //‰½‚à‚µ‚Ä‚¢‚È‚¢ó‘Ô
     void PlayerWait();
 

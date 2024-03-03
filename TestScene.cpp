@@ -12,9 +12,9 @@ TestScene::TestScene(GameObject * parent)
 //‰Šú‰»
 void TestScene::Initialize()
 {
+	Instantiate<Map>(this);
 	Instantiate<Player>(this);
 	Instantiate<Enemy>(this);
-	Instantiate<Map>(this);
 	Camera::SetPosition(XMFLOAT3(0, 6, -10));
 }
 
