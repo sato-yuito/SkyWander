@@ -19,9 +19,9 @@ void Map::Initialize(){
 
 	for (auto model:models){
 		Transform t{};
-		t.position_.x = rand() % 50;
+		t.position_.x = rand() % 100;
 		//t.position_.y = rand()%20;
-		t.position_.z = rand() % 50;
+		t.position_.z = rand() % 100;
 		Model::SetTransform(model, t);
 	}
 }

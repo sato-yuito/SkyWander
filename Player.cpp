@@ -67,7 +67,6 @@ void Player::Update() {
 		ImGui::Text("dist=%f", Gronddata.dist );
 		if (Gronddata.hit)
 			PlayerHit = true;
-		
 
 	}
 	if (PlayerHit) {
