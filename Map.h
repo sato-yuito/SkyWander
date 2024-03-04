@@ -1,9 +1,10 @@
 #pragma once
 #include "Engine/GameObject.h"
 #include<vector>
+#include"Floor.h"
 class Map :public GameObject
 {
-    std::vector<int> models;
+    std::vector<Floor*>floorData;
   
     Transform TestModelPos;
 public:
@@ -25,7 +26,6 @@ public:
     //ŠJ•ú
     void Release() override;
 
-   std::vector<int> GetModelHandles() { return models ; }
-
+    std::vector<Floor*>GetfloorData() { return floorData; }
   
 };

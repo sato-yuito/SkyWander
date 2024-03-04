@@ -3,6 +3,7 @@
 #include "Engine/Input.h"
 #include"Engine/Camera.h"
 #include"Map.h"
+#include"Floor.h"
 #include"Engine/ImGui/imgui.h"
 namespace
 {
@@ -55,7 +56,7 @@ void Player::Update() {
 	//レイキャスト
 	RayCastData Gronddata;
 	bool PlayerHit = false;//一回でもヒットしたら
-	std::vector <int> mapModel = ((Map*)FindObject("Map"))->GetModelHandles();
+	std::vector< Floor* > mapModel = ((Map*)FindObject("Map"))->GetfloorData();
 	
 	for (auto mapmodels : mapModel) {
 		Gronddata.start = transform_.position_;
