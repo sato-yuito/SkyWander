@@ -17,7 +17,7 @@ void TestScene::Initialize()
 	
 	 Instantiate<Map>(this);
 	
-	//Instantiate<Player>(this);
+	Instantiate<Player>(this);
 	//Instantiate<Enemy>(this);
 	Camera::SetPosition(XMFLOAT3(0, 6, -10));
 }

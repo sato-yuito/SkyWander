@@ -50,18 +50,14 @@ void Player::Update() {
 		break;
 	}
 
-	
-	//Mapのモデルに対して一つ一つrayを打つ
-	
 	//レイキャスト
 	RayCastData Gronddata;
 	bool PlayerHit = false;//一回でもヒットしたら
 	std::vector< Floor* > mapModel = ((Map*)FindObject("Map"))->GetfloorData();
-	
 	for (auto mapmodels : mapModel) {
 		Gronddata.start = transform_.position_;
 		Gronddata.dir = XMFLOAT3(0, -1, 0);
-		Model::RayCast(mapmodels, &Gronddata);
+		Model::RayCast(mapmodels->GetModelHandle(), &Gronddata);
 		//ジャンプなどをしてマップ上にいない場合
 		ImGui::Text("hit=%s", Gronddata.hit ? "true " : "false");
 		ImGui::Text("dist=%f", Gronddata.dist );
