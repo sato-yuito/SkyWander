@@ -19,7 +19,7 @@ void TestScene::Initialize()
 	
 	Instantiate<Player>(this);
 	//Instantiate<Enemy>(this);
-	Camera::SetPosition(XMFLOAT3(0, 6, -10));
+	//Camera::SetPosition(XMFLOAT3(0, 6, -10));
 }
 
 //çXêV

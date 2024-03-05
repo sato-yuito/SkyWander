@@ -31,17 +31,8 @@ void Player::Initialize(){
 
 //更新
 void Player::Update() {
-	float CamdisPlayerY = 6.5f;
-	float CamdisPlayerZ = 10.0f;
-	XMFLOAT3 CmPos =
-	{
-		transform_.position_.x,
-		transform_.position_.y +CamdisPlayerY,
-		transform_.position_.z - CamdisPlayerZ
-	};
-
-	Camera::SetPosition(CmPos);
-	Camera::SetTarget(transform_.position_);
+	
+	PlayerCamTarget();
 
 	switch (playerstate_)
 	{
@@ -175,7 +166,19 @@ void Player::Useitem(){
 }
 
 void Player::PlayerCamTarget(){
-	
+	//yとz方向に離すカメラ
+	float CamdisPlayerY = 6.5f;
+	float CamdisPlayerZ = 10.0f;
+	//y方向は上(+)z方向は後ろ(-)にカメラを置く
+	XMFLOAT3 CmPos =
+	{
+		transform_.position_.x,
+		transform_.position_.y + CamdisPlayerY,
+		transform_.position_.z - CamdisPlayerZ
+	};
+
+	Camera::SetPosition(CmPos);
+	Camera::SetTarget(transform_.position_);
 	
 }
 
