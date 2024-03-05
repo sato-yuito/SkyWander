@@ -31,11 +31,11 @@ void Player::Initialize(){
 
 //çXêV
 void Player::Update() {
-	float CamdisPlayer = 10.0f;
+	float CamdisPlayer = 7.0f;
 	XMFLOAT3 CmPos =
 	{
 		transform_.position_.x,
-		transform_.position_.y,
+		transform_.position_.y+CamdisPlayer,
 		transform_.position_.z - CamdisPlayer
 	};
 
