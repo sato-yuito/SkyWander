@@ -146,6 +146,9 @@
     <ClCompile Include="Floor.cpp">
       <Filter>リソース ファイル\Map</Filter>
     </ClCompile>
+    <ClCompile Include="GameOverScene.cpp">
+      <Filter>リソース ファイル\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -258,6 +261,9 @@
     </ClInclude>
     <ClInclude Include="Floor.h">
       <Filter>リソース ファイル\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverScene.h">
+      <Filter>リソース ファイル\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

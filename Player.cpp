@@ -136,8 +136,7 @@ void Player::PlayerWalk(){
 		transform_.position_.x -= curSpeed;
 	}
 	
-	if (Input::IsKeyDown(DIK_SPACE))
-	{
+	if (Input::IsKeyDown(DIK_SPACE)){
 		isPlayerDown = true;
 
 		playerstate_ = Playeraction::jump;
@@ -179,7 +178,6 @@ void Player::PlayerCamTarget(){
 
 	Camera::SetPosition(CmPos);
 	Camera::SetTarget(transform_.position_);
-	
 }
 
 
