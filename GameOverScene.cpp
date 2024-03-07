@@ -1,8 +1,7 @@
 #include "GameOverScene.h"
 
-GameOverScene::GameOverScene(GameObject* parent):GameObject(parent, "Scene")
+GameOverScene::GameOverScene(GameObject* parent):GameObject(parent, "GameOverScene"){
 
-{
 }
 
 void GameOverScene::Initialize()

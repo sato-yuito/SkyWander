@@ -40,8 +40,6 @@ void Enemy::Initialize()
 
 void Enemy::Update()
 {
-	
-
 	if (IsFindPlayer())
 	{
 		//‚à‚µŒ©‚Â‚¯‚Ä‚¢‚é‚È‚ç’ÇŒ‚‚·‚é(‚Ì‚¿‚ÉUŒ‚‚·‚é‚æ‚¤‚É‚µ‚½‚¢j
