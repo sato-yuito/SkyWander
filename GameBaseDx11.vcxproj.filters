@@ -149,6 +149,9 @@
     <ClCompile Include="GameOverScene.cpp">
       <Filter>リソース ファイル\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="PlayScene.cpp">
+      <Filter>リソース ファイル\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -265,6 +268,10 @@
     <ClInclude Include="GameOverScene.h">
       <Filter>リソース ファイル\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="PlayScene.h">
+      <Filter>リソース ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="json.hpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">

@@ -159,6 +159,7 @@
     <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="TittleScene.cpp" />
   </ItemGroup>
@@ -197,8 +198,10 @@
     <ClInclude Include="Engine\Transform.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="GameOverScene.h" />
+    <ClInclude Include="json.hpp" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayScene.h" />
     <ClInclude Include="TestScene.h" />
     <ClInclude Include="TittleScene.h" />
   </ItemGroup>

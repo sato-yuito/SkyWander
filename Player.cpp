@@ -73,7 +73,7 @@ void Player::Update() {
 	}
 	else
 	{
-		transform_.position_.y -= gravity;
+
 		if (transform_.position_.y < -1)
 		{
 			KillMe();

@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine/GameObject.h"
-
+#include"json.hpp"
+#include<fstream>
 class Player:public GameObject
 { 
     enum class Playeraction
@@ -15,6 +16,12 @@ class Player:public GameObject
 
     int playerModel;    //モデル番号
 
+
+    //jsonファイルをLoad
+    void Load();
+
+    //jsonファイルをセーブ
+    void Save();
 
     //何もしていない状態
     void PlayerWait();
@@ -52,6 +59,8 @@ public:
     //開放
     void Release() override;
     
+   
+
     int GetModelHandle() { return playerModel; }
 };
 

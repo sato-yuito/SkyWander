@@ -14,7 +14,7 @@ void TittleScene::Initialize(){
 void TittleScene::Update(){
 	if (Input::IsKey(DIK_SPACE) || Input::IsMouseButtonDown(0)){
 		SceneManager* pTitleScene = (SceneManager*)FindObject("SceneManager");
-		pTitleScene->ChangeScene(SCENE_ID_TEST);
+		pTitleScene->ChangeScene(SCENE_ID_PLAY);
      }
 }
 
