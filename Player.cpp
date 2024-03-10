@@ -5,14 +5,18 @@
 #include"Map.h"
 #include"Floor.h"
 #include"Engine/ImGui/imgui.h"
+
 namespace
 {
 	float PlayerSpeed = 0.1f;//プレイヤーのスピード
 	float gravity =0.02f;//プレイヤーの重力
 	float PlayerInitialSpeed = 0.5f;//ジャンプの上昇量
-	
 	bool isPlayerDown = false;//プレイヤーが下降しているかどうか
+	int HP =0;//体力
+	int Attack = 0;//攻撃力
 }
+
+using json = nlohmann::json;
 
 Player::Player(GameObject* parent) :GameObject(parent, "Player"), playerModel(-1), playerstate_(Playeraction::wait){
 
@@ -95,6 +99,8 @@ void Player::Draw(){
 void Player::Release(){
 
 }
+
+
 
 
 void Player::PlayerWait(){
@@ -181,7 +187,26 @@ void Player::PlayerCamTarget(){
 }
 
 
+void Player::Load(std::string LoadFile) {
+	if (LoadFile.empty()) {
+		LoadFile = "Player.json"; 
+	}
+	std::ifstream file(LoadFile);
+	if (file.is_open())
+	{
+		json playerdata;
+		file >> playerdata;
 
+		HP = playerdata["HP"];
+		Attack = playerdata["Attack"];
+		file.close();
+	}
+}
+
+void Player::Save(std::string SaveFile)
+{
+
+}
 
 
 

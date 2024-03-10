@@ -16,13 +16,6 @@ class Player:public GameObject
 
     int playerModel;    //モデル番号
 
-
-    //jsonファイルをLoad
-    void Load();
-
-    //jsonファイルをセーブ
-    void Save();
-
     //何もしていない状態
     void PlayerWait();
 
@@ -40,6 +33,12 @@ class Player:public GameObject
 
     //プレイヤーの後ろを常に追尾してくれるようにする
     void PlayerCamTarget();
+
+    //jsonファイルをLoad
+    void Load(std::string LoadFile);
+
+    //jsonファイルをセーブ
+    void Save(std::string SaveFile);
 public:
     //コンストラクタ
     Player(GameObject* parent);
