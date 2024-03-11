@@ -19,7 +19,7 @@ namespace
 using json = nlohmann::json;
 
 Player::Player(GameObject* parent) :GameObject(parent, "Player"), playerModel(-1), playerstate_(Playeraction::wait){
-
+	Load("Player.json");
 }
 
 //デストラクタ
@@ -86,6 +86,7 @@ void Player::Update() {
 
 
 	ImGui::Text("state = %d", (int)playerstate_);
+	
 	
 }
 
@@ -188,9 +189,8 @@ void Player::PlayerCamTarget(){
 
 
 void Player::Load(std::string LoadFile) {
-	if (LoadFile.empty()) {
-		LoadFile = "Player.json"; 
-	}
+	
+
 	std::ifstream file(LoadFile);
 	if (file.is_open())
 	{
@@ -201,23 +201,21 @@ void Player::Load(std::string LoadFile) {
 		Attack = playerdata["Attack"];
 		file.close();
 	}
+
+	ImGui::Text("HP=%d", HP);
 }
 
 void Player::Save(std::string SaveFile)
 {
-	if (SaveFile.empty())
-	{
-		SaveFile = "Player.json";
-	}
+	
 	json data;
 	data["HP"] = HP;
 	data["Attack"] = Attack;
 
 	std::ofstream file(SaveFile);
-	if (file.is_open()) {
-		file << std::setw(3) << data << std::endl;
+	
 		file.close();
-	}
+	
 }
 
 
