@@ -205,7 +205,19 @@ void Player::Load(std::string LoadFile) {
 
 void Player::Save(std::string SaveFile)
 {
+	if (SaveFile.empty())
+	{
+		SaveFile = "Player.json";
+	}
+	json data;
+	data["HP"] = HP;
+	data["Attack"] = Attack;
 
+	std::ofstream file(SaveFile);
+	if (file.is_open()) {
+		file << std::setw(3) << data << std::endl;
+		file.close();
+	}
 }
 
 
