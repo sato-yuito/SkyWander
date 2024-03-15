@@ -152,6 +152,9 @@
     <ClCompile Include="PlayScene.cpp">
       <Filter>リソース ファイル\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="MoveFloor.cpp">
+      <Filter>リソース ファイル\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -272,6 +275,9 @@
       <Filter>リソース ファイル\Scene</Filter>
     </ClInclude>
     <ClInclude Include="json.hpp" />
+    <ClInclude Include="MoveFloor.h">
+      <Filter>リソース ファイル\Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">
