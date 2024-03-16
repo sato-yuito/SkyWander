@@ -13,6 +13,7 @@ void Floor::Initialize(){
 }
 
 void Floor::Update(){
+	
 }
 
 void Floor::Draw()

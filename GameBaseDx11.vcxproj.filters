@@ -39,6 +39,9 @@
     <Filter Include="リソース ファイル\Scene">
       <UniqueIdentifier>{e2ddcdba-6a84-4507-9b1b-3c66f6b2ec1e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="リソース ファイル\item">
+      <UniqueIdentifier>{e630c694-23c6-4870-a6a6-f20c3d66a12d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\BoxCollider.cpp">
@@ -154,6 +157,9 @@
     </ClCompile>
     <ClCompile Include="MoveFloor.cpp">
       <Filter>リソース ファイル\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Treasure.cpp">
+      <Filter>リソース ファイル\item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -277,6 +283,9 @@
     <ClInclude Include="json.hpp" />
     <ClInclude Include="MoveFloor.h">
       <Filter>リソース ファイル\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Treasure.h">
+      <Filter>リソース ファイル\item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

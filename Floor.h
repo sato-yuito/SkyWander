@@ -24,8 +24,6 @@ public:
 	//ŠJ•ú
 	void Release() override;
 
-	
-
 	//ƒ‚ƒfƒ‹”Ô†‚Ìæ“¾
 	int GetModelHandle() { return floorModel_; }
 };
