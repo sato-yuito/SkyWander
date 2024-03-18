@@ -17,6 +17,13 @@ void MoveFloor::Update()
 {
 	int move = 0.05f;
 	transform_.position_.y += move;
+	
+	if (transform_.position_.y > 6.0f) {
+		move = -move;
+	}
+	else if (transform_.position_.y < -6.0f) {
+		move = -move;
+	}
 }
 
 void MoveFloor::Draw()

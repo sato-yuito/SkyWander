@@ -75,14 +75,7 @@ void Player::Update() {
 			PlayerInitialSpeed -= gravity;
 		}
 	}
-	else
-	{
-
-		if (transform_.position_.y < -1)
-		{
-			KillMe();
-		}
-	}
+	
 
 
 	ImGui::Text("state = %d", (int)playerstate_);
