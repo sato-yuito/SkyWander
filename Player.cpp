@@ -77,7 +77,6 @@ void Player::Update() {
 	}
 	
 
-
 	ImGui::Text("state = %d", (int)playerstate_);
 	
 	
