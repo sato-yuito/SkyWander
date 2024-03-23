@@ -3,6 +3,7 @@
 #include"Enemy.h"
 #include"Map.h"
 #include"Floor.h"
+#include"Treasure.h"
 #include"Engine/Camera.h"
 #include "Engine/SceneManager.h"
 
@@ -18,6 +19,8 @@ void PlayScene::Initialize()
 	Instantiate<Player>(this);
 
 	Instantiate<Enemy>(this);
+
+	Instantiate<Treasure>(this);
 }
 
 void PlayScene::Update()
