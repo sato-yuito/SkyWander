@@ -16,14 +16,13 @@ namespace
 	float gravity =0.02f;//プレイヤーの重力
 	float PlayerInitialSpeed = 0.5f;//ジャンプの上昇量
 	bool isPlayerDown = false;//プレイヤーが下降しているかどうか
-	int HP =0;//体力
-	int Attack = 0;//攻撃力
+	
 }
 
 using json = nlohmann::json;
 
 Player::Player(GameObject* parent) :GameObject(parent, "Player"), playerModel(-1), playerstate_(Playeraction::wait){
-	Load("Player.json");
+	
 }
 
 //デストラクタ
@@ -33,6 +32,7 @@ Player::~Player(){
 //初期化
 void Player::Initialize(){
 	//モデルデータのロード
+	Load();
 	playerModel = Model::Load("Player.fbx");
 	assert(playerModel >= 0);
 	BoxCollider* collision = new BoxCollider(XMFLOAT3(0, 0, 0), XMFLOAT3(1.3, 1.3, 1.3));
@@ -184,33 +184,24 @@ void Player::PlayerCamTarget(){
 }
 
 
-void Player::Load(std::string LoadFile) {
+void Player::Load() {
 	
-
-	std::ifstream file(LoadFile);
-	if (file.is_open())
+	std::string PlayerFileName = "Player.json";
+	std::ifstream ifs(PlayerFileName.c_str());
+	if (ifs.is_open())
 	{
-		json playerdata;
-		file >> playerdata;
+		json playerjson;
+		ifs >> playerjson;
 
-		HP = playerdata["HP"];
-		Attack = playerdata["Attack"];
-		file.close();
+		HP = playerjson["HP"];
+		Attack = playerjson["Attack"];
 	}
-
-	ImGui::Text("HP=%d", HP);
 }
 
-void Player::Save(std::string SaveFile)
+void Player::Save()
 {
 	
-	json data;
-	data["HP"] = HP;
-	data["Attack"] = Attack;
-
-	std::ofstream file(SaveFile);
 	
-		file.close();
 	
 }
 

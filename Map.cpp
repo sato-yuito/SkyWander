@@ -10,7 +10,7 @@ Map::~Map(){
 
 void Map::Initialize(){
 
-	for (int i = 0; i < 15; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		Floor* fl = Instantiate<Floor>(this);
 		fl->SetPosition(0, 0, i * 18);

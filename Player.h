@@ -16,6 +16,10 @@ class Player:public GameObject
 
     int playerModel;    //モデル番号
 
+    int HP = 0;//体力
+
+    int Attack = 0;//攻撃力
+
     //何もしていない状態
     void PlayerWait();
 
@@ -35,10 +39,10 @@ class Player:public GameObject
     void PlayerCamTarget();
 
     //jsonファイルをLoad
-    void Load(std::string LoadFile);
+    void Load();
 
     //jsonファイルをセーブ
-    void Save(std::string SaveFile);
+    void Save();
 public:
     //コンストラクタ
     Player(GameObject* parent);
