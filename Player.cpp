@@ -1,10 +1,14 @@
-#include "Player.h"
+
+#include "Engine/SceneManager.h"
 #include "Engine/Model.h"
 #include "Engine/Input.h"
 #include"Engine/Camera.h"
+#include "Engine/BoxCollider.h"
+#include"Engine/ImGui/imgui.h"
+#include "Player.h"
 #include"Map.h"
 #include"Floor.h"
-#include"Engine/ImGui/imgui.h"
+#include"Treasure.h"
 
 namespace
 {
@@ -31,6 +35,8 @@ void Player::Initialize(){
 	//モデルデータのロード
 	playerModel = Model::Load("Player.fbx");
 	assert(playerModel >= 0);
+	BoxCollider* collision = new BoxCollider(XMFLOAT3(0, 0, 0), XMFLOAT3(1.3, 1.3, 1.3));
+	AddCollider(collision);
 }
 
 //更新
@@ -77,6 +83,7 @@ void Player::Update() {
 	}
 	
 
+
 	ImGui::Text("state = %d", (int)playerstate_);
 	
 	
@@ -92,9 +99,6 @@ void Player::Draw(){
 void Player::Release(){
 
 }
-
-
-
 
 void Player::PlayerWait(){
 	
@@ -212,6 +216,14 @@ void Player::Save(std::string SaveFile)
 
 
 
+void Player::OnCollision(GameObject* pTarget)
+{
+	if (pTarget->GetObjectName() == "Treasure")
+	{
+		SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
+		pSceneManager->ChangeScene(SCENE_ID_GAMECLEAR);
+	}
+}
 //メモ
 /*
   

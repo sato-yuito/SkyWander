@@ -19,7 +19,5 @@ public:
 	//ŠJ•ú
 	void Release() override;
 
-	//ƒ‚ƒfƒ‹”Ô†‚ğæ“¾
-	int GetModelHandle() { return treasureModel_; }
 };
 
