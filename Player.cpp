@@ -15,7 +15,7 @@ namespace
 	float PlayerSpeed = 0.1f;//プレイヤーのスピード
 	float gravity =0.02f;//プレイヤーの重力
 	float PlayerInitialSpeed = 0.5f;//ジャンプの上昇量
-	bool isPlayerDown = false;//プレイヤーが下降しているかどうか
+
 	
 }
 
@@ -68,7 +68,7 @@ void Player::Update() {
 		Gronddata.start = transform_.position_;
 		Gronddata.dir = XMFLOAT3(0, -1, 0);
 		Model::RayCast(mapmodels->GetModelHandle(), &Gronddata);
-		//ジャンプなどをしてマップ上にいない場合
+		
 		ImGui::Text("hit=%s", Gronddata.hit ? "true " : "false");
 		ImGui::Text("dist=%f", Gronddata.dist );
 		if (Gronddata.hit)
@@ -109,7 +109,7 @@ void Player::PlayerWait(){
 	}
 	if (Input::IsKeyDown(DIK_SPACE))
 	{
-		isPlayerDown = false;
+		
 		playerstate_  = Playeraction::jump;
 	}
 }
@@ -140,8 +140,7 @@ void Player::PlayerWalk(){
 	}
 	
 	if (Input::IsKeyDown(DIK_SPACE)){
-		isPlayerDown = true;
-
+		
 		playerstate_ = Playeraction::jump;
 
 		PlayerInitialSpeed = 0.5f;
@@ -154,7 +153,7 @@ void Player::PlayerJump(){
 
 	if (transform_.position_.y < 0.5f) {
 			transform_.position_.y = 0.5f;
-			isPlayerDown = false;
+			
 			playerstate_ = Playeraction::wait;
 	}
 	
