@@ -1,5 +1,4 @@
 #include "Enemy.h"
-
 #include"Map.h"
 #include "Engine/Model.h"
 
@@ -102,7 +101,7 @@ bool Enemy::IsFindPlayer()
 
 
 /// <summary>
-/// 追撃アルゴリズム
+/// Playerを追撃する
 /// </summary>
 void Enemy::ChasePlayer()
 {
@@ -170,5 +169,6 @@ void Enemy::EnemySearch()
 
 //メモ
 //不自然な動きなので自然の動きを出すようにしたほうがいい。
-//Enemyを管理するパラメーターを作ってゴーレムだったら足遅くする工夫ができる。
+//動きは共通だけど速さと変えたいときはパラメーターを管理するクラスとか作って工夫ができる。
+//伝える努力をしよう;;
 
