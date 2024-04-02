@@ -61,22 +61,19 @@ void Player::Update() {
 	}
 
 	//レイキャスト
-	RayCastData Gronddata;
+	RayCastData StageData;
 	bool PlayerHit = false;//一回でもヒットしたら
 	std::vector< Floor* > mapModel = ((Map*)FindObject("Map"))->GetfloorData();
 	for (auto mapmodels : mapModel) {
-		Gronddata.start = transform_.position_;
-		Gronddata.dir = XMFLOAT3(0, -1, 0);
-		Model::RayCast(mapmodels->GetModelHandle(), &Gronddata);
-		
-		ImGui::Text("hit=%s", Gronddata.hit ? "true " : "false");
-		ImGui::Text("dist=%f", Gronddata.dist );
-		if (Gronddata.hit)
+		StageData.start = transform_.position_;
+		StageData.dir = XMFLOAT3(0, -1, 0);
+		Model::RayCast(mapmodels->GetModelHandle(), &StageData);
+		if (StageData.hit)
 			PlayerHit = true;
 
 	}
 	if (PlayerHit) {
-		if (Gronddata.dist > 0.5f) {
+		if (StageData.dist > 0.5f) {
 			transform_.position_.y += PlayerInitialSpeed;
 			PlayerInitialSpeed -= gravity;
 		}
