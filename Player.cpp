@@ -1,4 +1,3 @@
-
 #include "Engine/SceneManager.h"
 #include "Engine/Model.h"
 #include "Engine/Input.h"
@@ -129,22 +128,23 @@ void Player::PlayerWalk(){
 void Player::PlayerJump(){
 	//レイキャスト
 	RayCastData StageData;
-	bool PlayerHit = false;//Raycastが当たっていないとき
+	bool PlayerHit = false;//stageのrayが当たっていないときの変数
+	const float halfPlayermodel = 0.5;
 	std::vector< Floor* > StageModel = ((Map*)FindObject("Map"))->GetfloorData();
 	for (auto mapmodels : StageModel) {
 		StageData.start = transform_.position_;
 		StageData.dir = XMFLOAT3(0, -1, 0);
 		Model::RayCast(mapmodels->GetModelHandle(), &StageData);
-		if (StageData.hit)
-			PlayerHit = true;
+		PlayerHit = StageData.hit;
 	}
+	//当たった時上昇
 	if (PlayerHit) {
-		if (StageData.dist > 0.5f) {
+		if (StageData.dist > halfPlayermodel) {
 			transform_.position_.y += PlayerVelocity;
 			PlayerVelocity -= gravity;
 		}
 	}
-	else if (StageData.dist < 0.5f) {
+	else if (StageData.dist < halfPlayermodel) {
 		PlayerVelocity = 0.5f;
 
 			playerstate_ = Playeraction::wait;
