@@ -2,8 +2,12 @@
 #include "Engine/GameObject.h"
 #include"json.hpp"
 #include<fstream>
+
+using json = nlohmann::json;
+
 class Player:public GameObject
 { 
+
     enum class Playeraction
     {
         wait,//‰½‚à‚µ‚Ä‚¢‚È‚¢ó‘Ô

@@ -14,12 +14,10 @@ namespace
 {
 	float PlayerSpeed = 0.1f;//プレイヤーのスピード
 	float gravity =0.02f;//プレイヤーの重力
-	float PlayerInitialSpeed = 0.5f;//ジャンプの上昇量
-
-	
+	float PlayerVelocity = 0.5f;//ジャンプの上昇量
 }
 
-using json = nlohmann::json;
+
 
 Player::Player(GameObject* parent) :GameObject(parent, "Player"), playerModel(-1), playerstate_(Playeraction::wait){
 	
@@ -60,24 +58,6 @@ void Player::Update() {
 		break;
 	}
 
-	//レイキャスト
-	RayCastData StageData;
-	bool PlayerHit = false;//Raycastが当たっていないとき
-	std::vector< Floor* > mapModel = ((Map*)FindObject("Map"))->GetfloorData();
-	for (auto mapmodels : mapModel) {
-		StageData.start = transform_.position_;
-		StageData.dir = XMFLOAT3(0, -1, 0);
-		Model::RayCast(mapmodels->GetModelHandle(), &StageData);
-		if (StageData.hit)
-			PlayerHit = true;
-
-	}
-	if (PlayerHit) {
-		if (StageData.dist > 0.5f) {
-			transform_.position_.y += PlayerInitialSpeed;
-			PlayerInitialSpeed -= gravity;
-		}
-	}
 	
 
 
@@ -106,8 +86,8 @@ void Player::PlayerWait(){
 	}
 	if (Input::IsKeyDown(DIK_SPACE))
 	{
-		
 		playerstate_  = Playeraction::jump;
+		
 	}
 }
 
@@ -140,20 +120,36 @@ void Player::PlayerWalk(){
 		
 		playerstate_ = Playeraction::jump;
 
-		PlayerInitialSpeed = 0.5f;
+		PlayerVelocity = 0.5f;
 		
 	}
 	
 }
 
 void Player::PlayerJump(){
-
-	if (transform_.position_.y < 0.5f) {
-			transform_.position_.y = 0.5f;
-			
-			playerstate_ = Playeraction::wait;
+	//レイキャスト
+	RayCastData StageData;
+	bool PlayerHit = false;//Raycastが当たっていないとき
+	std::vector< Floor* > StageModel = ((Map*)FindObject("Map"))->GetfloorData();
+	for (auto mapmodels : StageModel) {
+		StageData.start = transform_.position_;
+		StageData.dir = XMFLOAT3(0, -1, 0);
+		Model::RayCast(mapmodels->GetModelHandle(), &StageData);
+		if (StageData.hit)
+			PlayerHit = true;
 	}
-	
+	if (PlayerHit) {
+		if (StageData.dist > 0.5f) {
+			transform_.position_.y += PlayerVelocity;
+			PlayerVelocity -= gravity;
+		}
+	}
+	else if (StageData.dist < 0.5f) {
+		PlayerVelocity = 0.5f;
+
+			playerstate_ = Playeraction::wait;
+		}
+
 }
 
 
