@@ -62,7 +62,7 @@ void Player::Update() {
 
 	//レイキャスト
 	RayCastData StageData;
-	bool PlayerHit = false;//一回でもヒットしたら
+	bool PlayerHit = false;//Raycastが当たっていないとき
 	std::vector< Floor* > mapModel = ((Map*)FindObject("Map"))->GetfloorData();
 	for (auto mapmodels : mapModel) {
 		StageData.start = transform_.position_;
