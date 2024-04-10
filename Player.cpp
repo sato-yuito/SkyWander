@@ -128,24 +128,26 @@ void Player::PlayerWalk(){
 void Player::PlayerJump(){
 	//レイキャスト
 	RayCastData StageData;
-	bool PlayerHit = false;//stageのrayが当たっていないときの変数
+	bool StageHit = false;//stageのrayが当たっていないときの変数
 	const float halfPlayermodel = 0.5;
 	std::vector< Floor* > StageModel = ((Map*)FindObject("Map"))->GetfloorData();
 	for (auto mapmodels : StageModel) {
 		StageData.start = transform_.position_;
 		StageData.dir = XMFLOAT3(0, -1, 0);
 		Model::RayCast(mapmodels->GetModelHandle(), &StageData);
-		PlayerHit = StageData.hit;
+		if (StageData.hit)
+			StageHit = true;
 	}
-	//当たった時上昇
-	if (PlayerHit) {
+	
+	if (StageHit) {
 		if (StageData.dist > halfPlayermodel) {
 			transform_.position_.y += PlayerVelocity;
 			PlayerVelocity -= gravity;
 		}
 	}
 	else if (StageData.dist < halfPlayermodel) {
-		PlayerVelocity = 0.5f;
+
+        	transform_.position_.y = 0.5f;
 
 			playerstate_ = Playeraction::wait;
 		}
