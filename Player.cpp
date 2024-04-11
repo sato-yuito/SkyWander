@@ -12,7 +12,7 @@
 namespace
 {
 	float PlayerSpeed = 0.1f;//プレイヤーのスピード
-	float gravity =0.02f;//プレイヤーの重力
+	float gravity =9.8f;//プレイヤーの重力
 	float PlayerVelocity = 0.5f;//ジャンプの上昇量
 }
 
@@ -86,7 +86,6 @@ void Player::PlayerWait(){
 	if (Input::IsKeyDown(DIK_SPACE))
 	{
 		playerstate_  = Playeraction::jump;
-		
 	}
 }
 
@@ -115,12 +114,8 @@ void Player::PlayerWalk(){
 		transform_.position_.x -= curSpeed;
 	}
 	
-	if (Input::IsKeyDown(DIK_SPACE)){
-		
+	if (Input::IsKeyDown(DIK_SPACE)){		
 		playerstate_ = Playeraction::jump;
-
-		PlayerVelocity = 0.5f;
-		
 	}
 	
 }
@@ -128,29 +123,29 @@ void Player::PlayerWalk(){
 void Player::PlayerJump(){
 	//レイキャスト
 	RayCastData StageData;
+	constexpr float startOffset = 1.0f;
 	bool StageHit = false;//stageのrayが当たっていないときの変数
-	const float halfPlayermodel = 0.5;
 	std::vector< Floor* > StageModel = ((Map*)FindObject("Map"))->GetfloorData();
 	for (auto mapmodels : StageModel) {
 		StageData.start = transform_.position_;
+		StageData.start.y += startOffset;
 		StageData.dir = XMFLOAT3(0, -1, 0);
 		Model::RayCast(mapmodels->GetModelHandle(), &StageData);
 		if (StageData.hit)
 			StageHit = true;
+		
 	}
 	
-	if (StageHit) {
-		if (StageData.dist > halfPlayermodel) {
-			transform_.position_.y += PlayerVelocity;
-			PlayerVelocity -= gravity;
-		}
+	if (StageHit&& StageData.dist < startOffset) {
+		transform_.position_.y += (startOffset - StageData.dist);
+		PlayerVelocity = 0;
+		playerstate_ = Playeraction::wait;
 	}
-	else if (StageData.dist < halfPlayermodel) {
-
-        	transform_.position_.y = 0.5f;
-
-			playerstate_ = Playeraction::wait;
-		}
+	else
+	{
+		transform_.position_.y += PlayerVelocity;
+		PlayerVelocity -= gravity;
+	}
 
 }
 
