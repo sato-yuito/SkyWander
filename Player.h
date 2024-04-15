@@ -20,9 +20,7 @@ class Player:public GameObject
 
     int playerModel;    //ƒ‚ƒfƒ‹”Ô†
 
-    int HP = 0;//‘Ì—Í
-
-    int Attack = 0;//UŒ‚—Í
+    
 
     //‰½‚à‚µ‚Ä‚¢‚È‚¢ó‘Ô
     void PlayerWait();

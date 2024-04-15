@@ -14,6 +14,8 @@ namespace
 	float PlayerSpeed = 0.1f;//プレイヤーのスピード
 	float gravity =9.8f;//プレイヤーの重力
 	float PlayerVelocity = 0.5f;//ジャンプの上昇量
+	int HP = 100;//体力
+	int Attack = 10;//攻撃力
 }
 
 
@@ -135,12 +137,13 @@ void Player::PlayerJump(){
 			StageHit = true;
 		
 	}
-	
+	//もし地面に当たっているかつdistがoffsetより小さかったらy座標を調整しvelocityを元の値に戻してstateをwait状態にする
 	if (StageHit&& StageData.dist < startOffset) {
 		transform_.position_.y += (startOffset - StageData.dist);
-		PlayerVelocity = 0;
+		PlayerVelocity = 0.5;
 		playerstate_ = Playeraction::wait;
 	}
+	//当たっていなければy座標plyarevelocityを加算しその上がった分重力を加えることでジャンプがされる
 	else
 	{
 		transform_.position_.y += PlayerVelocity;
@@ -175,16 +178,7 @@ void Player::PlayerCamTarget(){
 
 void Player::Load() {
 	
-	std::string PlayerFileName = "Player.json";
-	std::ifstream ifs(PlayerFileName.c_str());
-	if (ifs.is_open())
-	{
-		json playerjson;
-		ifs >> playerjson;
-
-		HP = playerjson["HP"];
-		Attack = playerjson["Attack"];
-	}
+	
 }
 
 void Player::Save()
