@@ -138,16 +138,19 @@ void Player::PlayerJump(){
 		
 	}
 	//もし地面に当たっているかつdistがoffsetより小さかったらy座標を調整しvelocityを元の値に戻してstateをwait状態にする
-	if (StageHit&& StageData.dist < startOffset) {
+	if (StageHit&& StageData.dist <= 0.0f) {
 		transform_.position_.y += (startOffset - StageData.dist);
 		PlayerVelocity = 0.5;
 		playerstate_ = Playeraction::wait;
 	}
 	//当たっていなければy座標plyarevelocityを加算しその上がった分重力を加えることでジャンプがされる
-	else
+	else 
 	{
 		transform_.position_.y += PlayerVelocity;
-		PlayerVelocity -= gravity;
+		
+			PlayerVelocity -= gravity;
+		
+		
 	}
 
 }
