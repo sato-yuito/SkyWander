@@ -125,12 +125,11 @@ void Player::PlayerWalk(){
 void Player::PlayerJump(){
 	//レイキャスト
 	RayCastData StageData;
-	constexpr float startOffset = 1.0f;
+	
 	bool StageHit = false;//stageのrayが当たっていないときの変数
 	std::vector< Floor* > StageModel = ((Map*)FindObject("Map"))->GetfloorData();
 	for (auto mapmodels : StageModel) {
 		StageData.start = transform_.position_;
-		StageData.start.y += startOffset;
 		StageData.dir = XMFLOAT3(0, -1, 0);
 		Model::RayCast(mapmodels->GetModelHandle(), &StageData);
 		if (StageData.hit)
@@ -138,19 +137,14 @@ void Player::PlayerJump(){
 		
 	}
 	//もし地面に当たっているかつdistがoffsetより小さかったらy座標を調整しvelocityを元の値に戻してstateをwait状態にする
-	if (StageHit&& StageData.dist <= 0.0f) {
-		transform_.position_.y += (startOffset - StageData.dist);
+	if (StageHit&& StageData.dist >= 0.5f) {
 		PlayerVelocity = 0.5;
 		playerstate_ = Playeraction::wait;
 	}
 	//当たっていなければy座標plyarevelocityを加算しその上がった分重力を加えることでジャンプがされる
-	else 
-	{
+	else {
 		transform_.position_.y += PlayerVelocity;
-		
-			PlayerVelocity -= gravity;
-		
-		
+		PlayerVelocity -= gravity;
 	}
 
 }
