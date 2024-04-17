@@ -31,6 +31,9 @@ class Player:public GameObject
     //ジャンプ
     void PlayerJump();
     
+    //ステージに着地しているかどうか
+    bool stageDatahit();
+
     //攻撃
     void PlayerAttack();
     

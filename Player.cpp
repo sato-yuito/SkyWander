@@ -12,7 +12,7 @@
 namespace
 {
 	float PlayerSpeed = 0.1f;//プレイヤーのスピード
-	float gravity =9.8f;//プレイヤーの重力
+	float gravity =0.02f;//プレイヤーの重力
 	float PlayerVelocity = 0.5f;//ジャンプの上昇量
 	int HP = 100;//体力
 	int Attack = 10;//攻撃力
@@ -57,13 +57,7 @@ void Player::Update() {
 	case Playeraction::attack:
 		PlayerAttack();
 		break;
-	}
-
-	
-
-
-	ImGui::Text("state = %d", (int)playerstate_);
-	
+	}	
 	
 }
 
@@ -123,26 +117,15 @@ void Player::PlayerWalk(){
 }
 
 void Player::PlayerJump(){
-	//レイキャスト
-	RayCastData StageData;
 	
-	bool StageHit = false;//stageのrayが当たっていないときの変数
-	std::vector< Floor* > StageModel = ((Map*)FindObject("Map"))->GetfloorData();
-	for (auto mapmodels : StageModel) {
-		StageData.start = transform_.position_;
-		StageData.dir = XMFLOAT3(0, -1, 0);
-		Model::RayCast(mapmodels->GetModelHandle(), &StageData);
-		if (StageData.hit)
-			StageHit = true;
-		
-	}
-	//もし地面に当たっているかつdistがoffsetより小さかったらy座標を調整しvelocityを元の値に戻してstateをwait状態にする
-	if (StageHit&& StageData.dist >= 0.5f) {
-		PlayerVelocity = 0.5;
+	if (stageDatahit())
+	{
+
 		playerstate_ = Playeraction::wait;
+		PlayerVelocity = 0.5f;
 	}
-	//当たっていなければy座標plyarevelocityを加算しその上がった分重力を加えることでジャンプがされる
-	else {
+	else
+	{
 		transform_.position_.y += PlayerVelocity;
 		PlayerVelocity -= gravity;
 	}
@@ -150,6 +133,25 @@ void Player::PlayerJump(){
 }
 
 
+bool Player::stageDatahit(){
+	RayCastData StageData;
+	bool StageHit = false;//stageのrayが当たっていないときの変数
+	std::vector< Floor* > StageModel = ((Map*)FindObject("Map"))->GetfloorData();
+	for (auto mapmodels : StageModel) {
+		StageData.start = transform_.position_;
+		StageData.start.z = 0.0f;
+		StageData.dir = XMFLOAT3(0, -1, 0);
+		Model::RayCast(mapmodels->GetModelHandle(), &StageData);
+		if (StageData.hit)
+			StageHit = true;
+	}
+	
+	if (StageHit && StageData.dist <=) {
+		return true;
+	}
+	return false;
+
+}
 void Player::PlayerAttack(){
 }
 
