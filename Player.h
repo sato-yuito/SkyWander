@@ -14,6 +14,7 @@ class Player:public GameObject
         walk,//歩く
         jump,//ジャンプ
         attack,//攻撃
+        fall//落下
     }playerstate_;
 
     int playerModel;    //モデル番号
@@ -37,6 +38,8 @@ class Player:public GameObject
     
     //プレイヤーの後ろを常に追尾してくれるようにする
     void PlayerCamTarget();
+
+    void PlayerFall();//プレイヤーの落下処理
 
 public:
     //コンストラクタ

@@ -13,7 +13,9 @@ namespace
 {
 	float PlayerSpeed = 0.1f;//プレイヤーのスピード
 	float gravity =0.02f;//プレイヤーの重力
-	float PlayerVelocity = 0.5f;//ジャンプの上昇量
+	float PlayerUP = 0.5f;//ジャンプの上昇量
+	XMFLOAT3 PlayerVelocity = { 0,0,0 };//移動量
+	XMFLOAT3 JumpVelocity = { 0,0,0 };//ジャンプの移動量
 	int HP = 100;//体力
 	int Attack = 10;//攻撃力
 }
@@ -96,34 +98,41 @@ void Player::PlayerWalk(){
 	}
 	//前後移動
 	if (Input::IsKey(DIK_W)){
-		transform_.position_.z+= curSpeed;
+		PlayerVelocity.z += curSpeed;
 	}
 	if (Input::IsKey(DIK_S)){
-		transform_.position_.z -= curSpeed;
+		PlayerVelocity.z -= curSpeed;
 	}
 	//左右移動
 	if (Input::IsKey(DIK_D)){
-		transform_.position_.x += curSpeed;
+		PlayerVelocity.x += curSpeed;
 	}
 	if (Input::IsKey(DIK_A)){
-		transform_.position_.x -= curSpeed;
+		PlayerVelocity.x -= curSpeed;
 	}
 	
 	if (Input::IsKeyDown(DIK_SPACE)){		
+		JumpVelocity = PlayerVelocity;
 		playerstate_ = Playeraction::jump;
+		 
 	}
-	
+	transform_.position_.x += PlayerVelocity.x;
+	transform_.position_.y += PlayerVelocity.y;
+	transform_.position_.z += PlayerVelocity.z;
+	PlayerVelocity = { 0.0f,0.0f,0.0f };
 }
 
 void Player::PlayerJump(){
-	
+
 	if (stageDatahit()){
 		playerstate_ = Playeraction::wait;
-		PlayerVelocity = 0.5f;
+		PlayerUP = 0.5f;
 	}
 	else{
-		transform_.position_.y += PlayerVelocity;
-		PlayerVelocity -= gravity;
+		transform_.position_.x += JumpVelocity.x;
+		transform_.position_.z += JumpVelocity.z;
+		transform_.position_.y += PlayerUP;
+		PlayerUP -= gravity;
 	}
 
 }
@@ -132,18 +141,22 @@ void Player::PlayerJump(){
 bool Player::stageDatahit(){
 	RayCastData StageData;
 	bool StageHit = false;//stageのrayが当たっていないときの変数
+	const float PlayerPosy = 1.0;
 	std::vector< Floor* > StageModel = ((Map*)FindObject("Map"))->GetfloorData();
 	for (auto mapmodels : StageModel) {
 		StageData.start = transform_.position_;
-		StageData.start.z = 0.0f;
+
+		StageData.start.y += PlayerPosy;
 		StageData.dir = XMFLOAT3(0, -1, 0);
 		Model::RayCast(mapmodels->GetModelHandle(), &StageData);
 		if (StageData.hit)
 			StageHit = true;
 	}
-	if (StageHit && StageData.dist <=) {
+	if (StageHit && StageData.dist- PlayerPosy <= -0.5 ) {
+	transform_.position_.y +=  PlayerPosy-StageData.dist;
 		return true;
 	}
+	
 	return false;
 }
 void Player::PlayerAttack(){
@@ -167,7 +180,10 @@ void Player::PlayerCamTarget(){
 	Camera::SetTarget(transform_.position_);
 }
 
+void Player::PlayerFall()
+{
 
+}
 
 
 
