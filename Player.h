@@ -14,8 +14,6 @@ class Player:public GameObject
         walk,//歩く
         jump,//ジャンプ
         attack,//攻撃
-        useitem,//アイテムを使う
-        walkjump
     }playerstate_;
 
     int playerModel;    //モデル番号
@@ -37,17 +35,9 @@ class Player:public GameObject
     //攻撃
     void PlayerAttack();
     
-    //アイテムを使う
-    void Useitem();
-
     //プレイヤーの後ろを常に追尾してくれるようにする
     void PlayerCamTarget();
 
-    //jsonファイルをLoad
-    void Load();
-
-    //jsonファイルをセーブ
-    void Save();
 public:
     //コンストラクタ
     Player(GameObject* parent);

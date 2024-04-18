@@ -31,7 +31,6 @@ Player::~Player(){
 //初期化
 void Player::Initialize(){
 	//モデルデータのロード
-	Load();
 	playerModel = Model::Load("Player.fbx");
 	assert(playerModel >= 0);
 	BoxCollider* collision = new BoxCollider(XMFLOAT3(0, 0, 0), XMFLOAT3(1.3, 1.3, 1.3));
@@ -118,14 +117,11 @@ void Player::PlayerWalk(){
 
 void Player::PlayerJump(){
 	
-	if (stageDatahit())
-	{
-
+	if (stageDatahit()){
 		playerstate_ = Playeraction::wait;
 		PlayerVelocity = 0.5f;
 	}
-	else
-	{
+	else{
 		transform_.position_.y += PlayerVelocity;
 		PlayerVelocity -= gravity;
 	}
@@ -145,18 +141,15 @@ bool Player::stageDatahit(){
 		if (StageData.hit)
 			StageHit = true;
 	}
-	
 	if (StageHit && StageData.dist <=) {
 		return true;
 	}
 	return false;
-
 }
 void Player::PlayerAttack(){
 }
 
-void Player::Useitem(){
-}
+
 
 void Player::PlayerCamTarget(){
 	//yとz方向に離すカメラ
@@ -175,17 +168,6 @@ void Player::PlayerCamTarget(){
 }
 
 
-void Player::Load() {
-	
-	
-}
-
-void Player::Save()
-{
-	
-	
-	
-}
 
 
 
