@@ -39,7 +39,8 @@ class Player:public GameObject
     //プレイヤーの後ろを常に追尾してくれるようにする
     void PlayerCamTarget();
 
-    void PlayerFall();//プレイヤーの落下処理
+    //プレイヤーの落下処理
+    void PlayerFall();
 
 public:
     //コンストラクタ

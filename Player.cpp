@@ -58,6 +58,9 @@ void Player::Update() {
 	case Playeraction::attack:
 		PlayerAttack();
 		break;
+	case Playeraction::fall:
+		PlayerFall();
+		break;
 	}	
 	
 }
@@ -124,6 +127,7 @@ void Player::PlayerWalk(){
 
 void Player::PlayerJump(){
 
+	//下記がtrueのときwaitに戻し上昇量を初期値にもどす
 	if (stageDatahit()){
 		playerstate_ = Playeraction::wait;
 		PlayerUP = 0.5f;
@@ -137,22 +141,33 @@ void Player::PlayerJump(){
 
 }
 
+void Player::PlayerFall(){
+	// Y方向の速度を減少させて落下させる
+	PlayerVelocity.y -= gravity;
+
+	// プレイヤーの位置を更新
+	transform_.position_.x += PlayerVelocity.x;
+	transform_.position_.y += PlayerVelocity.y;
+	transform_.position_.z += PlayerVelocity.z;
+}
 
 bool Player::stageDatahit(){
 	RayCastData StageData;
 	bool StageHit = false;//stageのrayが当たっていないときの変数
-	const float PlayerPosy = 1.0;
+	const float PlayerPosy = 1.0;//Playerがジャンプしたときの高さ
+	const float returnpPosy = -0.5;//プレイヤーがジャンプして戻る距離(+だったら上昇しなくなる(検証済み))
+	//StageModelのDataを取得
 	std::vector< Floor* > StageModel = ((Map*)FindObject("Map"))->GetfloorData();
 	for (auto mapmodels : StageModel) {
 		StageData.start = transform_.position_;
-
 		StageData.start.y += PlayerPosy;
 		StageData.dir = XMFLOAT3(0, -1, 0);
 		Model::RayCast(mapmodels->GetModelHandle(), &StageData);
 		if (StageData.hit)
 			StageHit = true;
 	}
-	if (StageHit && StageData.dist- PlayerPosy <= -0.5 ) {
+	//当たっているかつレイが当たったと距離とプレイヤーの高さがreturnJump以下の時位置を更新
+	if (StageHit && StageData.dist- PlayerPosy <= returnpPosy) {
 	transform_.position_.y +=  PlayerPosy-StageData.dist;
 		return true;
 	}
@@ -180,10 +195,7 @@ void Player::PlayerCamTarget(){
 	Camera::SetTarget(transform_.position_);
 }
 
-void Player::PlayerFall()
-{
 
-}
 
 
 
