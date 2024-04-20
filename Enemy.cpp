@@ -14,8 +14,7 @@ Enemy::Enemy(GameObject* parent)
 	: GameObject(parent, "Enemy"), hModel_(-1), front_(XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f)),pPlayer(nullptr)
 {
 
-	movement_ = 0.02f;
-
+	
 	enemyfan.EnemyDegree = cos(XMConvertToRadians(60.0 / 2.0));
 	enemyfan.EnemyLength = 10.0f;
 	elaspsedTime_ = 0.0f;
