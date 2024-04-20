@@ -139,20 +139,11 @@ void Player::PlayerJump(){
 		PlayerUP -= gravity;
 	}
 
-	if (PlayerUP <= 0)
-	{
-		playerstate_ = Playeraction::fall;
-	}
+	
 }
 
 void Player::PlayerFall(){
-	// Y方向の速度を減少させて落下させる
-	PlayerVelocity.y -= gravity;
 
-	// プレイヤーの位置を更新
-	transform_.position_.x += PlayerVelocity.x;
-	transform_.position_.y += PlayerVelocity.y;
-	transform_.position_.z += PlayerVelocity.z;
 }
 
 bool Player::stageDatahit(){
