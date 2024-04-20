@@ -139,6 +139,10 @@ void Player::PlayerJump(){
 		PlayerUP -= gravity;
 	}
 
+	if (PlayerUP <= 0)
+	{
+		playerstate_ = Playeraction::fall;
+	}
 }
 
 void Player::PlayerFall(){
