@@ -1,25 +1,37 @@
 #pragma once
 #include "Engine/GameObject.h"
+#include "Engine/SceneManager.h"
+#include "Engine/Model.h"
+#include "Engine/Input.h"
+#include"Engine/Camera.h"
+#include "Engine/BoxCollider.h"
+#include"Engine/ImGui/imgui.h"
+#include"Sword.h"
+#include"Map.h"
+#include"Floor.h"
+#include"Treasure.h"
 #include"json.hpp"
-#include<fstream>
 
 using json = nlohmann::json;
 
 class Player:public GameObject
 { 
-
     enum class Playeraction
     {
         wait,//何もしていない状態
         walk,//歩く
         jump,//ジャンプ
         attack,//攻撃
-        fall//落下
     }playerstate_;
 
-    int playerModel;    //モデル番号
-
-    
+    float PlayerSpeed;//プレイヤーの速さ
+    float gravity//重力
+    float PlayerUP;//ジャンプの上昇量
+    XMFLOAT3 PlayerVelocity ;//移動量
+    XMFLOAT3 JumpVelocity ;//ジャンプの移動量
+    int HP;//体力
+    int Attack;//攻撃力
+    int playerModelhandle_;    //モデル番号
 
     //何もしていない状態
     void PlayerWait();
@@ -38,9 +50,6 @@ class Player:public GameObject
     
     //プレイヤーの後ろを常に追尾してくれるようにする
     void PlayerCamTarget();
-
-    //プレイヤーの落下処理
-    void PlayerFall();
 
 public:
     //コンストラクタ
@@ -65,6 +74,10 @@ public:
     //引数：pTarget 当たった相手
     void OnCollision(GameObject* pTarget) override;
 
-    int GetModelHandle() { return playerModel; }
+    int GetModelHandle() { return playerModelhandle_; }
+
+    int GetHP() { return HP; }
+
+    int GetAttack() { return Attack; }
 };
 

@@ -164,6 +164,9 @@
     <ClCompile Include="GameClearScene.cpp">
       <Filter>リソース ファイル\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Sword.cpp">
+      <Filter>リソース ファイル\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -292,6 +295,9 @@
     </ClInclude>
     <ClInclude Include="GameClearScene.h">
       <Filter>リソース ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sword.h">
+      <Filter>リソース ファイル\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

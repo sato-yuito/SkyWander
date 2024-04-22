@@ -1,28 +1,10 @@
-#include "Engine/SceneManager.h"
-#include "Engine/Model.h"
-#include "Engine/Input.h"
-#include"Engine/Camera.h"
-#include "Engine/BoxCollider.h"
-#include"Engine/ImGui/imgui.h"
 #include "Player.h"
-#include"Map.h"
-#include"Floor.h"
-#include"Treasure.h"
 
-namespace
-{
-	float PlayerSpeed = 0.1f;//プレイヤーのスピード
-	float gravity =0.02f;//プレイヤーの重力
-	float PlayerUP = 0.5f;//ジャンプの上昇量
-	XMFLOAT3 PlayerVelocity = { 0,0,0 };//移動量
-	XMFLOAT3 JumpVelocity = { 0,0,0 };//ジャンプの移動量
-	int HP = 100;//体力
-	int Attack = 10;//攻撃力
+namespace{
+	
 }
 
-
-
-Player::Player(GameObject* parent) :GameObject(parent, "Player"), playerModel(-1), playerstate_(Playeraction::wait){
+Player::Player(GameObject* parent) :GameObject(parent, "Player"), playerModelhandle_(-1), playerstate_(Playeraction::wait){
 	
 }
 
@@ -32,11 +14,29 @@ Player::~Player(){
 
 //初期化
 void Player::Initialize(){
+    
+	PlayerSpeed = 0.1f;
+	
+	gravity = 0.02f;
+	
+	PlayerUP = 0.5f;
+	
+	PlayerVelocity = { 0,0,0 };
+	
+	JumpVelocity = { 0,0,0 };
+	
+	HP = 100;
+	
+	Attack = 10;
+	
 	//モデルデータのロード
-	playerModel = Model::Load("Player.fbx");
-	assert(playerModel >= 0);
+	playerModelhandle_ = Model::Load("Player.fbx");
+	assert(playerModelhandle_ >= 0);
+	
 	BoxCollider* collision = new BoxCollider(XMFLOAT3(0, 0, 0), XMFLOAT3(1.3, 1.3, 1.3));
 	AddCollider(collision);
+
+	Instantiate<Sword>(this);
 }
 
 //更新
@@ -58,17 +58,14 @@ void Player::Update() {
 	case Playeraction::attack:
 		PlayerAttack();
 		break;
-	case Playeraction::fall:
-		PlayerFall();
-		break;
 	}	
 	
 }
 
 //描画
 void Player::Draw(){
-	Model::SetTransform(playerModel, transform_);
-	Model::Draw(playerModel);
+	Model::SetTransform(playerModelhandle_, transform_);
+	Model::Draw(playerModelhandle_);
 }
 
 //開放
@@ -138,13 +135,9 @@ void Player::PlayerJump(){
 		transform_.position_.y += PlayerUP;
 		PlayerUP -= gravity;
 	}
-
 	
 }
 
-void Player::PlayerFall(){
-
-}
 
 bool Player::stageDatahit(){
 	RayCastData StageData;
@@ -167,12 +160,11 @@ bool Player::stageDatahit(){
 		return true;
 	}
 	
+	
 	return false;
 }
 void Player::PlayerAttack(){
 }
-
-
 
 void Player::PlayerCamTarget(){
 	//yとz方向に離すカメラ
@@ -190,25 +182,10 @@ void Player::PlayerCamTarget(){
 	Camera::SetTarget(transform_.position_);
 }
 
-
-
-
-
 void Player::OnCollision(GameObject* pTarget)
 {
-	if (pTarget->GetObjectName() == "Treasure")
-	{
+	if (pTarget->GetObjectName() == "Treasure"){
 		SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
 		pSceneManager->ChangeScene(SCENE_ID_GAMECLEAR);
 	}
 }
-//メモ
-/*
-  
-
-	アドバイス
-	見えやすいようにかくには物理演算を保存しているupdateを書くのもいいけどいまのままで
-	状態遷移は変数に直接入れるのではなく関数で呼ぶべき。
-	状態遷移は少ない場合は今のままでいいけど多くなる時別別な変数を作ってかんりすべき
-
-*/
