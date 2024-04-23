@@ -1,8 +1,6 @@
 #include "Player.h"
 
-namespace{
-	
-}
+
 
 Player::Player(GameObject* parent) :GameObject(parent, "Player"), playerModelhandle_(-1), playerstate_(Playeraction::wait){
 	

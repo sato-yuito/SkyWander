@@ -1,6 +1,7 @@
 #include "Sword.h"
 
-Sword::Sword(GameObject* parent):GameObject(parent,"Sword"),swordModelHandle_(-1){
+Sword::Sword(GameObject* parent):GameObject(parent,"Sword"),swordModelHandle_(-1)
+{
 }
 
 Sword::~Sword()
@@ -17,7 +18,8 @@ void Sword::Update()
 {
 }
 
-void Sword::Drow(){
+void Sword::Drow()
+{
 	Model::SetTransform(swordModelHandle_, transform_);
 	Model::Draw(swordModelHandle_);
 }

@@ -25,7 +25,7 @@ class Player:public GameObject
     }playerstate_;
 
     float PlayerSpeed;//プレイヤーの速さ
-    float gravity//重力
+    float gravity;//重力
     float PlayerUP;//ジャンプの上昇量
     XMFLOAT3 PlayerVelocity ;//移動量
     XMFLOAT3 JumpVelocity ;//ジャンプの移動量
