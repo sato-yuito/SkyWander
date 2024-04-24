@@ -1,6 +1,6 @@
 #include "Enemy.h"
 #include"Map.h"
-#include "Engine/Model.h"
+
 
 namespace {
 	const int LastTime = 10;//Œü‚«‚ð•Ï‚¦‚½‚é‚½‚ß‚ÌŽžŠÔ(•b)
@@ -11,14 +11,9 @@ namespace {
 }
 
 Enemy::Enemy(GameObject* parent)
-	: EnemyBase(parent, Enemy), hModel_(-1), front_(XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f)),pPlayer(nullptr)
+	: EnemyBase(parent, EnemyName), hModel_(-1)
 {
-
-	movement_ = 0.02f;
-
-	enemyfan.EnemyDegree = cos(XMConvertToRadians(60.0 / 2.0));
-	enemyfan.EnemyLength = 10.0f;
-	elaspsedTime_ = 0.0f;
+	
 }
 
 Enemy::~Enemy()
@@ -28,6 +23,16 @@ Enemy::~Enemy()
 
 void Enemy::Initialize()
 {
+	front_ = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
+
+	pPlayer = nullptr;
+
+	movement_ = 0.02f;
+
+	enemyfan.EnemyDegree = cos(XMConvertToRadians(60.0 / 2.0));
+	enemyfan.EnemyLength = 10.0f;
+	elaspsedTime_ = 0.0f;
+
 	hModel_ = Model::Load("Enemy.fbx");
 	assert(hModel_ >= 0);
 	

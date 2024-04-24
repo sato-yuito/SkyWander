@@ -1,6 +1,8 @@
 #pragma once
 #include"Engine/GameObject.h"
 #include "Player.h"
+#include "Engine/Model.h"
+
 class EnemyBase:public GameObject
 {
 protected:
@@ -10,7 +12,9 @@ protected:
 	XMVECTOR front_;
 
 	Player* pPlayer;
+
 	float elaspsedTime_;//経過時間を追跡するための変数
+	
 	struct EnemyFan
 	{
 		float EnemyDegree;//視野角の範囲（角度）
@@ -20,27 +24,28 @@ protected:
 	EnemyBase(GameObject* parent,std::string _name)
 		:GameObject(parent, _name){}
 
-	~EnemyBase();
+	~EnemyBase() {};
 
-	void Initialize()override ;
+	virtual void Initialize() =0;
 	
-	void Update()override ;
+	virtual void Update() = 0 ;
 	
 	//描画
-	void Draw() override;
+	virtual void Draw() = 0 ;
 
 	//開放
-	void Release() override;
+	virtual void Release() =0 ;
 
 	//見つけているか
-	virtual bool IsFindPlayer()  = 0;
+	virtual bool IsFindPlayer() = 0;
 
 	//プレイヤーを見つけたら追跡
-	virtual void ChasePlayer()  = 0;
+	virtual void ChasePlayer() = 0;
 
 	//見つけていない場合の移動
-	virtual void EnemySearch()   = 0;
+	virtual void EnemySearch() = 0;
 
-
+	//攻撃
+	virtual void EnemyAttack() = 0;
 };
 
