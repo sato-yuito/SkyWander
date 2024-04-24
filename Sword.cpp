@@ -18,7 +18,7 @@ void Sword::Update()
 {
 }
 
-void Sword::Drow()
+void Sword::Draw()
 {
 	Model::SetTransform(swordModelHandle_, transform_);
 	Model::Draw(swordModelHandle_);

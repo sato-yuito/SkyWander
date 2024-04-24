@@ -1,8 +1,6 @@
 #pragma once
-#include "Engine/Model.h"
 #include"EnemyBase.h"
-#include"Map.h"
-
+#include"Engine/GameObject.h"
 class Enemy :public EnemyBase
 {
 private:
@@ -27,5 +25,6 @@ public:
     
    void EnemySearch() override;
    
+   void EnemyAttack() override;
 };
 

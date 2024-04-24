@@ -1,5 +1,5 @@
 #include "Player.h"
-
+#include"Sword.h"
 
 
 Player::Player(GameObject* parent) :GameObject(parent, "Player"), playerModelhandle_(-1), playerstate_(Playeraction::wait){
@@ -24,8 +24,8 @@ void Player::Initialize(){
 	JumpVelocity = { 0,0,0 };
 	
 	HP = 100;
-	
 	Attack = 10;
+   
 	
 	//モデルデータのロード
 	playerModelhandle_ = Model::Load("Player.fbx");

@@ -299,6 +299,9 @@
     <ClInclude Include="Sword.h">
       <Filter>リソース ファイル\Player</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyBase.h">
+      <Filter>リソース ファイル\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">

@@ -1,7 +1,7 @@
 #pragma once
 #include"Engine/GameObject.h"
-#include "Player.h"
 #include "Engine/Model.h"
+#include "Player.h"
 
 class EnemyBase:public GameObject
 {
@@ -21,10 +21,9 @@ protected:
 		float EnemyLength;//’†S‚©‚çî‚Ü‚Å‚Ì’·‚³
 	} enemyfan;
 
-	EnemyBase(GameObject* parent,std::string _name)
-		:GameObject(parent, _name){}
-
-	~EnemyBase() {};
+protected:
+	EnemyBase(GameObject* parent, std::string _name)
+		:GameObject(parent, _name) {}
 
 	virtual void Initialize() =0;
 	

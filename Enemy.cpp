@@ -171,6 +171,9 @@ void Enemy::EnemySearch()
 	XMStoreFloat3(&transform_.position_, NewPosition);
 }
 
+void Enemy::EnemyAttack(){
+}
+
 
 //メモ
 //不自然な動きなので自然の動きを出すようにしたほうがいい。
