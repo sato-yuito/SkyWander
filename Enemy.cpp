@@ -11,7 +11,7 @@ namespace {
 }
 
 Enemy::Enemy(GameObject* parent)
-	: GameObject(parent, "Enemy"), hModel_(-1), front_(XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f)),pPlayer(nullptr)
+	: EnemyBase(parent, Enemy), hModel_(-1), front_(XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f)),pPlayer(nullptr)
 {
 
 	movement_ = 0.02f;
