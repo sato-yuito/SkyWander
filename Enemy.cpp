@@ -1,6 +1,4 @@
 #include "Enemy.h"
-#include"Map.h"
-
 
 namespace {
 	const int LastTime = 10;//Œü‚«‚ğ•Ï‚¦‚½‚é‚½‚ß‚ÌŠÔ(•b)
@@ -23,15 +21,9 @@ Enemy::~Enemy()
 
 void Enemy::Initialize()
 {
-	front_ = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
-
-	pPlayer = nullptr;
+	EnemyBase::Initialize();
 
 	movement_ = 0.02f;
-
-	enemyfan.EnemyDegree = cos(XMConvertToRadians(60.0 / 2.0));
-	enemyfan.EnemyLength = 10.0f;
-	elaspsedTime_ = 0.0f;
 
 	hModel_ = Model::Load("Enemy.fbx");
 	assert(hModel_ >= 0);
@@ -44,13 +36,11 @@ void Enemy::Initialize()
 
 void Enemy::Update()
 {
-	if (IsFindPlayer())
-	{
+	if (IsFindPlayer()){
 		//‚à‚µŒ©‚Â‚¯‚Ä‚¢‚é‚È‚ç’ÇŒ‚‚·‚é(‚Ì‚¿‚ÉUŒ‚‚·‚é‚æ‚¤‚É‚µ‚½‚¢j
 		ChasePlayer();
 	}
-	else
-	{
+	else{
 		EnemySearch();
 	}
 }
@@ -105,9 +95,7 @@ bool Enemy::IsFindPlayer()
 }
 
 
-/// <summary>
-/// Player‚ğ’ÇŒ‚‚·‚é
-/// </summary>
+
 void Enemy::ChasePlayer()
 {
 	XMFLOAT3 playerpos = pPlayer->GetPosition();
@@ -153,6 +141,7 @@ void Enemy::EnemySearch()
 		cosf(XMConvertToRadians(transform_.rotate_.y)),
 		0.0f);
 
+	//³‹K‰»
 	moveDirection = XMVector3Normalize(moveDirection);
 
 	// V‚µ‚¢ˆÊ’u‚ğŒvZ

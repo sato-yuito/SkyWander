@@ -7,7 +7,7 @@ class EnemyBase:public GameObject
 {
 protected:
 
-	float movement_;//移動量
+
 
 	XMVECTOR front_;
 
@@ -35,13 +35,19 @@ protected:
 	//開放
 	virtual void Release() =0 ;
 
-	//見つけているか
+	/// <summary>
+	/// Playerを見つけているかどうか
+	/// </summary>
+	/// <returns></returns>
 	virtual bool IsFindPlayer() = 0;
-
-	//プレイヤーを見つけたら追跡
+	/// <summary>
+	/// 見つけたら追撃
+	/// </summary>
 	virtual void ChasePlayer() = 0;
 
-	//見つけていない場合の移動
+	/// <summary>
+	/// 見つけていない場合の移動
+	/// </summary>
 	virtual void EnemySearch() = 0;
 
 	//攻撃

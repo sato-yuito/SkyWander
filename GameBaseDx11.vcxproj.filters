@@ -167,6 +167,9 @@
     <ClCompile Include="Sword.cpp">
       <Filter>リソース ファイル\Player</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyBase.cpp">
+      <Filter>リソース ファイル\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
