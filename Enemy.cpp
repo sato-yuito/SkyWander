@@ -28,15 +28,14 @@ void Enemy::Initialize()
 	hModel_ = Model::Load("Enemy.fbx");
 	assert(hModel_ >= 0);
 	
-	transform_.position_.x = (float)(rand() % 401 - 200) / 10;
-	transform_.position_.z = 20.0f;
+
 	
 	pPlayer = (Player*)FindObject("Player");
 }
 
 void Enemy::Update()
 {
-	if (IsFindPlayer()){
+	if (EnemyBase::IsFindPlayer()){
 		//もし見つけているなら追撃する(のちに攻撃するようにしたい）
 		ChasePlayer();
 	}
@@ -56,49 +55,10 @@ void Enemy::Release()
 }
 
 
-
-/// <summary>
-/// 視野の範囲にいるかどうか
-/// </summary>
-bool Enemy::IsFindPlayer()
-{
-	XMFLOAT3 playerPos = pPlayer->GetPosition();
-	//自身のポジションを入れる変数
-	XMVECTOR EnemPos = XMLoadFloat3(&transform_.position_);
-
-	// 向いてる方向に対する回転行列
-	XMMATRIX matRY = XMMatrixRotationY(XMConvertToRadians(transform_.rotate_.y));
-	//敵の前方ベクトルをmatRYで回転させる
-	XMVECTOR frontVec = XMVector3TransformCoord(front_, matRY);
-	//正規化
-	frontVec = XMVector3Normalize(frontVec);
-
-	//プレイヤーの位置を表すベクトル
-	XMVECTOR Playervec = XMLoadFloat3(&playerPos);
-
-	XMVECTOR playerVec = Playervec - EnemPos;
-	float length = XMVectorGetX(XMVector3Length(playerVec));
-	playerVec = XMVector3Normalize(playerVec);
-
-	//内積をとる
-	float InnerProduct = XMVectorGetX(XMVector3Dot(playerVec, frontVec));
-	
-	//視野角の範囲内かどうか
-	if (InnerProduct >enemyfan.EnemyDegree)
-		return false;
-
-	//中心から扇までの長さより大きいかの判別
-	if (length > enemyfan.EnemyLength)
-		return false;
-
-	return true;
-}
-
-
-
 void Enemy::ChasePlayer()
 {
 	XMFLOAT3 playerpos = pPlayer->GetPosition();
+	playerpos.y = 0;
 	//対象のポジションと自身のポジションをVECTOR型に変換
 	XMVECTOR PlayerPos = XMLoadFloat3(&playerpos);
 	XMVECTOR EnemyPosition = XMLoadFloat3(&transform_.position_);
