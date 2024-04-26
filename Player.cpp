@@ -178,14 +178,14 @@ void Player::PlayerAttack(){
 
 void Player::PlayerCamTarget(){
 	//y‚Æz•ûŒü‚É—£‚·ƒJƒƒ‰
-	float CamdisPlayerY = 6.5f;
-	float CamdisPlayerZ = 10.0f;
+	float CamthisPlayerY = 6.5f;
+	float CamthisPlayerZ = 10.0f;
 	//y•ûŒü‚Íã(+)z•ûŒü‚ÍŒã‚ë(-)‚ÉƒJƒƒ‰‚ğ’u‚­
 	XMFLOAT3 CmPos =
 	{
 		transform_.position_.x,
-		transform_.position_.y + CamdisPlayerY,
-		transform_.position_.z - CamdisPlayerZ
+		transform_.position_.y + CamthisPlayerY,
+		transform_.position_.z - CamthisPlayerZ
 	};
 
 	Camera::SetPosition(CmPos);
