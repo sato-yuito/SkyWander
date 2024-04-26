@@ -23,13 +23,9 @@ void Enemy::Initialize()
 {
 	EnemyBase::Initialize();
 
-	movement_ = 0.02f;
-
 	hModel_ = Model::Load("Enemy.fbx");
 	assert(hModel_ >= 0);
-	
-
-	
+		
 	pPlayer = (Player*)FindObject("Player");
 }
 
@@ -57,28 +53,7 @@ void Enemy::Release()
 
 void Enemy::ChasePlayer()
 {
-	XMFLOAT3 playerpos = pPlayer->GetPosition();
-	playerpos.y = 0;
-	//対象のポジションと自身のポジションをVECTOR型に変換
-	XMVECTOR PlayerPos = XMLoadFloat3(&playerpos);
-	XMVECTOR EnemyPosition = XMLoadFloat3(&transform_.position_);
-	//追尾するための方向ベクトルとして使うための計算
-	XMVECTOR EnemyChase = PlayerPos - EnemyPosition;
-
-	//敵キャラクターがプレイヤーを追いかけるときにプレイヤーが向いている方向に向けさせるための処理
-	double enemtan= atan2(XMVectorGetX(-EnemyChase),XMVectorGetZ(-EnemyChase));
 	
-	//ラジアンから度に変換
-	transform_.rotate_.y = XMConvertToDegrees(enemtan);
-
-	// プレイヤーに向かって進む方向ベクトルを生成
-	XMVECTOR moveDirection = XMVector3Normalize(EnemyChase);
-
-	//移動ベクトル計算
-	XMVECTOR MoveEnemy = moveDirection * movement_;
-	
-	//新しい位置を更新するように自身のポジションに格納
-	XMStoreFloat3(&transform_.position_, EnemyPosition + MoveEnemy);
 }
 
 /// <summary>
@@ -121,6 +96,7 @@ void Enemy::EnemySearch()
 }
 
 void Enemy::EnemyAttack(){
+
 }
 
 

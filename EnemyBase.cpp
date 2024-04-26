@@ -51,3 +51,30 @@ bool EnemyBase::IsFindPlayer()
 
 	return true;
 }
+
+void EnemyBase::ChasePlayer()
+{
+	XMFLOAT3 playerpos = pPlayer->GetPosition();
+	playerpos.y = 0;//これをやらないとPlayerがジャンプをした時でも浮いてしまうので0に設定
+	//対象のポジションと自身のポジションをVECTOR型に変換
+	XMVECTOR PlayerPos = XMLoadFloat3(&playerpos);
+	XMVECTOR EnemyPosition = XMLoadFloat3(&transform_.position_);
+	//追尾するための方向ベクトルとして使うための計算
+	XMVECTOR EnemyChase = PlayerPos - EnemyPosition;
+
+	//敵キャラクターがプレイヤーを追いかけるときにプレイヤーが向いている方向に向けさせるための処理
+	double enemtan = atan2(XMVectorGetX(-EnemyChase), XMVectorGetZ(-EnemyChase));
+
+	//ラジアンから度に変換
+	transform_.rotate_.y = XMConvertToDegrees(enemtan);
+
+	// プレイヤーに向かって進む方向ベクトルを生成
+	XMVECTOR moveDirection = XMVector3Normalize(EnemyChase);
+
+	//移動ベクトル計算
+	XMVECTOR MoveEnemy = moveDirection * Enemymovement_;
+
+	//新しい位置を更新するように自身のポジションに格納
+	XMStoreFloat3(&transform_.position_, EnemyPosition + MoveEnemy);
+}
+

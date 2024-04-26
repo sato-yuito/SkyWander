@@ -7,7 +7,7 @@ class EnemyBase:public GameObject
 {
 protected:
 
-
+	float Enemymovement_;//移動スピード
 
 	XMVECTOR front_;
 

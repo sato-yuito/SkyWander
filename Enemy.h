@@ -8,7 +8,7 @@ private:
     
     float movement_;//ˆÚ“®—Ê
 
-    std::string EnemyName = "Enemy";
+    std::string EnemyName ;
 public:
     Enemy(GameObject* parent);
 
@@ -21,8 +21,6 @@ public:
    void Draw() override;
 
    void Release() override;
-
-   bool IsFindPlayer() override;
 
    void ChasePlayer() override;
     
