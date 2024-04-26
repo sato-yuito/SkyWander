@@ -56,6 +56,9 @@ void Player::Update() {
 	case Playeraction::attack:
 		PlayerAttack();
 		break;
+	case Playeraction::fall:
+		PlayerFall();
+		break;
 	}	
 	
 }
@@ -81,6 +84,11 @@ void Player::PlayerWait(){
 	if (Input::IsKeyDown(DIK_SPACE))
 	{
 		playerstate_  = Playeraction::jump;
+	}
+
+	if (stageDatahit()==false)
+	{
+		playerstate_ = Playeraction::fall;
 	}
 }
 
@@ -136,6 +144,10 @@ void Player::PlayerJump(){
 	
 }
 
+void Player::PlayerFall()
+{
+	
+}
 
 bool Player::stageDatahit(){
 	RayCastData StageData;
@@ -158,10 +170,10 @@ bool Player::stageDatahit(){
 		return true;
 	}
 	
-	
 	return false;
 }
 void Player::PlayerAttack(){
+
 }
 
 void Player::PlayerCamTarget(){

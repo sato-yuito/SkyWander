@@ -10,6 +10,8 @@ void EnemyBase::Initialize()
 	enemyfan.EnemyDegree = cos(XMConvertToRadians(60.0 / 2.0));
 	enemyfan.EnemyLength = 10.0f;
 	
+	pPlayer = (Player*)FindObject("Player");
+
 }
 
 

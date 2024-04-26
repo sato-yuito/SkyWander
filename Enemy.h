@@ -5,8 +5,7 @@ class Enemy :public EnemyBase
 {
 private:
     int hModel_;
-    
-    float movement_;//ˆÚ“®—Ê
+
 
     std::string EnemyName ;
 public:
@@ -21,6 +20,8 @@ public:
    void Draw() override;
 
    void Release() override;
+
+   bool IsFindPlayer() override;
 
    void ChasePlayer() override;
     
