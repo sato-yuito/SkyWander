@@ -2,7 +2,8 @@
 #include"Sword.h"
 
 
-Player::Player(GameObject* parent) :GameObject(parent, "Player"), playerModelhandle_(-1), playerstate_(Playeraction::wait){
+Player::Player(GameObject* parent) :GameObject(parent, "Player"), playerModelhandle_(-1), playerstate_(Playeraction::wait)
+{
 	
 }
 
@@ -38,12 +39,11 @@ void Player::Initialize(){
 }
 
 //更新
-void Player::Update() {
-	
+void Player::Update()
+{
 	PlayerCamTarget();
 
-	switch (playerstate_)
-	{
+	switch (playerstate_){
 	case Playeraction::wait:
 		PlayerWait();
 		break;
@@ -56,43 +56,38 @@ void Player::Update() {
 	case Playeraction::attack:
 		PlayerAttack();
 		break;
-	case Playeraction::fall:
-		PlayerFall();
-		break;
-	}	
-	
+	}
 }
 
 //描画
-void Player::Draw(){
+void Player::Draw()
+{
 	Model::SetTransform(playerModelhandle_, transform_);
 	Model::Draw(playerModelhandle_);
 }
 
 //開放
-void Player::Release(){
+void Player::Release()
+{
 
 }
 
-void Player::PlayerWait(){
+void Player::PlayerWait()
+{
 	
 	if (Input::IsKey(DIK_W) || Input::IsKey(DIK_S)  
-		||Input::IsKey(DIK_D) || Input::IsKey(DIK_A))
-	{
+		||Input::IsKey(DIK_D) || Input::IsKey(DIK_A)){
 		playerstate_ = Playeraction::walk;
 	}
-	if (Input::IsKeyDown(DIK_SPACE))
-	{
+	if (Input::IsKeyDown(DIK_SPACE)){
 		playerstate_  = Playeraction::jump;
 	}
 
-	if (stageDatahit()==false)
-	{
-		playerstate_ = Playeraction::fall;
-	}
+
 }
 
-void Player::PlayerWalk(){
+void Player::PlayerWalk()
+{
 	float curSpeed = 0.0f;
 	
 	//ダッシュをしているとき
@@ -128,7 +123,8 @@ void Player::PlayerWalk(){
 	PlayerVelocity = { 0.0f,0.0f,0.0f };
 }
 
-void Player::PlayerJump(){
+void Player::PlayerJump()
+{
 
 	//下記がtrueのときwaitに戻し上昇量を初期値にもどす
 	if (stageDatahit()){
@@ -144,12 +140,9 @@ void Player::PlayerJump(){
 	
 }
 
-void Player::PlayerFall()
-{
-	
-}
 
-bool Player::stageDatahit(){
+bool Player::stageDatahit()
+{
 	RayCastData StageData;
 	bool StageHit = false;//stageのrayが当たっていないときの変数
 	const float PlayerPosy = 1.0;//Playerがジャンプしたときの高さ
@@ -172,17 +165,18 @@ bool Player::stageDatahit(){
 	
 	return false;
 }
-void Player::PlayerAttack(){
-
+void Player::PlayerAttack()
+{
+	
 }
 
-void Player::PlayerCamTarget(){
+void Player::PlayerCamTarget()
+{
 	//yとz方向に離すカメラ
 	float CamthisPlayerY = 6.5f;
 	float CamthisPlayerZ = 10.0f;
 	//y方向は上(+)z方向は後ろ(-)にカメラを置く
-	XMFLOAT3 CmPos =
-	{
+	XMFLOAT3 CmPos ={
 		transform_.position_.x,
 		transform_.position_.y + CamthisPlayerY,
 		transform_.position_.z - CamthisPlayerZ

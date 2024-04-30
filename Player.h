@@ -23,7 +23,6 @@ class Player:public GameObject
         walk,//歩く
         jump,//ジャンプ
         attack,//攻撃
-        fall//落下
     }playerstate_;
 
     float PlayerSpeed;//プレイヤーの速さ
@@ -44,8 +43,7 @@ class Player:public GameObject
     //ジャンプ
     void PlayerJump();
     
-    //Playerの落下
-    void PlayerFall();
+   
 
     //ステージに着地しているかどうか
     bool stageDatahit();

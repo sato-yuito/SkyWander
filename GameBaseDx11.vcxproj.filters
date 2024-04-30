@@ -30,9 +30,6 @@
     <Filter Include="リソース ファイル\Enemy">
       <UniqueIdentifier>{4f27393c-f168-4c19-b9e9-2e78fc2c2471}</UniqueIdentifier>
     </Filter>
-    <Filter Include="リソース ファイル\Map">
-      <UniqueIdentifier>{7b1898ad-1105-44b1-9c62-c6397ff4fd36}</UniqueIdentifier>
-    </Filter>
     <Filter Include="リソース ファイル\Player">
       <UniqueIdentifier>{0f1840aa-02f3-41a0-b265-942ec0404394}</UniqueIdentifier>
     </Filter>
@@ -41,6 +38,9 @@
     </Filter>
     <Filter Include="リソース ファイル\item">
       <UniqueIdentifier>{e630c694-23c6-4870-a6a6-f20c3d66a12d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソース ファイル\Stage">
+      <UniqueIdentifier>{7b1898ad-1105-44b1-9c62-c6397ff4fd36}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -135,7 +135,7 @@
       <Filter>リソース ファイル\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="Map.cpp">
-      <Filter>リソース ファイル\Map</Filter>
+      <Filter>リソース ファイル\Stage</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>リソース ファイル\Player</Filter>
@@ -147,7 +147,7 @@
       <Filter>リソース ファイル\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Floor.cpp">
-      <Filter>リソース ファイル\Map</Filter>
+      <Filter>リソース ファイル\Stage</Filter>
     </ClCompile>
     <ClCompile Include="GameOverScene.cpp">
       <Filter>リソース ファイル\Scene</Filter>
@@ -156,7 +156,7 @@
       <Filter>リソース ファイル\Scene</Filter>
     </ClCompile>
     <ClCompile Include="MoveFloor.cpp">
-      <Filter>リソース ファイル\Map</Filter>
+      <Filter>リソース ファイル\Stage</Filter>
     </ClCompile>
     <ClCompile Include="Treasure.cpp">
       <Filter>リソース ファイル\item</Filter>
@@ -269,7 +269,7 @@
       <Filter>リソース ファイル\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Map.h">
-      <Filter>リソース ファイル\Map</Filter>
+      <Filter>リソース ファイル\Stage</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>リソース ファイル\Player</Filter>
@@ -281,7 +281,7 @@
       <Filter>リソース ファイル\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Floor.h">
-      <Filter>リソース ファイル\Map</Filter>
+      <Filter>リソース ファイル\Stage</Filter>
     </ClInclude>
     <ClInclude Include="GameOverScene.h">
       <Filter>リソース ファイル\Scene</Filter>
@@ -291,7 +291,7 @@
     </ClInclude>
     <ClInclude Include="json.hpp" />
     <ClInclude Include="MoveFloor.h">
-      <Filter>リソース ファイル\Map</Filter>
+      <Filter>リソース ファイル\Stage</Filter>
     </ClInclude>
     <ClInclude Include="Treasure.h">
       <Filter>リソース ファイル\item</Filter>
