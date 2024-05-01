@@ -1,13 +1,5 @@
 #include "Enemy.h"
 
-namespace {
-	const int LastTime = 10;//向きを変えたるための時間(秒)
-	float minX = -4.0f;//x座標の最小行動範囲
-	float maxX = 4.0f;//x座標の最大行動範囲
-	float minZ = -4.0f;//z座標の最小行動範囲
-	float maxZ = 4.0f;//z座標の最大行動範囲
-}
-
 Enemy::Enemy(GameObject* parent)
 	: EnemyBase(parent, EnemyName), hModel_(-1)
 {
@@ -32,13 +24,10 @@ void Enemy::Initialize()
 
 void Enemy::Update()
 {
-	if (IsFindPlayer()){
+	if (IsFindPlayer())
 		//もし見つけているなら追撃する(のちに攻撃するようにしたい）
 		ChasePlayer();
-	}
-	else{
-
-	}
+	
 }
 
 void Enemy::Draw()

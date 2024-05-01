@@ -25,9 +25,11 @@ void Player::Initialize(){
 	JumpVelocity = { 0,0,0 };
 	
 	HP = 100;
+
 	Attack = 10;
-   
 	
+	
+
 	//モデルデータのロード
 	playerModelhandle_ = Model::Load("Player.fbx");
 	assert(playerModelhandle_ >= 0);
@@ -89,7 +91,7 @@ void Player::PlayerWait()
 void Player::PlayerWalk()
 {
 	float curSpeed = 0.0f;
-	
+
 	//ダッシュをしているとき
 	if (Input::IsKey(DIK_LSHIFT)) {
 		curSpeed = PlayerSpeed * 2;
@@ -125,7 +127,6 @@ void Player::PlayerWalk()
 
 void Player::PlayerJump()
 {
-
 	//下記がtrueのときwaitに戻し上昇量を初期値にもどす
 	if (stageDatahit()){
 		playerstate_ = Playeraction::wait;
@@ -136,10 +137,18 @@ void Player::PlayerJump()
 		transform_.position_.z += JumpVelocity.z;
 		transform_.position_.y += PlayerUP;
 		PlayerUP -= gravity;
-	}
-	
+	}	
 }
 
+void Player::PlayerFall()
+{
+	const float PlyaerPosY = transform_.position_.y;
+	const float playerdieheight_ = -5.0;
+	if (PlyaerPosY <= playerdieheight_)
+	{
+		KillMe();
+	}
+}
 
 bool Player::stageDatahit()
 {
@@ -157,6 +166,7 @@ bool Player::stageDatahit()
 		if (StageData.hit)
 			StageHit = true;
 	}
+
 	//当たっているかつレイが当たったと距離とプレイヤーの高さがreturnJump以下の時位置を更新
 	if (StageHit && StageData.dist- PlayerPosy <= returnpPosy) {
 	transform_.position_.y +=  PlayerPosy-StageData.dist;
@@ -169,6 +179,7 @@ void Player::PlayerAttack()
 {
 	
 }
+
 
 void Player::PlayerCamTarget()
 {

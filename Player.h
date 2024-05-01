@@ -17,41 +17,67 @@ using json = nlohmann::json;
 
 class Player:public GameObject
 { 
+private:
     enum class Playeraction
     {
         wait,//何もしていない状態
         walk,//歩く
         jump,//ジャンプ
         attack,//攻撃
+        fall//落下
     }playerstate_;
 
     float PlayerSpeed;//プレイヤーの速さ
+    
     float gravity;//重力
+    
     float PlayerUP;//ジャンプの上昇量
+    
     XMFLOAT3 PlayerVelocity ;//移動量
+    
     XMFLOAT3 JumpVelocity ;//ジャンプの移動量
+    
     int HP;//体力
+    
     int Attack;//攻撃力
-    int playerModelhandle_;    //モデル番号
+    
+    int playerModelhandle_; //モデル番号
 
-    //何もしていない状態
+    
+    /// <summary>
+    /// 何もしてない状態
+    /// </summary>
     void PlayerWait();
 
-    //歩く
+    /// <summary>
+    /// 歩く
+    /// </summary>
     void PlayerWalk();
     
-    //ジャンプ
+    /// <summary>
+    /// ジャンプ
+    /// </summary>
+    /// <returns></returns>
     void PlayerJump();
     
-   
+    /// <summary>
+    /// 落下
+    /// </summary>
+    void PlayerFall();
 
-    //ステージに着地しているかどうか
+    /// <summary>
+    /// 着地しているかどうか
+    /// </summary>
     bool stageDatahit();
 
-    //攻撃
+    /// <summary>
+    /// 攻撃
+    /// </summary>
     void PlayerAttack();
     
-    //プレイヤーの後ろを常に追尾してくれるようにする
+    /// <summary>
+    /// カメラの追尾
+    /// </summary>
     void PlayerCamTarget();
 
 public:
