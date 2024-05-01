@@ -8,11 +8,13 @@ Player::Player(GameObject* parent) :GameObject(parent, "Player"), playerModelhan
 }
 
 //デストラクタ
-Player::~Player(){
+Player::~Player()
+{
 }
 
 //初期化
-void Player::Initialize(){
+void Player::Initialize()
+{
     
 	PlayerSpeed = 0.1f;
 	
@@ -58,6 +60,9 @@ void Player::Update()
 	case Playeraction::attack:
 		PlayerAttack();
 		break;
+	case Playeraction::fall:
+		PlayerFall();
+		break;
 	}
 }
 
@@ -76,7 +81,6 @@ void Player::Release()
 
 void Player::PlayerWait()
 {
-	
 	if (Input::IsKey(DIK_W) || Input::IsKey(DIK_S)  
 		||Input::IsKey(DIK_D) || Input::IsKey(DIK_A)){
 		playerstate_ = Playeraction::walk;
@@ -84,8 +88,6 @@ void Player::PlayerWait()
 	if (Input::IsKeyDown(DIK_SPACE)){
 		playerstate_  = Playeraction::jump;
 	}
-
-
 }
 
 void Player::PlayerWalk()
@@ -142,12 +144,8 @@ void Player::PlayerJump()
 
 void Player::PlayerFall()
 {
-	const float PlyaerPosY = transform_.position_.y;
-	const float playerdieheight_ = -5.0;
-	if (PlyaerPosY <= playerdieheight_)
-	{
-		KillMe();
-	}
+	const float PlayerdieHeight_ = -5.0f;
+
 }
 
 bool Player::stageDatahit()
@@ -167,13 +165,13 @@ bool Player::stageDatahit()
 			StageHit = true;
 	}
 
-	//当たっているかつレイが当たったと距離とプレイヤーの高さがreturnJump以下の時位置を更新
-	if (StageHit && StageData.dist- PlayerPosy <= returnpPosy) {
-	transform_.position_.y +=  PlayerPosy-StageData.dist;
+	//当たっているかつレイが当たったと距離とプレイヤーの高さがreturnpPosy以下の時位置を更新
+	if (StageHit && StageData.dist - PlayerPosy <= returnpPosy) {
+		transform_.position_.y += (PlayerPosy - StageData.dist);
 		return true;
 	}
-	
 	return false;
+		
 }
 void Player::PlayerAttack()
 {
