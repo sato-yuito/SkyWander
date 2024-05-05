@@ -76,7 +76,7 @@ void EnemyBase::ChasePlayer()
 	//移動ベクトル計算
 	XMVECTOR MoveEnemy = moveDirection * Enemymovement_;
 
-	//新しい位置を更新するように自身のポジションに格納
+	//新しい位置を更新するように自身のポジションに格納して正規化
 	XMStoreFloat3(&transform_.position_, EnemyPosition + MoveEnemy);
 }
 
