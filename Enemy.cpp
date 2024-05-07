@@ -49,15 +49,9 @@ void Enemy::ChasePlayer()
 	EnemyBase::ChasePlayer();
 }
 
-/// <summary>
-/// 10•b‚Éˆê‰ñŒü‚«‚ð•Ï‚¦‚È‚ª‚çˆÚ“®‚·‚é
-/// </summary>
-void Enemy::EnemySearch()
+
+void Enemy::EnemyAttack()
 {
-
-}
-
-void Enemy::EnemyAttack(){
 
 }
 

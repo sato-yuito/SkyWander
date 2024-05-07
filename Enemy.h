@@ -25,7 +25,6 @@ public:
 
    void ChasePlayer() override;
     
-   void EnemySearch() override;
    
    void EnemyAttack() override;
 };
