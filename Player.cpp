@@ -116,6 +116,10 @@ void Player::PlayerWalk()
 		PlayerVelocity.x -= curSpeed;
 	}
 	
+	XMVECTOR VectorPlayerMove;
+	VectorPlayerMove = XMLoadFloat3(&PlayerVelocity);
+	VectorPlayerMove = XMVector3Normalize(VectorPlayerMove);
+	
 	if (Input::IsKeyDown(DIK_SPACE)){		
 		JumpVelocity = PlayerVelocity;
 		playerstate_ = Playeraction::jump;
@@ -173,11 +177,11 @@ bool Player::stageDatahit()
 	return false;
 		
 }
+
 void Player::PlayerAttack()
 {
 	
 }
-
 
 void Player::PlayerCamTarget()
 {

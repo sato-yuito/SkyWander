@@ -6,8 +6,7 @@ class Enemy :public EnemyBase
 private:
     int hModel_;
 
-
-    std::string EnemyName ;
+    std::string EnemyName;
 public:
     Enemy(GameObject* parent);
 
