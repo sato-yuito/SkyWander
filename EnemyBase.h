@@ -45,10 +45,6 @@ protected:
 	/// </summary>
 	virtual void ChasePlayer() = 0;
 
-	/// <summary>
-	/// Œ©‚Â‚¯‚Ä‚¢‚È‚¢ê‡‚ÌˆÚ“®
-	/// </summary>
-	virtual void EnemySearch() = 0;
 
 	//UŒ‚
 	virtual void EnemyAttack() = 0;

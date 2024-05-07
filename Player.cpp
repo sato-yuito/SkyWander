@@ -116,10 +116,24 @@ void Player::PlayerWalk()
 		PlayerVelocity.x -= curSpeed;
 	}
 	
-	XMVECTOR VectorPlayerMove;
+	//å¸Ç´ÇïœÇ¶ÇÈèàóù
+	XMVECTOR VectorPlayerMove = {0.0f,0.0f,0.0f,0.0f};
 	VectorPlayerMove = XMLoadFloat3(&PlayerVelocity);
-	VectorPlayerMove = XMVector3Normalize(VectorPlayerMove);
-	
+	XMVECTOR PlayerVecLength_ =  XMVector3Length(VectorPlayerMove);
+	float PlayerLength_ = XMVectorGetX(PlayerVecLength_);
+	if (PlayerLength_ != 0) {
+		XMVECTOR PlayerFront = { 0,0,1,0 };
+		VectorPlayerMove = XMVector3Normalize(VectorPlayerMove);
+		XMVECTOR VecPlayerDot = XMVector3Dot(PlayerFront, VectorPlayerMove);
+		float PlayerDot = XMVectorGetX(VecPlayerDot);
+		float PlayerAngle = acos(PlayerDot);
+		XMVECTOR VecPlayerCross = XMVector3Cross(PlayerFront, VectorPlayerMove);
+		if (XMVectorGetY(VecPlayerCross) < 0){
+			PlayerAngle *= -1;
+		}
+		transform_.rotate_.y = XMConvertToDegrees(PlayerAngle);
+	}
+
 	if (Input::IsKeyDown(DIK_SPACE)){		
 		JumpVelocity = PlayerVelocity;
 		playerstate_ = Playeraction::jump;
