@@ -24,10 +24,7 @@ void Enemy::Initialize()
 
 void Enemy::Update()
 {
-	if (IsFindPlayer())
-		//もし見つけているなら追撃する(のちに攻撃するようにしたい）
-		ChasePlayer();
-	
+	EnemyBase::Update();
 }
 
 void Enemy::Draw()
@@ -56,8 +53,5 @@ void Enemy::EnemyAttack()
 }
 
 
-//メモ
-//不自然な動きなので自然の動きを出すようにしたほうがいい。
-//動きは共通だけど速さと変えたいときはパラメーターを管理するクラスとか作って工夫ができる。
-//伝える努力をしよう;;
+
 

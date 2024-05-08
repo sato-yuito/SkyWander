@@ -17,6 +17,8 @@ void EnemyBase::Initialize()
 
 void EnemyBase::Update()
 {
+	if (IsFindPlayer())
+		ChasePlayer();
 
 }
 
