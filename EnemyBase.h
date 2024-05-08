@@ -9,11 +9,9 @@ protected:
 
 	float Enemymovement_;//移動スピード
 
-	XMVECTOR front_;
+	XMVECTOR front_;//前方ベクトル
 
 	Player* pPlayer;
-
-	float elaspsedTime_;//経過時間を追跡するための変数
 	
 	struct EnemyFan
 	{
@@ -40,11 +38,11 @@ protected:
 	/// </summary>
 	/// <returns></returns>
 	virtual bool IsFindPlayer() = 0;
+	
 	/// <summary>
 	/// 見つけたら追撃
 	/// </summary>
 	virtual void ChasePlayer() = 0;
-
 
 	//攻撃
 	virtual void EnemyAttack() = 0;
