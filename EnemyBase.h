@@ -19,7 +19,6 @@ protected:
 		float EnemyLength;//’†S‚©‚çî‚Ü‚Å‚Ì’·‚³
 	} enemyfan;
 
-protected:
 	EnemyBase(GameObject* parent, std::string _name)
 		:GameObject(parent, _name) {}
 
