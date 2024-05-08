@@ -39,7 +39,7 @@ void Player::Initialize()
 	BoxCollider* collision = new BoxCollider(XMFLOAT3(0, 0, 0), XMFLOAT3(1.3, 1.3, 1.3));
 	AddCollider(collision);
 
-	Instantiate<Sword>(this);
+	//Instantiate<Sword>(this);
 }
 
 //çXêV
