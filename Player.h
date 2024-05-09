@@ -43,7 +43,8 @@ private:
     
     int playerModelhandle_; //モデル番号
 
-    
+    bool PlayerFalling;//プレイヤーが落下しているかどうか
+
     /// <summary>
     /// 何もしてない状態
     /// </summary>
@@ -69,6 +70,8 @@ private:
     /// 着地しているかどうか
     /// </summary>
     bool stageDatahit();
+
+    bool PlayerRayCast();
 
     /// <summary>
     /// 攻撃

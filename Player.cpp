@@ -163,7 +163,7 @@ void Player::PlayerJump()
 void Player::PlayerFall()
 {
 	const float PlayerdieHeight_ = -5.0f;
-
+	
 }
 
 bool Player::stageDatahit()
@@ -188,7 +188,13 @@ bool Player::stageDatahit()
 		transform_.position_.y += (PlayerPosy - StageData.dist);
 		return true;
 	}
+	else if (!StageHit)
+	{
+		PlayerFalling = true;
+	}
+	
 	return false;
+
 		
 }
 
