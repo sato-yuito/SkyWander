@@ -45,6 +45,8 @@ private:
 
     bool PlayerFalling;//プレイヤーが落下しているかどうか
 
+    float PlayerPosy;//Playerがジャンプしたときの高さ
+    float returnpPosy;//プレイヤーがジャンプして戻る距離
     /// <summary>
     /// 何もしてない状態
     /// </summary>
@@ -71,7 +73,7 @@ private:
     /// </summary>
     bool stageDatahit();
 
-    bool PlayerRayCast();
+    RayCastData PlayerRayCast();
 
     /// <summary>
     /// 攻撃

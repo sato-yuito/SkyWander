@@ -30,7 +30,8 @@ void Player::Initialize()
 
 	Attack = 10;
 	
-	
+	 PlayerPosy = 1.0;
+	returnpPosy = -0.5;
 
 	//モデルデータのロード
 	playerModelhandle_ = Model::Load("Player.fbx");
@@ -64,6 +65,8 @@ void Player::Update()
 		PlayerFall();
 		break;
 	}
+
+	
 }
 
 //描画
@@ -162,16 +165,30 @@ void Player::PlayerJump()
 
 void Player::PlayerFall()
 {
-	const float PlayerdieHeight_ = -5.0f;
+	
 	
 }
 
 bool Player::stageDatahit()
 {
+	RayCastData StageHit = PlayerRayCast();
+	
+	//当たっているかつレイが当たったと距離とプレイヤーの高さがreturnpPosy以下の時位置を更新
+	if ( StageHit.hit&& StageHit.dist - PlayerPosy <= returnpPosy) {
+		transform_.position_.y += (PlayerPosy - StageHit.dist);
+		return true;
+	}
+	
+	return false;
+
+		
+}
+
+RayCastData Player::PlayerRayCast()
+{
 	RayCastData StageData;
 	bool StageHit = false;//stageのrayが当たっていないときの変数
-	const float PlayerPosy = 1.0;//Playerがジャンプしたときの高さ
-	const float returnpPosy = -0.5;//プレイヤーがジャンプして戻る距離(+だったら上昇しなくなる(検証済み))
+	
 	//StageModelのDataを取得
 	std::vector< Floor* > StageModel = ((Map*)FindObject("Map"))->GetfloorData();
 	for (auto mapmodels : StageModel) {
@@ -182,20 +199,10 @@ bool Player::stageDatahit()
 		if (StageData.hit)
 			StageHit = true;
 	}
-
-	//当たっているかつレイが当たったと距離とプレイヤーの高さがreturnpPosy以下の時位置を更新
-	if (StageHit && StageData.dist - PlayerPosy <= returnpPosy) {
-		transform_.position_.y += (PlayerPosy - StageData.dist);
-		return true;
-	}
-	else if (!StageHit)
-	{
-		PlayerFalling = true;
-	}
 	
-	return false;
+	return StageData;
+	
 
-		
 }
 
 void Player::PlayerAttack()
