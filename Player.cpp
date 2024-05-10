@@ -171,17 +171,17 @@ void Player::PlayerFall()
 
 bool Player::stageDatahit()
 {
-	RayCastData StageHit = PlayerRayCast();
+	RayCastData stageRayCast = PlayerRayCast();
 	
 	//当たっているかつレイが当たったと距離とプレイヤーの高さがreturnpPosy以下の時位置を更新
-	if ( StageHit.hit&& StageHit.dist - PlayerPosy <= returnpPosy) {
-		transform_.position_.y += (PlayerPosy - StageHit.dist);
+	if (stageRayCast.hit&& PlayerPosy -stageRayCast.dist <= returnpPosy) {
+		transform_.position_.y += (PlayerPosy - stageRayCast.dist);
 		return true;
 	}
 	
-	return false;
+	ImGui::Text("isHit = %s", stageRayCast.hit ? "true" : "false");
 
-		
+	return false;
 }
 
 RayCastData Player::PlayerRayCast()
@@ -201,8 +201,6 @@ RayCastData Player::PlayerRayCast()
 	}
 	
 	return StageData;
-	
-
 }
 
 void Player::PlayerAttack()
