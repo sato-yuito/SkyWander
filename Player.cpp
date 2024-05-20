@@ -179,7 +179,7 @@ bool Player::stageDatahit()
 		return true;
 	}
 	
-	ImGui::Text("isHit = %s", stageRayCast.hit ? "true" : "false");
+	//ImGui::Text("isHit = %s", stageRayCast.hit ? "true" : "false");
 
 	return false;
 }
