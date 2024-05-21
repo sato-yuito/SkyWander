@@ -45,7 +45,8 @@ private:
 
     bool PlayerFalling;//プレイヤーが落下しているかどうか
 
-    float PlayerPosy;//Playerがジャンプしたときの高さ
+    float footRayCast;//足元からrayを飛ばすための変数(foot:足元)
+
     float returnpPosy;//プレイヤーがジャンプして戻る距離
     /// <summary>
     /// 何もしてない状態

@@ -30,7 +30,7 @@ void Player::Initialize()
 
 	Attack = 10;
 	
-	 PlayerPosy = 1.0;
+	footRayCast = 1.0;
 	returnpPosy = -0.5;
 
 	//モデルデータのロード
@@ -174,8 +174,8 @@ bool Player::stageDatahit()
 	RayCastData stageRayCast = PlayerRayCast();
 	
 	//当たっているかつレイが当たったと距離とプレイヤーの高さがreturnpPosy以下の時位置を更新
-	if (stageRayCast.hit&& PlayerPosy -stageRayCast.dist <= returnpPosy) {
-		transform_.position_.y += (PlayerPosy - stageRayCast.dist);
+	if (stageRayCast.hit&& footRayCast -stageRayCast.dist <= returnpPosy) {
+		transform_.position_.y += (footRayCast - stageRayCast.dist);
 		return true;
 	}
 	
@@ -188,18 +188,20 @@ RayCastData Player::PlayerRayCast()
 {
 	RayCastData StageData;
 	bool StageHit = false;//stageのrayが当たっていないときの変数
-	
+	StageData.start = transform_.position_;
+	StageData.start.y += footRayCast;
+	StageData.dir = XMFLOAT3(0, -1, 0);
+
 	//StageModelのDataを取得
 	std::vector< Floor* > StageModel = ((Map*)FindObject("Map"))->GetfloorData();
 	for (auto mapmodels : StageModel) {
-		StageData.start = transform_.position_;
-		StageData.start.y += PlayerPosy;
-		StageData.dir = XMFLOAT3(0, -1, 0);
 		Model::RayCast(mapmodels->GetModelHandle(), &StageData);
 		if (StageData.hit)
 			StageHit = true;
+		
 	}
-	
+
+	StageData.hit = StageHit;
 	return StageData;
 }
 
