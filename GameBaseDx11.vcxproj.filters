@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="01Engine">
       <UniqueIdentifier>{e5fccdcb-f299-4448-bdb6-01fa28039576}</UniqueIdentifier>
     </Filter>
@@ -27,22 +23,26 @@
     <Filter Include="01Engine\ImGui">
       <UniqueIdentifier>{a57aa4f5-69c6-4326-8ed1-f884d18a8812}</UniqueIdentifier>
     </Filter>
-    <Filter Include="リソース ファイル\Enemy">
+    <Filter Include="03Game">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="03Game\Enemy">
       <UniqueIdentifier>{4f27393c-f168-4c19-b9e9-2e78fc2c2471}</UniqueIdentifier>
     </Filter>
-    <Filter Include="リソース ファイル\Player">
+    <Filter Include="03Game\Player">
       <UniqueIdentifier>{0f1840aa-02f3-41a0-b265-942ec0404394}</UniqueIdentifier>
     </Filter>
-    <Filter Include="リソース ファイル\Scene">
+    <Filter Include="03Game\Scene">
       <UniqueIdentifier>{e2ddcdba-6a84-4507-9b1b-3c66f6b2ec1e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="リソース ファイル\item">
+    <Filter Include="03Game\item">
       <UniqueIdentifier>{e630c694-23c6-4870-a6a6-f20c3d66a12d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="リソース ファイル\Stage">
+    <Filter Include="03Game\Stage">
       <UniqueIdentifier>{7b1898ad-1105-44b1-9c62-c6397ff4fd36}</UniqueIdentifier>
     </Filter>
-    <Filter Include="リソース ファイル\trap">
+    <Filter Include="03Game\trap">
       <UniqueIdentifier>{982b2f4c-0c34-4e3d-80a8-8c81f74461e7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -135,46 +135,46 @@
       <Filter>01Engine\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>リソース ファイル\Enemy</Filter>
+      <Filter>03Game\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="Map.cpp">
-      <Filter>リソース ファイル\Stage</Filter>
+      <Filter>03Game\Stage</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>リソース ファイル\Player</Filter>
+      <Filter>03Game\Player</Filter>
     </ClCompile>
     <ClCompile Include="TestScene.cpp">
-      <Filter>リソース ファイル\Scene</Filter>
+      <Filter>03Game\Scene</Filter>
     </ClCompile>
     <ClCompile Include="TittleScene.cpp">
-      <Filter>リソース ファイル\Scene</Filter>
+      <Filter>03Game\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Floor.cpp">
-      <Filter>リソース ファイル\Stage</Filter>
+      <Filter>03Game\Stage</Filter>
     </ClCompile>
     <ClCompile Include="GameOverScene.cpp">
-      <Filter>リソース ファイル\Scene</Filter>
+      <Filter>03Game\Scene</Filter>
     </ClCompile>
     <ClCompile Include="PlayScene.cpp">
-      <Filter>リソース ファイル\Scene</Filter>
+      <Filter>03Game\Scene</Filter>
     </ClCompile>
     <ClCompile Include="MoveFloor.cpp">
-      <Filter>リソース ファイル\Stage</Filter>
+      <Filter>03Game\Stage</Filter>
     </ClCompile>
     <ClCompile Include="Treasure.cpp">
-      <Filter>リソース ファイル\item</Filter>
+      <Filter>03Game\item</Filter>
     </ClCompile>
     <ClCompile Include="GameClearScene.cpp">
-      <Filter>リソース ファイル\Scene</Filter>
+      <Filter>03Game\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Sword.cpp">
-      <Filter>リソース ファイル\Player</Filter>
+      <Filter>03Game\Player</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBase.cpp">
-      <Filter>リソース ファイル\Enemy</Filter>
+      <Filter>03Game\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="Movetrap.cpp">
-      <Filter>リソース ファイル\trap</Filter>
+      <Filter>03Game\trap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -272,47 +272,47 @@
       <Filter>01Engine\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>リソース ファイル\Enemy</Filter>
+      <Filter>03Game\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Map.h">
-      <Filter>リソース ファイル\Stage</Filter>
+      <Filter>03Game\Stage</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>リソース ファイル\Player</Filter>
+      <Filter>03Game\Player</Filter>
     </ClInclude>
     <ClInclude Include="TestScene.h">
-      <Filter>リソース ファイル\Scene</Filter>
+      <Filter>03Game\Scene</Filter>
     </ClInclude>
     <ClInclude Include="TittleScene.h">
-      <Filter>リソース ファイル\Scene</Filter>
+      <Filter>03Game\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Floor.h">
-      <Filter>リソース ファイル\Stage</Filter>
+      <Filter>03Game\Stage</Filter>
     </ClInclude>
     <ClInclude Include="GameOverScene.h">
-      <Filter>リソース ファイル\Scene</Filter>
+      <Filter>03Game\Scene</Filter>
     </ClInclude>
     <ClInclude Include="PlayScene.h">
-      <Filter>リソース ファイル\Scene</Filter>
+      <Filter>03Game\Scene</Filter>
     </ClInclude>
     <ClInclude Include="json.hpp" />
     <ClInclude Include="MoveFloor.h">
-      <Filter>リソース ファイル\Stage</Filter>
+      <Filter>03Game\Stage</Filter>
     </ClInclude>
     <ClInclude Include="Treasure.h">
-      <Filter>リソース ファイル\item</Filter>
+      <Filter>03Game\item</Filter>
     </ClInclude>
     <ClInclude Include="GameClearScene.h">
-      <Filter>リソース ファイル\Scene</Filter>
+      <Filter>03Game\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Sword.h">
-      <Filter>リソース ファイル\Player</Filter>
+      <Filter>03Game\Player</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBase.h">
-      <Filter>リソース ファイル\Enemy</Filter>
+      <Filter>03Game\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Movetrap.h">
-      <Filter>リソース ファイル\trap</Filter>
+      <Filter>03Game\trap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -187,21 +187,33 @@ bool Player::stageDatahit()
 RayCastData Player::PlayerRayCast()
 {
 	RayCastData StageData;
+	
 	bool StageHit = false;//stageのrayが当たっていないときの変数
-	StageData.start = transform_.position_;
-	StageData.start.y += footRayCast;
-	StageData.dir = XMFLOAT3(0, -1, 0);
+	
+	static XMFLOAT3 prevPosition = transform_.position_;
 
 	//StageModelのDataを取得
 	std::vector< Floor* > StageModel = ((Map*)FindObject("Map"))->GetfloorData();
 	for (auto mapmodels : StageModel) {
+		StageData.start = transform_.position_;
+		StageData.start.y += footRayCast;
+		StageData.dir = XMFLOAT3(0, -1, 0);
 		Model::RayCast(mapmodels->GetModelHandle(), &StageData);
-		if (StageData.hit)
-			StageHit = true;
-		
+		if (StageData.hit) {
+			// プレイヤーが上昇中 (ジャンプ中) かどうかを判定
+			if (transform_.position_.y > prevPosition.y) {
+				StageHit = false; // ジャンプ中なので衝突しているとは見なさない
+			}
+			else {
+				StageHit = true;
+			}
+		}
 	}
 
+	prevPosition = transform_.position_;
+
 	StageData.hit = StageHit;
+	
 	return StageData;
 }
 
