@@ -202,7 +202,7 @@ RayCastData Player::PlayerRayCast()
 		if (StageData.hit) {
 			// プレイヤーが上昇中 (ジャンプ中) かどうかを判定
 			if (transform_.position_.y > prevPosition.y) {
-				StageHit = false; // ジャンプ中なので衝突しているとは見なさない
+				StageHit = false; 
 			}
 			else {
 				StageHit = true;
