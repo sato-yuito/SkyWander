@@ -173,7 +173,7 @@
     <ClCompile Include="EnemyBase.cpp">
       <Filter>03Game\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Movetrap.cpp">
+    <ClCompile Include="thorn.cpp">
       <Filter>03Game\trap</Filter>
     </ClCompile>
   </ItemGroup>
@@ -311,7 +311,7 @@
     <ClInclude Include="EnemyBase.h">
       <Filter>03Game\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Movetrap.h">
+    <ClInclude Include="thorn.h">
       <Filter>03Game\trap</Filter>
     </ClInclude>
   </ItemGroup>
