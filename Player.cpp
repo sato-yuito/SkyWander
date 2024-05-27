@@ -39,6 +39,7 @@ void Player::Initialize()
 	
 	BoxCollider* collision = new BoxCollider(XMFLOAT3(0, 0, 0), XMFLOAT3(1.3, 1.3, 1.3));
 	AddCollider(collision);
+	
 
 	//Instantiate<Sword>(this);
 }
@@ -157,8 +158,8 @@ void Player::PlayerJump()
 	}
 	else{
 		transform_.position_.x += JumpVelocity.x;
-		transform_.position_.z += JumpVelocity.z;
 		transform_.position_.y += PlayerUP;
+		transform_.position_.z += JumpVelocity.z;
 		PlayerUP -= gravity;
 	}	
 }
@@ -173,14 +174,12 @@ bool Player::stageDatahit()
 {
 	RayCastData stageRayCast = PlayerRayCast();
 	
-	//当たっているかつレイが当たったと距離とプレイヤーの高さがreturnpPosy以下の時位置を更新
+	//当たっているかつレイが当たった距離とプレイヤーの高さがreturnpPosy以下の時位置を更新
 	if (stageRayCast.hit&& footRayCast -stageRayCast.dist <= returnpPosy) {
 		transform_.position_.y += (footRayCast - stageRayCast.dist);
 		return true;
 	}
 	
-	//ImGui::Text("isHit = %s", stageRayCast.hit ? "true" : "false");
-
 	return false;
 }
 
@@ -235,6 +234,7 @@ void Player::PlayerCamTarget()
 	};
 
 	Camera::SetPosition(CmPos);
+	
 	Camera::SetTarget(transform_.position_);
 }
 
