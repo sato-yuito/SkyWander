@@ -2,7 +2,7 @@
 #include"Engine/GameObject.h"
 class thorn:public GameObject
 {
-	int thornModel_;
+	int thornHandle_;
 
 public:
 	thorn(GameObject* parent);
@@ -22,7 +22,6 @@ public:
 	//ŠJ•ú
 	void Release() override;
 
-	//ƒ‚ƒfƒ‹”Ô†‚Ìæ“¾
-	int GetModelHandle() { return thornModel_; }
+	
 };
 

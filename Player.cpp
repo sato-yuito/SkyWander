@@ -1,6 +1,10 @@
 #include "Player.h"
-#include"Sword.h"
-
+#include "Engine/SceneManager.h"
+#include "Engine/Model.h"
+#include "Engine/Input.h"
+#include"Engine/Camera.h"
+#include "Engine/BoxCollider.h"
+#include"Engine/ImGui/imgui.h"
 
 Player::Player(GameObject* parent) :GameObject(parent, "Player"), playerModelhandle_(-1), playerstate_(Playeraction::wait)
 {
@@ -65,6 +69,12 @@ void Player::Update()
 	case Playeraction::fall:
 		PlayerFall();
 		break;
+	}
+
+	if (HP <= 0)
+	{
+		SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
+		pSceneManager->ChangeScene(SCENE_ID_GAMECLEAR);
 	}
 
 	
@@ -243,5 +253,10 @@ void Player::OnCollision(GameObject* pTarget)
 	if (pTarget->GetObjectName() == "Treasure"){
 		SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
 		pSceneManager->ChangeScene(SCENE_ID_GAMECLEAR);
+	}
+
+	if (pTarget->GetObjectName() == "thorn")
+	{
+		HP -= 10;
 	}
 }
