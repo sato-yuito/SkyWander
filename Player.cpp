@@ -5,6 +5,9 @@
 #include"Engine/Camera.h"
 #include "Engine/BoxCollider.h"
 #include"Engine/ImGui/imgui.h"
+#include"Map.h"
+#include"Floor.h"
+#include"Treasure.h"
 
 Player::Player(GameObject* parent) :GameObject(parent, "Player"), playerModelhandle_(-1), playerstate_(Playeraction::wait)
 {

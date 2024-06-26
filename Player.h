@@ -2,14 +2,6 @@
 #include "Engine/GameObject.h"
 
 
-#include"Map.h"
-#include"Floor.h"
-#include"Treasure.h"
-#include"json.hpp"
-
-
-using json = nlohmann::json;
-
 class Player:public GameObject
 { 
 private:
@@ -70,6 +62,7 @@ private:
     bool stageDatahit();
 
     RayCastData PlayerRayCast();
+    
 
     /// <summary>
     /// çUåÇ
