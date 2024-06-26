@@ -5,7 +5,6 @@
 #include"Floor.h"
 #include"Treasure.h"
 #include"Engine/Camera.h"
-#include"thorn.h"
 #include "Engine/SceneManager.h"
 
 PlayScene::PlayScene(GameObject* parent)
