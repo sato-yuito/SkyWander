@@ -42,9 +42,6 @@
     <Filter Include="03Game\Stage">
       <UniqueIdentifier>{7b1898ad-1105-44b1-9c62-c6397ff4fd36}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03Game\trap">
-      <UniqueIdentifier>{982b2f4c-0c34-4e3d-80a8-8c81f74461e7}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\BoxCollider.cpp">
@@ -172,9 +169,6 @@
     </ClCompile>
     <ClCompile Include="EnemyBase.cpp">
       <Filter>03Game\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="thorn.cpp">
-      <Filter>03Game\trap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -310,9 +304,6 @@
     </ClInclude>
     <ClInclude Include="EnemyBase.h">
       <Filter>03Game\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="thorn.h">
-      <Filter>03Game\trap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

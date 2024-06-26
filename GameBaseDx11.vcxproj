@@ -161,7 +161,6 @@
     <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MoveFloor.cpp" />
-    <ClCompile Include="thorn.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="Sword.cpp" />
@@ -209,7 +208,6 @@
     <ClInclude Include="json.hpp" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MoveFloor.h" />
-    <ClInclude Include="thorn.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="Sword.h" />
