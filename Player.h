@@ -1,7 +1,6 @@
 #pragma once
 #include "Engine/GameObject.h"
-
-class Model;
+#include "Engine/Model.h"
 
 class Player:public GameObject
 { 
