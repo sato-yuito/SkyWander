@@ -1,4 +1,5 @@
-#include "GameClearScene.h"
+#include"GameClearScene.h"
+#include "../Engine/GameObject.h"
 
 GameClearScene::GameClearScene(GameObject* parent) :GameObject(parent, "GameClearScene")
 {

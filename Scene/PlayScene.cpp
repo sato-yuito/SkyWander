@@ -1,11 +1,11 @@
 #include "PlayScene.h"
-#include"Player.h"
-#include"Enemy.h"
-#include"Map.h"
-#include"Floor.h"
-#include"Treasure.h"
-#include"Engine/Camera.h"
-#include "Engine/SceneManager.h"
+#include"../Player/Player.h"
+#include"../Enemy/Enemy.h"
+#include"../Stage/Map.h"
+#include"../Stage/Floor.h"
+#include"../GoalItem/Treasure.h"
+#include"../Engine/Camera.h"
+#include "../Engine/SceneManager.h"
 
 PlayScene::PlayScene(GameObject* parent)
 {

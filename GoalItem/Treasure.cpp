@@ -1,6 +1,6 @@
 #include "Treasure.h"
-#include"Engine/Model.h"
-#include"Engine/Collider.h"
+#include"../Engine/Model.h"
+#include"../Engine/Collider.h"
 Treasure::Treasure(GameObject* parent)
 	:GameObject(parent, "Treasure"),treasureModel_(-1)
 {

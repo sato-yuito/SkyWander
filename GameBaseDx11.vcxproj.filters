@@ -36,11 +36,11 @@
     <Filter Include="03Game\Scene">
       <UniqueIdentifier>{e2ddcdba-6a84-4507-9b1b-3c66f6b2ec1e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03Game\item">
-      <UniqueIdentifier>{e630c694-23c6-4870-a6a6-f20c3d66a12d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03Game\Stage">
       <UniqueIdentifier>{7b1898ad-1105-44b1-9c62-c6397ff4fd36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03Game\Enemy\GoalItem">
+      <UniqueIdentifier>{e630c694-23c6-4870-a6a6-f20c3d66a12d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -131,43 +131,37 @@
     <ClCompile Include="Engine\ImGui\imgui_widgets.cpp">
       <Filter>01Engine\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
+    <ClCompile Include="Enemy\Enemy.cpp">
       <Filter>03Game\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Map.cpp">
+    <ClCompile Include="Stage\Map.cpp">
       <Filter>03Game\Stage</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="Player\Player.cpp">
       <Filter>03Game\Player</Filter>
     </ClCompile>
-    <ClCompile Include="TestScene.cpp">
+    <ClCompile Include="Scene\TestScene.cpp">
       <Filter>03Game\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="TittleScene.cpp">
+    <ClCompile Include="Scene\TittleScene.cpp">
       <Filter>03Game\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Floor.cpp">
+    <ClCompile Include="Stage\Floor.cpp">
       <Filter>03Game\Stage</Filter>
     </ClCompile>
-    <ClCompile Include="GameOverScene.cpp">
+    <ClCompile Include="Scene\GameOverScene.cpp">
       <Filter>03Game\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="PlayScene.cpp">
+    <ClCompile Include="Scene\PlayScene.cpp">
       <Filter>03Game\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="MoveFloor.cpp">
-      <Filter>03Game\Stage</Filter>
+    <ClCompile Include="GoalItem\Treasure.cpp">
+      <Filter>03Game\Enemy\GoalItem</Filter>
     </ClCompile>
-    <ClCompile Include="Treasure.cpp">
-      <Filter>03Game\item</Filter>
-    </ClCompile>
-    <ClCompile Include="GameClearScene.cpp">
+    <ClCompile Include="Scene\GameClearScene.cpp">
       <Filter>03Game\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Sword.cpp">
-      <Filter>03Game\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyBase.cpp">
+    <ClCompile Include="Enemy\EnemyBase.cpp">
       <Filter>03Game\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
@@ -265,44 +259,37 @@
     <ClInclude Include="Engine\ImGui\imstb_truetype.h">
       <Filter>01Engine\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
+    <ClInclude Include="Enemy\Enemy.h">
       <Filter>03Game\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Map.h">
+    <ClInclude Include="Stage\Map.h">
       <Filter>03Game\Stage</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
+    <ClInclude Include="Player\Player.h">
       <Filter>03Game\Player</Filter>
     </ClInclude>
-    <ClInclude Include="TestScene.h">
+    <ClInclude Include="Scene\TestScene.h">
       <Filter>03Game\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="TittleScene.h">
+    <ClInclude Include="Scene\TittleScene.h">
       <Filter>03Game\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Floor.h">
+    <ClInclude Include="Stage\Floor.h">
       <Filter>03Game\Stage</Filter>
     </ClInclude>
-    <ClInclude Include="GameOverScene.h">
+    <ClInclude Include="Scene\GameOverScene.h">
       <Filter>03Game\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="PlayScene.h">
+    <ClInclude Include="Scene\PlayScene.h">
       <Filter>03Game\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="json.hpp" />
-    <ClInclude Include="MoveFloor.h">
-      <Filter>03Game\Stage</Filter>
+    <ClInclude Include="GoalItem\Treasure.h">
+      <Filter>03Game\Enemy\GoalItem</Filter>
     </ClInclude>
-    <ClInclude Include="Treasure.h">
-      <Filter>03Game\item</Filter>
-    </ClInclude>
-    <ClInclude Include="GameClearScene.h">
+    <ClInclude Include="Scene\GameClearScene.h">
       <Filter>03Game\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Sword.h">
-      <Filter>03Game\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyBase.h">
+    <ClInclude Include="Enemy\EnemyBase.h">
       <Filter>03Game\Enemy</Filter>
     </ClInclude>
   </ItemGroup>

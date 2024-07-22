@@ -1,12 +1,12 @@
 #include "Player.h"
-#include "Engine/SceneManager.h"
-#include "Engine/Input.h"
-#include"Engine/Camera.h"
-#include "Engine/BoxCollider.h"
-#include"Engine/ImGui/imgui.h"
-#include"Map.h"
-#include"Floor.h"
-#include"Treasure.h"
+#include "../Engine/SceneManager.h"
+#include "../Engine/Input.h"
+#include"../Engine/Camera.h"
+#include "../Engine/BoxCollider.h"
+#include"../Engine/ImGui/imgui.h"
+#include"../Stage/Map.h"
+#include"../Stage/Floor.h"
+#include"../GoalItem/Treasure.h"
 
 Player::Player(GameObject* parent) :GameObject(parent, "Player"), playerModelhandle_(-1), playerstate_(Playeraction::wait)
 {
@@ -219,11 +219,12 @@ RayCastData Player::PlayerRayCast()
 				StageHit = true;
 			}
 		}
+		StageData.hit = StageHit;
 	}
 
 	prevPosition = transform_.position_;
 
-	StageData.hit = StageHit;
+	
 	
 	return StageData;
 }

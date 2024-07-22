@@ -1,10 +1,10 @@
 #pragma once
-#include"Engine/GameObject.h"
-class GameClearScene :public GameObject
+#include"../Engine/GameObject.h"
+class GameOverScene :public GameObject
 {
 public:
 	//コンストラクタ
-	GameClearScene(GameObject* parent);
+	GameOverScene(GameObject* parent);
 
 	//初期化
 	void Initialize()override;

@@ -1,7 +1,7 @@
 #include "TittleScene.h"
-#include "Engine/Image.h"
-#include "Engine/Input.h"
-#include "Engine/SceneManager.h"
+#include "../Engine/Image.h"
+#include "../Engine/Input.h"
+#include "../Engine/SceneManager.h"
 TittleScene::TittleScene(GameObject* parent):GameObject(parent, "TittleScene"),titlePict_(-1){
 
 }

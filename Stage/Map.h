@@ -1,8 +1,8 @@
 #pragma once
-#include "Engine/GameObject.h"
+#include "../Engine/GameObject.h"
 #include<vector>
 #include"Floor.h"
-#include"MoveFloor.h"
+
 class Map :public GameObject
 {
     std::vector<Floor*>floorData;

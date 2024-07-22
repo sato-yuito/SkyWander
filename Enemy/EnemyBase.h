@@ -1,7 +1,7 @@
 #pragma once
-#include"Engine/GameObject.h"
-#include "Engine/Model.h"
-#include "Player.h"
+#include"../Engine/GameObject.h"
+#include "../Engine/Model.h"
+#include "../Player/Player.h"
 
 class EnemyBase:public GameObject
 {
